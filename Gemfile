@@ -27,10 +27,12 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'spring',        group: :development
 
 # Koala : FaceBook Connect, Graph
-gem 'koala', '~> 1.11.1'
+gem 'koala'
 
 # Devise : Facebook OmniAuth
-gem 'devise', '~> 3.4.1'
+gem 'devise'
+gem 'omniauth'
+gem 'omniauth-facebook'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
