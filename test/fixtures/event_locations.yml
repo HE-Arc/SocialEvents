@@ -1,0 +1,35 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id_facebook: MyString
+  name: MyString
+  city: MyString
+  street: MyString
+  zip: MyString
+  canton: MyString
+  country: MyString
+  latitude: 1.5
+  longitude: 1.5
+  category: MyString
+  cover: MyString
+  likes: 1
+  link: MyString
+  phone: MyString
+  website: MyString
+
+two:
+  id_facebook: MyString
+  name: MyString
+  city: MyString
+  street: MyString
+  zip: MyString
+  canton: MyString
+  country: MyString
+  latitude: 1.5
+  longitude: 1.5
+  category: MyString
+  cover: MyString
+  likes: 1
+  link: MyString
+  phone: MyString
+  website: MyString

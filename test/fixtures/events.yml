@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id_facebook: MyString
+  title: MyString
+  picture: MyString
+  category: MyString
+  description: MyText
+  start_time: 2015-02-11 12:14:25
+  end_time: 2015-02-11 12:14:25
+  user_id: 
+  event_location_id: 
+
+two:
+  id_facebook: MyString
+  title: MyString
+  picture: MyString
+  category: MyString
+  description: MyText
+  start_time: 2015-02-11 12:14:25
+  end_time: 2015-02-11 12:14:25
+  user_id: 
+  event_location_id: 

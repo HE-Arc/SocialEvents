@@ -11,10 +11,47 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150211092931) do
+ActiveRecord::Schema.define(version: 20150211121425) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "event_locations", force: true do |t|
+    t.string   "id_facebook"
+    t.string   "name"
+    t.string   "city"
+    t.string   "street"
+    t.string   "zip"
+    t.string   "canton"
+    t.string   "country"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "category"
+    t.string   "cover"
+    t.integer  "likes"
+    t.string   "link"
+    t.string   "phone"
+    t.string   "website"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "events", force: true do |t|
+    t.string   "id_facebook"
+    t.string   "title"
+    t.string   "picture"
+    t.string   "category"
+    t.text     "description"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.integer  "user_id"
+    t.integer  "event_location_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "events", ["event_location_id"], name: "index_events_on_event_location_id", using: :btree
+  add_index "events", ["user_id"], name: "index_events_on_user_id", using: :btree
 
   create_table "identities", force: true do |t|
     t.integer  "user_id"

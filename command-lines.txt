@@ -1,1 +1,3 @@
 rails g model 
+
+rails g model Event id_facebook:string title:string picture:string category:string description:text start_time:datetime end_time:datetime
