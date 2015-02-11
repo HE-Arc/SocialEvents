@@ -29,6 +29,9 @@ gem 'spring',        group: :development
 # Koala : FaceBook Connect, Graph
 gem 'koala', '~> 1.11.1'
 
+# Devise : Facebook OmniAuth
+gem 'devise', '~> 3.4.1'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
