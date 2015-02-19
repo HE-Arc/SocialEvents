@@ -45,7 +45,7 @@ class User < ActiveRecord::Base
           #username: auth.info.nickname || auth.uid,
           password: Devise.friendly_token[0,20]
         )
-        user.skip_confirmation!
+        #user.skip_confirmation!
         user.save!
       end
     end
