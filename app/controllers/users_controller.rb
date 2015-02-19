@@ -1,9 +1,16 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
+  def index
+    @users = User.all()
+  end
+  
   # GET /users/:id.:format
   def show
     # authorize! :read, @user
+    
+    # accessible publiquement, sans vérification user courant connecté
+    @user = User.find(params[:id])
   end
 
   # GET /users/:id/edit
