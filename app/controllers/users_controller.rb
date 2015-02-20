@@ -11,6 +11,7 @@ class UsersController < ApplicationController
     
     # accessible publiquement, sans vérification user courant connecté
     @user = User.find(params[:id])
+    @is_connected = @user == current_user
   end
 
   # GET /users/:id/edit

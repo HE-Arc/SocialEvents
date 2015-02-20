@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   # désactivation possible de /users/sign_in ?
   
   resources :users
+  resources :events
+  
+  get "/import" => "events#import"
   match '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => :finish_signup
 
 
