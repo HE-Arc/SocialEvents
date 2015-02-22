@@ -3,3 +3,6 @@
 <% if @is_connected %>
 <p><%= link_to "Importation", import_path %></p>
 <% end %>
+
+
+<p>Nombre de contributions : <%= @user.contributions_counter %>

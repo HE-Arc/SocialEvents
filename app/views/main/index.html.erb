@@ -1,3 +1,7 @@
 <h1>Main</h1>
 
-<h2>Main</h2>
+<h2>Top contributeurs</h2>
+
+<% @users_top.each do |user| %>
+<p><%= user.first_name %> <%= user.last_name %> <%= user.contributions_counter %></p>
+<% end %>

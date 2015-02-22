@@ -1,5 +1,5 @@
 <h1>Liste des utilisateurs</h1>
 
 <% @users.each do |user| %>
-<p><%= link_to user.first_name + " " + user.last_name, user %></p>
+<p><%= link_to user.first_name + " " + user.last_name, user %> <%= user.contributions_counter %></p>
 <% end %>

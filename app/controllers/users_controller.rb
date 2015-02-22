@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   def index
-    @users = User.all()
+    @users = User.get_users_with_contributions_counter()
   end
   
   # GET /users/:id.:format
@@ -10,7 +10,7 @@ class UsersController < ApplicationController
     # authorize! :read, @user
     
     # accessible publiquement, sans vérification user courant connecté
-    @user = User.find(params[:id])
+    @user = User.get_user_with_contribution_counter(params[:id]) #User.find(params[:id])
     @is_connected = @user == current_user
   end
 

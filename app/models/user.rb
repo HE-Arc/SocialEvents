@@ -61,4 +61,44 @@ class User < ActiveRecord::Base
   def email_verified?
     self.email && self.email !~ TEMP_EMAIL_REGEX
   end
+  
+  
+  # Récupère la liste des utilisateurs, triés par ordre de contribution descendant
+  # limit    limite à N utilisateurs la liste
+  def self.get_users_with_contributions_counter(limit=nil)
+    self.query_contributions_counter_user(nil, limit)
+  end
+  
+  # Récupère un utilisateur avec son nb de contribution
+  # user_id    ID de l'utilisateur
+  def self.get_user_with_contribution_counter(user_id)
+    self.query_contributions_counter_user(user_id)
+  end
+  
+  private
+  
+  # Récupère un ou N utilisateurs dans la BD, en calculant pour chacun leur total de contributions, et les triant par nb contribution descendant
+  # user_id    ID d'un utilisateur spécifique à récupérer
+  # limit      nombre maximum N d'utilisateurs à récupérer
+  # retour     1 ou N utilisateur suivant les paramètres
+  def self.query_contributions_counter_user(user_id=nil, limit=nil)
+    # A faire avec ActiveRecord!
+    #self.joins(:events).select('users.*, COUNT(events.id) AS contributions_counter').group('users.id').order('contributions_counter DESC').order(:first_name).order(:last_name)
+
+    query = self.select('users.*, COUNT(events.id) AS contributions_counter')
+        .joins('LEFT JOIN events ON events.user_id = users.id AND events.is_published = True')
+        .group('users.id')
+        .order('contributions_counter DESC, first_name ASC, last_name ASC')
+
+    if not user_id.nil?
+      query = query.where('users.id = ?', user_id).take
+    end
+    
+    if not limit.nil?
+      query = query.limit(limit)
+    end
+    
+    query
+  end
+
 end
