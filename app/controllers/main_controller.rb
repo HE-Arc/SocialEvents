@@ -1,5 +1,10 @@
 class MainController < ApplicationController
   def index
-    @users_top = User.get_users_with_contributions_counter(10)
+    @users_top = User.get_users_with_contributions_counter(5)
+    
+    title = "and"
+    categories = ["fun", "Détente"]
+    cantons = ["Bern"]
+    @events = Event.get_listing_events(title, categories, cantons)
   end
 end

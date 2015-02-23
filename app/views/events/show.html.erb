@@ -1,0 +1,6 @@
+<h1>Evénement <%= @event.title %></h1>
+
+<p>Catégorie: <%= @event.category %></p>
+<p>Localisation: <%= @event.event_location.city + " " + @event.event_location.canton %></p>
+
+<p><%= @event.description %></p>

@@ -5,3 +5,9 @@
 <% @users_top.each do |user| %>
 <p><%= user.first_name %> <%= user.last_name %> <%= user.contributions_counter %></p>
 <% end %>
+
+<h2>Evénements</h2>
+
+<% @events.each do |event| %>
+<p><%= link_to event.title, event %> <%= event.category %></p>
+<% end %>
