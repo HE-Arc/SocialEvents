@@ -1,7 +1,8 @@
 <h1>Profil de <%= @user.first_name %> <%= @user.last_name %></h1>
 
 <% if @is_connected %>
-<p><%= link_to "Importation", import_path %></p>
+<p><button id="import">Importation</button></p>
+<p><%= link_to "Importation", import_data_path %></p>
 <% end %>
 
 

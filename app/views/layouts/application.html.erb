@@ -13,6 +13,8 @@
   <p class="notice"><%= notice %></p>
   <p class="alert"><%= alert %></p>
   
+  <p id="fetching" style="display: <%= @user_is_fetching ? 'block' : 'none' %>">Fetching</p>
+  
   <% if user_signed_in? %>
   Signed in as <%= current_user.first_name %>. Not you?
   <%= link_to "Sign out", destroy_user_session_path,:method => :delete %>
