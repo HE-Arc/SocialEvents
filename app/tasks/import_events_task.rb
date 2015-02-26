@@ -2,17 +2,17 @@ class ImportEventsTask
   
   class << self
     
-    def import(user, token)
-      Event.destroy_all()
+    def import(user_id, token)
+                  
+      user = User.find(user_id)
+      user.is_fetching = true
+      user.save!
       
-      p "trst"
+      sleep 20
+
+      user.is_fetching = false
+      user.save!
       
-      #user.is_fetching = true
-      #user.save!
-      
-      
-      #user.is_fetching = false
-      #user.save!
     end
     handle_asynchronously :import
     
