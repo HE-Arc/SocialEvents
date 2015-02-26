@@ -9,5 +9,7 @@ class MainController < ApplicationController
     
     @categories = Event.get_categories()
     @cantons = EventLocation.get_cantons()
+    
+    #ImportEventsTask.import("test", "afld")
   end
 end

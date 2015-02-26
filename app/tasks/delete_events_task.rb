@@ -1,4 +1,4 @@
-class TaskDeleteEvents
+class DeleteEventsTask
   include Delayed::RecurringJob
   
   run_every 60.second

@@ -35,6 +35,7 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 
 # Delayed Job : background task
+gem 'daemons'
 gem 'delayed_job'
 gem 'delayed_job_active_record'
 gem 'delayed_job_recurring'

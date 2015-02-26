@@ -1,5 +1,5 @@
 # Be sure to restart your server when you modify this file.
 
-TaskDeleteEvents.schedule!
+DeleteEventsTask.schedule!
 
-p "test"
+p "Schedule"
