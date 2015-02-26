@@ -44,4 +44,10 @@ class Event < ActiveRecord::Base
     self.distinct.pluck(:category)
   end
   
+  # Purge les événements plus vieux que la date du jour
+  def self.purge_events
+    date = DateTime.now.to_date
+    self.where("? > events.end_time", date).destroy_all
+  end
+  
 end
