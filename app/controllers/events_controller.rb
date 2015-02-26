@@ -32,6 +32,11 @@ class EventsController < ApplicationController
   
   # GRAPH API
   def test
+    
+    # **************************************************************
+    # Authentification process
+    # **************************************************************
+    
     # Authentification à l'application Facebook
     @oauth = Koala::Facebook::OAuth.new("653919454735658","035ddda1f5dc692934d9f0abc345e4ef","/import/test")
     
@@ -41,13 +46,41 @@ class EventsController < ApplicationController
     # Autorisation pour le graph search
     @graph = Koala::Facebook::GraphAPI.new(session["devise.facebook_data"]["credentials"]["token"])
 
-    # Affiche les événements à proximité de l'utilisateur
-    feed = @graph.get_object("search?q=nearby&type=event")
+    # ******************************************************************
+    # Get a list of bar using user GPS. I only get 40 bars at the moment
+    # ******************************************************************
     
-    # Affichage
-    feed.each {|f| puts f } # it's a subclass of Array
-    render :json => feed
+    # Affiche les événements à proximité de l'utilisateur
+    eventlocation = @graph.get_object("search?q=bar&type=place&center=46.94,6.85&distance=40000&limit=40")
+    @events_locations = eventlocation
+    
+    # **************************************************************
+    # Get event list for each location and store them in eventlist
+    # **************************************************************
+    eventlist = Array.new
+    eventlocation.each do |f| 
+      eventlist_request = @graph.get_object(f["id"]+"/events?since=now")
+      if !eventlist_request.empty?
+        eventlist_request.each do |f| 
+            eventlist.push(f)
+        end
+      end      
+    end
+    
+    # **************************************************
+    # Get events details and store them in @events
+    # **************************************************
+    @events = Array.new
+    
+    # Get events details loop
+    eventlist.each do |fe| 
+      puts "--------------------------------------------------------------------"
+      puts fe
+      puts "--------------------------------------------------------------------"
 
+      event_request = @graph.get_object(fe["id"])
+      @events = @events.push(event_request)
+    end
   end
 end
 
