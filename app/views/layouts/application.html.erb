@@ -1,8 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>SocialEvents</title>
+  <meta charset="UTF-8">
+  <title>Social Events</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag '//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css', media: 'all' %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
@@ -15,23 +17,35 @@
   
   <p id="fetching" style="display: <%= @user_is_fetching ? 'block' : 'none' %>">Fetching</p>
   
-  <% if user_signed_in? %>
-  Signed in as <%= current_user.first_name %>. Not you?
-  <%= link_to "Sign out", destroy_user_session_path,:method => :delete %>
-  <%= link_to "Profil", user_path(current_user) %>
-  <% else %>
-  <!-- 
-    link_to "Sign up", new_user_registration_path 
-      or
-    link_to "Sign in", new_user_session_path
-  --> 
-  <%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook) %>
-  <% end %>
+
   
   <%= link_to "Liste des users", users_path %>
-
+  
+  <!-- INTEGRATION -->
+  
+  <header>
+    <div class="header-content">
+      <h1><span class="site-title"> Social Events</span>
+        <% if not user_signed_in? %>
+              <div class="fb-login-button fb-login-button-large"><%= link_to(image_tag("fb_login.png", :alt => "facebook button", :class => ""),
+  user_omniauth_authorize_path(:facebook)) %></div>
+              <div class="fb-login-button fb-login-button-small"><%= link_to(image_tag("fb_login_small.png", :alt => "facebook button", :class => ""),
+    user_omniauth_authorize_path(:facebook)) %></div>
+          <% end %>
+        </h1>
+      <% if user_signed_in? %>
+              Signed in as <%= current_user.first_name %>. Not you?
+              <%= link_to "Sign out", destroy_user_session_path,:method => :delete %>
+              <%= link_to "Profil", user_path(current_user) %>
+      <% end %>
+    </div>
+  </header>
+  <div class="image-cover-div">
+    <%= image_tag("http://i.imgur.com/RuztiBT.jpg", :alt => "cover image" ,:class => "img-cover") %>
+  </div>
   
 <%= yield %>
 
+  <footer>FOOTER</footer>
 </body>
 </html>
