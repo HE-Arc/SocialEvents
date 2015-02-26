@@ -47,7 +47,7 @@ class Event < ActiveRecord::Base
   # Purge les événements plus vieux que la date du jour
   def self.purge_events
     date = DateTime.now.to_date
-    self.where("'2020-02-02' > events.end_time", date).destroy_all
+    self.where("? > events.end_time", date).destroy_all
   end
   
 end
