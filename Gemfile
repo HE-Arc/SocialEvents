@@ -37,6 +37,7 @@ gem 'omniauth-facebook'
 # Delayed Job : background task
 gem 'delayed_job'
 gem 'delayed_job_active_record'
+gem 'delayed_job_recurring'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
