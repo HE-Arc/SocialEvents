@@ -6,5 +6,8 @@ class MainController < ApplicationController
     categories = ["fun", "Détente"]
     cantons = ["Bern"]
     @events = Event.get_listing_events(title, categories, cantons)
+    
+    @categories = Event.get_categories()
+    @cantons = EventLocation.get_cantons()
   end
 end

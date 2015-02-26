@@ -25,7 +25,7 @@ events = []
 for i in 1..20
   user_id = i < 10 ? i : 1
   event_location_id = i % 10
-  events <<  { user_id: user_id, event_location_id: event_location_id, title: "Rails and #{i} girls", category: 'Détente' }
+  events <<  { user_id: user_id, event_location_id: event_location_id, title: "Rails and #{i} girls", category: 'Détente', start_time: "2015-02-26", end_time: "2015-03-15"  }
 end
 
 

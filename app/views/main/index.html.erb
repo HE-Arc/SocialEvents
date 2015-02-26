@@ -11,3 +11,15 @@
 <% @events.each do |event| %>
 <p><%= link_to event.title, event %> <%= event.category %></p>
 <% end %>
+
+<h2>Catégories</h2>
+
+<% @categories.each do |category| %>
+<p><%= category %>
+<% end %>
+  
+<h2>Cantons</h2>
+
+<% @cantons.each do |canton| %>
+<p><%= canton %>
+<% end %>
