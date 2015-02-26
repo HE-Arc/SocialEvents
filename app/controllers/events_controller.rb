@@ -1,10 +1,11 @@
+require "koala"
+require "openssl"
+require "base64"
+
 class EventsController < ApplicationController
+  
   def show
     @event = Event.find(params[:id])
-  end
-  
-  def import
-    
   end
   
   def import_data
@@ -38,4 +39,25 @@ class EventsController < ApplicationController
     render :json => is_fetching
   end
   
+  # GRAPH API
+  def test
+    # Authentification à l'application Facebook
+    @oauth = Koala::Facebook::OAuth.new("653919454735658","035ddda1f5dc692934d9f0abc345e4ef","/import/test")
+    
+    # Permission pour le graph search
+    @oauth.url_for_oauth_code(:permissions => "publish_actions")
+    
+    # Autorisation pour le graph search
+    @graph = Koala::Facebook::GraphAPI.new(session["devise.facebook_data"]["credentials"]["token"])
+
+    # Affiche les événements à proximité de l'utilisateur
+    feed = @graph.get_object("search?q=nearby&type=event")
+    
+    # Affichage
+    feed.each {|f| puts f } # it's a subclass of Array
+    render :json => feed
+
+  end
 end
+
+
