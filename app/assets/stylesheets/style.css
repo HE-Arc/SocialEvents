@@ -1,10 +1,24 @@
 @import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+@import url('http://fonts.googleapis.com/css?family=Roboto');
 
 body, html {
 }
 
 * {
-    font-family: 'Avenir',sans-serif;
+    font-family: 'Roboto',sans-serif;
+}
+
+.link{
+  text-decoration: none;
+  
+}
+
+.link-btn{
+  color: #FFFFFF;
+}
+
+.link-title{
+  color: #111111;
 }
 
 section.main {

@@ -1,5 +1,6 @@
 # Be sure to restart your server when you modify this file.
 
-DeleteEventsTask.schedule!
+#TODO needed in deployment
+#DeleteEventsTask.schedule!
 
-p "Schedule"
+#p "Schedule"

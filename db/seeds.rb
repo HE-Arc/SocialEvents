@@ -25,7 +25,7 @@ events = []
 for i in 1..20
   user_id = i < 10 ? i : 1
   event_location_id = i % 10
-  events <<  { user_id: user_id, event_location_id: event_location_id, title: "Rails and #{i} girls", category: 'Détente', start_time: "2015-02-26", end_time: "2015-03-15"  }
+  events <<  { description:"Cum haec taliaque sollicitas eius aures everberarent expositas semper eius modi rumoribus et patentes, varia animo tum miscente consilia,tandem id ut optimum factu elegit: et Vrsicinum primum ad se venire summo cum honore mandavit ea specie ut pro rerum tunc urgentium captu disponeretur concordiconsilio, quibus virium incrementis Parthicarum gentium a arma minantium impetus frangerentur.",user_id: user_id, event_location_id: event_location_id, title: "Rails and #{i} girls", category: 'Détente', start_time: "2015-02-26", end_time: "2015-03-15"  }
 end
 
 
