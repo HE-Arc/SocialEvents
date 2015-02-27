@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :events
   
   get "/import" => "events#import"
+  get "/import/test" => "events#test"
   get "/import/data" => "events#import_data"
   get "/import/verify" => "events#import_verify"
   match '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => :finish_signup

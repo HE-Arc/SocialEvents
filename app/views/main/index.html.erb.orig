@@ -12,9 +12,9 @@
 <% @events.each do |event| %>
 <p><%= link_to event.title, event %> <%= event.category %></p>
 <% end %>
+
+<<<<<<< HEAD
 -->
-
-
 
 <section class="main">
 <nav class="nav-bar">
@@ -116,7 +116,7 @@
 </section>
 
 </section>
-
+=======
 <h2>Catégories</h2>
 
 <% @categories.each do |category| %>
@@ -128,4 +128,4 @@
 <% @cantons.each do |canton| %>
 <p><%= canton %>
 <% end %>
-
+>>>>>>> 88cb030268957afcba4b29ff53cf4b2e93d53573
