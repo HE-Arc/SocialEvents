@@ -14,13 +14,14 @@ $ ->
       is_fetching = data
 
       if is_fetching
-        setTimeout(verify_import, 10000)
+        setTimeout(verify_import, 2000)
       else
         import_button.removeAttr("disabled")
         fetching.hide()
     })
 
   import_button.click ->
+    console.log("click")
     import_button.attr("disabled", "")
     fetching.show()
     $.ajax(url: "/import/data")
