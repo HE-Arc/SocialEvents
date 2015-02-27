@@ -1,3 +1,4 @@
+<!--
 <h1>Main</h1>
 
 <h2>Top contributeurs</h2>
@@ -11,3 +12,106 @@
 <% @events.each do |event| %>
 <p><%= link_to event.title, event %> <%= event.category %></p>
 <% end %>
+
+-->
+
+<section class="main">
+<nav class="nav-bar">
+    <div class="cat-queries-480">
+        <!-- Research Filter Title -->
+        <input type="checkbox" class="categorie categorie-1" id="toggle-1"/>
+
+        <label class="categorie" for="toggle-1">
+            Categories
+        </label>
+
+        <!-- Research Filter -->
+        <div class="categorie categorie-1">
+            <div>
+                <label class="se-checkbox">
+                    <input type="checkbox"/>
+                    <span></span>
+                </label>
+                <span class="category-name">All</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="cat-queries-480">
+        <input type="checkbox" class="categorie categorie-2" id="toggle-2"/>
+
+        <label class="categorie" for="toggle-2">
+            Cantons
+        </label>
+
+        <!-- Research Filter -->
+        <div class="categorie categorie-2">
+            <div>
+                <label class="se-checkbox">
+                    <input type="checkbox"/>
+                    <span></span>
+                </label>
+                <span class="category-name">All</span>
+            </div>
+        </div>
+    </div>
+    <div class="top-contributor cat-queries-480">
+        <h3 class="title-top-contributor">Top Contributors</h3>
+
+        <div>
+            <div class="content-top-contributor">
+                <i class="icon-user"></i><span class="name-top-contributor">Deruaz Vincent</span>
+                <span class="value-top-contributor">482</span>
+            </div>
+            
+        </div>
+    </div>
+
+</nav>
+
+<!--SEARCH BAR-->
+<section class="left">
+    <div class="search">
+        <div class="search-div">
+            <label class="se-placeholder">
+                <i class="icon-search icon-input-text"></i>
+                <input type="text" placeholder="Search">
+                <span>Search</span>
+            </label>
+            <button class="btn" href="#"> Search</button>
+
+        </div>
+        <div class="grid-or-list">
+            <button class="search-div-btn" href="#"><i class="icon-th"></i> Grid</button>
+            <button class="search-div-btn" href="#"><i class="icon-list"></i> List</button>
+        </div>
+    </div>
+    <div class="content">
+        <ul class="flex-container">
+            <li class="flex-item">
+                <div class="img-event">
+                    <%= image_tag("http://i.imgur.com/Qt7VGfn.jpg", :alt => "event image") %>
+                </div>
+                <div class="content-event">
+                    <p class="title-event">TITLE</p>
+
+                    <p class="date-event">Date: Du -- Au --</p>
+
+                    <p class="multiline-ellipsis">
+                        Itaque tum Scaevola cum in eam ipsam mentionem incidisset, exposuit nobis sermonem Laeli de
+                        amicitia habitum ab illo secum et cum altero genero, C. Fannio Marci filio, paucis diebus
+                        post mortem Africani. Eius disputationis sententias memoriae mandavi, quas hoc libro exposui
+                        arbitratu meo; quasi enim ipsos induxi loquentes, ne 'inquam' et 'inquit' saepius
+                        interponeretur, atque ut tamquam a praesentibus coram haberi sermo videretur.
+                    </p>
+
+                    <div class="more-event">
+                        <button class="btn" href="#">More</button>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</section>
+
+</section>
