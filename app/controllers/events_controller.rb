@@ -6,6 +6,7 @@ class EventsController < ApplicationController
   
   def show
     @event = Event.find(params[:id])
+    @user = User.find(@event.user_id)
   end
   
   def import_data
