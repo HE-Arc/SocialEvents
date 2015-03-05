@@ -1,0 +1,7 @@
+.ui-corner-all, 
+.ui-corner-bottom, 
+.ui-corner-right, 
+.ui-corner-br 
+{
+  border-radius: 0px;
+}

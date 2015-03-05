@@ -1,6 +1,14 @@
-<h1>Evénement <%= @event.title %></h1>
+<section class="show">
+  <h1>Evénement <%= @event.title %></h1>
+  <div class="show-content">
+    <p>Catégorie: <%= @event.category %></p>
+    <p>Localisation: <%= @event.event_location.city + " " + @event.event_location.canton %></p>
 
-<p>Catégorie: <%= @event.category %></p>
-<p>Localisation: <%= @event.event_location.city + " " + @event.event_location.canton %></p>
+    <p><%= @event.description %></p>
 
-<p><%= @event.description %></p>
+    <div class="map">
+    
+    </div>
+  </div>
+  
+</section>

@@ -56,6 +56,9 @@
           <% end %>
         </div>
     </div>
+  
+  <div id="datepicker"></div>
+  
     <div class="top-contributor cat-queries-480">
         <h3 class="title-top-contributor">Top Contributors</h3>
         <% @users_top.each do |user| %>
@@ -76,7 +79,7 @@
         <div class="search-div">
             <label class="se-placeholder">
                 <i class="icon-search icon-input-text"></i>
-                <input type="text" placeholder="Search">
+                <input type="text" placeholder="Search" class="search-input">
                 <span>Search</span>
             </label>
             <button class="btn" href="#"> Search</button>
@@ -121,4 +124,13 @@
     </div>
 </section>
 </section>
+<script>
+  $(function() {
+$(function() {
+        $("#datepicker").datepicker({
+          minDate: new Date(),
+        });
+    });
+});
 
+  </script>

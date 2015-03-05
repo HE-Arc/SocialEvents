@@ -1,6 +1,13 @@
 @import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
 @import url('http://fonts.googleapis.com/css?family=Roboto');
 
+.map{
+  background:red;
+  height:280px;
+  
+  margin:55px;
+}
+
 body, html {
 }
 
@@ -94,9 +101,19 @@ section.main .left .search {
 header,
 footer,
 section.main,
+section.show,
 .image-cover {
     margin: auto;
     max-width: 960px;
+}
+
+section.show{
+  padding: 5px;
+  background-color: #DBD2D7;
+}
+
+.show-content{
+  padding:1.2em;
 }
 
 .top-contributor{
@@ -164,7 +181,6 @@ input:focus, textarea:focus {
     -ms-transition: all 100ms linear;
     -o-transition: all 100ms linear;
     transition: all 100ms linear;
-
 }
 
 .btn:hover {
@@ -181,6 +197,10 @@ input[type=text] {
     -ms-transition: all 100ms linear;
     -o-transition: all 100ms linear;
     transition: all 100ms linear;
+}
+
+.search-input{
+
 }
 
 /*INPUT TEXT*/
