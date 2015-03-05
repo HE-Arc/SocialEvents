@@ -16,6 +16,9 @@ Rails.application.routes.draw do
   get "/import/data" => "events#import_data"
   get "/import/verify" => "events#import_verify"
   match '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => :finish_signup
+  
+  get "/main/load/" => "main#load"
+  get "/main/load/:categories/:cantons/:date/:title/:limit/:offset" => "main#load"
 
 
   # Example of regular route:
