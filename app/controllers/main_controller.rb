@@ -27,7 +27,11 @@ class MainController < ApplicationController
     categories_list = categories != "all" ? categories.split(',') : nil
     title = title != "*" ? title : nil
     
-    @events = Event.get_listing_events(title, categories, cantons, limit, offset, date)
+    # todo
+    limit = nil
+    offset = nil
+    
+    @events = Event.get_listing_events(title, categories_list, cantons_list, limit, offset, date)
     
     render :json => @events
   end
