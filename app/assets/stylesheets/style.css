@@ -112,8 +112,20 @@ section.show{
   background-color: #DBD2D7;
 }
 
-.show-content{
+.show-body{
   padding:1.2em;
+  background: #FFFFFF;
+  padding: 5px;
+  color: #111111;
+  border:solid #bdc3c7 1px;
+}
+
+.show-description{
+  margin:2em;
+}
+
+.show-information {
+  padding:0.8em;
 }
 
 .top-contributor{
@@ -124,6 +136,8 @@ section.show{
     padding: 0.2em;
 
 }
+
+
 
 h3.title-top-contributor{
     -webkit-margin-before: 0;
@@ -567,14 +581,16 @@ input[type=checkbox].categorie:checked + label:after {
 
 .header-content {
     padding-right: 2em;
+  
 }
 
 .fb-login-button {
     float: right;
+  
 }
 
 .header-content > h1 {
-    width: 100%;
+    
 }
 
 .category-name {
@@ -628,6 +644,15 @@ input[type=checkbox].categorie:checked + label:after {
 
 .error{
 	background:#FF2400;
+}
+
+.btn-user{
+  float:right;
+}
+
+.btn,
+.button_to{
+  display: inline-block;
 }
 
 /**********************************/

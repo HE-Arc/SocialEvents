@@ -2,21 +2,26 @@
   <%= image_tag(@event.picture, :alt => "cover image" ,:class => "img-cover") %>
 </div>
 <section class="show">
-  <div class="show-title">
-    <p class="title-event"><%= @event.title %></p>
-    <p class="date-event">From <%= @event.start_time.strftime("%d %B %Y") %> to <%= @event.end_time.strftime("%d %B %Y") %></p>
-  </div>
-  <div class="show-content">
-    <div class="show-information">
-      <p>Catégorie: <%= @event.category %></p>
-      <p>Localisation: <%= @event.event_location.city + " " + @event.event_location.canton %></p>
-      <p>Utilisateur: <%= @user.first_name %> <%= @user.last_name %></p>
+  <div class="show-body">
+    <div class="show-title">
+      <p class="title-event"><%= @event.title %></p>
+      <p class="date-event">From <%= @event.start_time.strftime("%d %B %Y") %> to <%= @event.end_time.strftime("%d %B %Y") %></p>
     </div>
-    <p><%= @event.description %></p>
+    <div class="show-content">
+      <div class="show-information">
+        <div>Catégorie: <%= @event.category %></div>
+        <div>Localisation: <%= @event.event_location.city + " " + @event.event_location.canton %></div>
+        <div>Utilisateur: <%= @user.first_name %> <%= @user.last_name %></div>
+      </div>
+      <div class="show-description">
+        <%= @event.description %>
+      </div>
 
-    <div class="map">
-    
     </div>
   </div>
+  <div class="map">
+
+  </div>
+  
   
 </section>

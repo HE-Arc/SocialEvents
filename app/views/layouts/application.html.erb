@@ -13,13 +13,9 @@
   <script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
 </head>
 <body>
-  
-  <p><%= link_to 'Home', '/' %></p>
-
   <p id="fetching" style="display: <%= @user_is_fetching ? 'block' : 'none' %>">Fetching</p>
-  
-
-  <%= link_to "Liste des users", users_path %>
+ 
+  <!--<%= link_to "Liste des users", users_path %>-->
   
   <!-- INTEGRATION -->
   
@@ -33,12 +29,15 @@
               <div class="fb-login-button fb-login-button-small"><%= link_to(image_tag("fb_login_small.png", :alt => "facebook button", :class => ""),
     user_omniauth_authorize_path(:facebook)) %></div>
           <% end %>
-        </h1>
+        
       <% if user_signed_in? %>
-              Signed in as <%= current_user.first_name %>. Not you?
-              <%= link_to "Sign out", destroy_user_session_path,:method => :delete %>
-              <%= link_to "Profil", user_path(current_user) %>
+             <div class="btn-user">
+              <%= button_to "Sign out", destroy_user_session_path, :class => "btn", :method => :delete %>
+              <%= button_to "Profil", user_path(current_user), :class => "btn" %>
+               <%= button_to "Home", "/", :class => "btn", :method => :get %>
+            </div>
       <% end %>
+        </h1>
     </div>
     
     <% if alert!=nil %>  
