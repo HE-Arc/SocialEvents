@@ -590,6 +590,47 @@ input[type=checkbox].categorie:checked + label:after {
 }
 
 /**********************************/
+/* alert dialog                   */
+/**********************************/
+
+.alert-dialog {
+  position: relative;
+  display: block;
+  padding: 1rem;
+  margin: 1rem;
+  background: #E4EAEE;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  color: rgba(0, 0, 0, 0.5);
+}
+.alert-dialog.alert-dialog {
+  padding-right: 2.5rem;
+}
+.alert-dialog .alert-dialog-close {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: block;
+  text-align: center;
+  padding: 1rem;
+  border: none;
+  background: none;
+  color: rgba(0, 0, 0, 0.2);
+}
+.alert-dialog .alert-dialog-close:hover {
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.warning{
+	background:#FF9500;
+}
+
+.error{
+	background:#FF2400;
+}
+
+/**********************************/
 /* MEDIA QUERIES                  */
 /**********************************/
 

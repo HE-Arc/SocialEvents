@@ -16,18 +16,15 @@
   
   <p><%= link_to 'Home', '/' %></p>
 
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
-  
   <p id="fetching" style="display: <%= @user_is_fetching ? 'block' : 'none' %>">Fetching</p>
   
 
-  
   <%= link_to "Liste des users", users_path %>
   
   <!-- INTEGRATION -->
   
   <header>
+    
     <div class="header-content">
       <h1><span class="site-title"> Social Events</span>
         <% if not user_signed_in? %>
@@ -43,6 +40,21 @@
               <%= link_to "Profil", user_path(current_user) %>
       <% end %>
     </div>
+    
+    <% if alert!=nil %>  
+      <div class="notify notify error alert" role="alert">  
+        <%= alert %>
+        <button type="button" class="notify-close">&times;</button>
+      </div>
+    <% end %>
+  
+    <% if alert!=nil %>  
+      <div class="notify notify warning notice" role="alert">  
+        <%= notice %>
+        <button type="button" class="notify-close">&times;</button>
+      </div>
+    <% end %>
+    
   </header>
 
   

@@ -66,4 +66,6 @@ $ ->
   $("#button-event-title").click ->
     load_event()
       
+$('.notify-close').click ->
+  $(this).closest('.notify').hide();
 
