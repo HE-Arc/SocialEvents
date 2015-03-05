@@ -19,9 +19,12 @@ class MainController < ApplicationController
     limit = params[:limit]
     offset = params[:offset]
     
-    cantons_list = cantons.split(',')
-    categories_list = categories.split(',')
+    cantons_list = cantons != "all" ? cantons.split(',') : nil
+    categories_list = categories != "all" ? categories.split(',') : nil
+    title = title != "*" ? title : nil
     
     @events = Event.get_listing_events(title, categories, cantons, limit, offset, date)
+    
+    render :json => @events
   end
 end

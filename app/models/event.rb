@@ -9,7 +9,7 @@ class Event < ActiveRecord::Base
   #    limit        nombre d'événements
   #    offset       indice de début de récupération
   #    date         date à partir de laquelle on récupère les événements
-  def self.get_listing_events(title=nil, categories=nil, cantons=nil, limit=nil, from=nil, date=nil)
+  def self.get_listing_events(title=nil, categories=nil, cantons=nil, limit=nil, offset=nil, date=nil)
     if date.nil?
       date = DateTime.now.to_date
     end
@@ -32,7 +32,7 @@ class Event < ActiveRecord::Base
       query = query.limit(limit)
     end
     
-    if not from.nil?
+    if not offset.nil?
       query = query.offset(offset)
     end
         

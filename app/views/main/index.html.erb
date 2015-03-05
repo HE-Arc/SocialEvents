@@ -2,7 +2,7 @@
 <nav class="nav-bar">
     <div class="cat-queries-480">
         <!-- Research Filter Title -->
-        <input type="checkbox" class="categorie categorie-1" id="toggle-1"/>
+        <input type="checkbox" checked="checked" class="categorie categorie-1" id="toggle-1"/>
 
         <label class="categorie" for="toggle-1">
             Categories
@@ -12,7 +12,7 @@
         <div class="categorie categorie-1">
             <div>
                 <label class="se-checkbox">
-                    <input type="checkbox" class="chk_category" value="all"/>
+                    <input type="checkbox" checked="checked" class="chk_category" value="all"/>
                     <span></span>
                 </label>
                 <span class="category-name">All</span>
@@ -30,7 +30,7 @@
     </div>
 
     <div class="cat-queries-480">
-        <input type="checkbox" class="categorie categorie-2" id="toggle-2" />
+        <input type="checkbox" checked="checked" class="categorie categorie-2" id="toggle-2" />
 
         <label class="categorie" for="toggle-2">
             Cantons
@@ -40,7 +40,7 @@
         <div class="categorie categorie-2">
             <div>
                 <label class="se-checkbox">
-                    <input type="checkbox" class="chk_canton" value="all"/>
+                    <input type="checkbox" checked="checked" class="chk_canton" value="all"/>
                     <span></span>
                 </label>
                 <span class="category-name">All</span>
@@ -79,10 +79,10 @@
         <div class="search-div">
             <label class="se-placeholder">
                 <i class="icon-search icon-input-text"></i>
-                <input type="text" placeholder="Search" class="search-input">
+                <input type="text" placeholder="Search" class="search-input" id="input-event-title" />
                 <span>Search</span>
             </label>
-            <button class="btn" href="#"> Search</button>
+            <button class="btn" href="#" id="button-event-title"> Search</button>
 
         </div>
         <div class="grid-or-list">
@@ -124,13 +124,3 @@
     </div>
 </section>
 </section>
-<script>
-
-$(function() {
-        $("#datepicker").datepicker({
-          minDate: new Date(),
-        });
-    });
-
-
-  </script>

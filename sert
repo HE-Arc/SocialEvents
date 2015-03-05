@@ -1,2 +1,2 @@
 rails s &
-rake jobs:work &
+rake jobs:work
