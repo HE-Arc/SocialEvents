@@ -15,18 +15,20 @@ end
 
 event_locations = []
 
-for i in 1..10
-  event_locations <<  { name: "Le bout du monde #{i}", city: 'St-Imier', canton: 'Bern' }
-end
 
 
 events = []
 
-for i in 1..20
-  user_id = i < 10 ? i : 1
-  event_location_id = i % 10
-  events <<  { description:"Cum haec taliaque sollicitas eius aures everberarent expositas semper eius modi rumoribus et patentes, varia animo tum miscente consilia,tandem id ut optimum factu elegit: et Vrsicinum primum ad se venire summo cum honore mandavit ea specie ut pro rerum tunc urgentium captu disponeretur concordiconsilio, quibus virium incrementis Parthicarum gentium a arma minantium impetus frangerentur.",user_id: user_id, event_location_id: event_location_id, title: "Rails and #{i} girls", category: 'Détente', start_time: "2015-02-26", end_time: "2015-03-15"  }
-end
+
+events <<  { description:"Cum haec taliaque sollicitas eius aures everberarent expositas semper eius modi rumoribus et patentes, varia animo tum miscente consilia,tandem id ut optimum factu elegit: et Vrsicinum primum ad se venire summo cum honore mandavit ea specie ut pro rerum tunc urgentium captu disponeretur concordiconsilio, quibus virium incrementis Parthicarum gentium a arma minantium impetus frangerentur.",user_id: 1, event_location_id: 1, title: "Viva Casa", category: 'Party hard', start_time: "2015-04-26", end_time: "2015-05-15",picture: 'http://i.imgur.com/uuuoqhW.jpg'  }
+event_locations <<  { country: 'switzerland',name: "Casa dani", city: 'St-Imier', canton: 'Bern',cover: 'http://i.imgur.com/uuuoqhW.jpg', category: 'party hard',street: 'rue des paquerettes 5', zip: '1232',latitude: '123981249119',longitude: '2394760239649235',likes: '153',phone: '0795842654',website: 'www.google.ch' }
+
+events <<  { description:"Cum haec taliaque sollicitas eius aures everberarent expositas semper eius modi rumoribus et patentes, varia animo tum miscente consilia,tandem id ut optimum factu elegit: et Vrsicinum primum ad se venire summo cum honore mandavit ea specie ut pro rerum tunc urgentium captu disponeretur concordiconsilio, quibus virium incrementis Parthicarum gentium a arma minantium impetus frangerentur.",user_id: 1, event_location_id: 2, title: "Les amis du tricot", category: 'Decoration', start_time: "2015-03-26", end_time: "2015-03-29",picture: 'http://i.imgur.com/RLe7blZ.jpg'  }
+event_locations <<  { country: 'switzerland',name: "Chez carracio", city: 'St-Imier', canton: 'Neuchatel',cover: 'http://i.imgur.com/RLe7blZ.jpg', category: 'party hard',street: 'rue des paquerettes 5', zip: '1232',latitude: '123981249119',longitude: '2394760239649235',likes: '13',phone: '0795842654',website: 'www.google.ch' }
+
+events <<  { description:"Cum haec taliaque sollicitas eius aures everberarent expositas semper eius modi rumoribus et patentes, varia animo tum miscente consilia,tandem id ut optimum factu elegit: et Vrsicinum primum ad se venire summo cum honore mandavit ea specie ut pro rerum tunc urgentium captu disponeretur concordiconsilio, quibus virium incrementis Parthicarum gentium a arma minantium impetus frangerentur.",user_id: 1, event_location_id: 3, title: "Halloween", category: 'Decoration', start_time: "2015-03-26", end_time: "2015-03-29",picture: 'http://i.imgur.com/4G6VZ2I.jpg'  }
+event_locations <<  { country: 'switzerland',name: "Fitzz", city: 'St-Imier', canton: 'Geneve',cover: 'http://i.imgur.com/4G6VZ2I.jpg', category: 'party hard',street: 'rue des paquerettes 5', zip: '1232',latitude: '123981249119',longitude: '2394760239649235',likes: '13',phone: '0795842654',website: 'www.google.ch' }
+
 
 
 User.create(users)

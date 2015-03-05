@@ -5,10 +5,14 @@ class MainController < ApplicationController
     title = "and"
     categories = ["fun", "Détente"]
     cantons = ["Bern"]
-    @events = Event.get_listing_events(title, categories, cantons)
+    #@events = Event.get_listing_events(title, categories, cantons)
+    @events = Event.get_listing_events()
     
     @categories = Event.get_categories()
     @cantons = EventLocation.get_cantons()
+    
+    offset = rand(Event.count)
+    @event_cover = Event.offset(offset).first
   end
   
   def load

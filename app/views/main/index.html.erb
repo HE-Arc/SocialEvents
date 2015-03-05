@@ -1,3 +1,7 @@
+
+<div class="image-cover-div">
+  <%= image_tag( @event_cover.picture , :alt => "cover image" ,:class => "img-cover") %>
+</div>
 <section class="main">
 <nav class="nav-bar">
     <div class="cat-queries-480">
@@ -105,12 +109,12 @@
                     <div class="inner">
                     <%= image_tag("http://i.imgur.com/Qt7VGfn.jpg", :alt => "event image") %>
                     </div>-->
-                  <div class="wrapperB" style="background-image: url('http://krasimirtsonev.com/blog/articles/CSSChallenge1/pic2.jpg');"></div>
+                  <div class="wrapperB" style="background-image: url('<%= event.picture %>');"></div>
                 </div>
                 <div class="content-event">
                     <p class="title-event"><%= link_to(event.title, event, :class => "link link-title") %></p>
 
-                  <p class="date-event">Date: From <%= event.start_time.strftime("%d %B %Y") %> to <%= event.end_time.strftime("%d %B %Y") %></p>
+                  <p class="date-event">From <%= event.start_time.strftime("%d %B %Y") %> to <%= event.end_time.strftime("%d %B %Y") %></p>
                     <p class="multiline-ellipsis">
                       <%= event.description %>
                     </p>

@@ -1,5 +1,11 @@
+<div class="image-cover-div">
+  <%= image_tag("http://i.imgur.com/RuztiBT.jpg", :alt => "cover image" ,:class => "img-cover") %>
+</div>
 <section class="show">
-  <h1>Evénement <%= @event.title %></h1>
+  <div class="show-title">
+    <p class="title-event"><%= @event.title %></p>
+    <p class="date-event">From <%= @event.start_time.strftime("%d %B %Y") %> to <%= @event.end_time.strftime("%d %B %Y") %></p>
+  </div>
   <div class="show-content">
     <p>Catégorie: <%= @event.category %></p>
     <p>Localisation: <%= @event.event_location.city + " " + @event.event_location.canton %></p>
