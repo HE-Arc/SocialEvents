@@ -104,8 +104,8 @@ class EventsController < ApplicationController
       event_request = @graph.get_object(fe["id"])
       @events = @events.push(event_request)
       
-      location = EventLocation.select(:id).where(id_facebook: event_request["owner"]["id"]).take
-      
+      location = EventLocation.select(:id).where(id_facebook: event_request["owner"]["id"])
+
       if not location.nil?
         # Insertion du lieu dans la base de données
         event_location = @graph.get_object(event_request["owner"]["id"])
@@ -126,19 +126,20 @@ class EventsController < ApplicationController
           :link  =>  event_location["link"],
           :phone  =>  event_location["phone"],
           :website  =>  event_location["website"])   
-
+        
         location.save()
       end 
       
       cover_image = @graph.get_object(event_request["id"]+"/photos?fields=source")
         puts "--------------------------------------------------------------------"
-        puts cover_image
+        puts cover_image[0]["source"]
+        puts location.id
         puts "--------------------------------------------------------------------"
       # Insertion des événements dans la base de données
       event = Event.new(
         :id_facebook => event_request["id"],
         :title => event_request["name"],
-        :picture => cover_image["source"],
+        :picture => cover_image[0]["source"],
         :category => "",
         :description => event_request["description"],
         :start_time => event_request["start_time"],
