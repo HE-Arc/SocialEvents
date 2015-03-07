@@ -17,7 +17,8 @@ class Event < ActiveRecord::Base
     query = self.joins(:event_location).order(:start_time).order(:title).where("? <= events.end_time", date)
 
     if not title.nil?
-      query = query.where('events.title LIKE ? OR events.description LIKE ?', "%#{title}%", "%#{title}%")
+      # ILIKE propre à Postgres
+      query = query.where('events.title ILIKE ? OR events.description ILIKE ?', "%#{title}%", "%#{title}%")
     end
     
     if not categories.nil?
