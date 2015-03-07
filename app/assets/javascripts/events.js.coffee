@@ -1,5 +1,5 @@
 $ ->
-    if document.location.href.indexOf('events') > -1 
+    if document.location.href.indexOf('events') > -1 && $('#map') != null
       handler = Gmaps.build('Google')
       handler.buildMap
         internal: 
