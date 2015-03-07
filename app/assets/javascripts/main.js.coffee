@@ -5,9 +5,12 @@
 # e permet désormais permet d'échapper un paramètre d'URL
 e = encodeURIComponent
 
+page = 0
+
 # exécution requête AJAX
 load_event = () ->
   console.log(create_ajax_url())
+  page = 0
   $.ajax({
     url: create_ajax_url(), 
     dataType: "json", 
@@ -16,40 +19,45 @@ load_event = () ->
       console.log "result ajax"
       console.log data 
     
-      #remove all child of flex-container with flex-item class
-      $('.flex-container > .flex-item').remove();
-  
-      month = ['January','February','March','April','May','June','July','August','September','October','November','December']
-    
-      #iterate on each search result
-      data.forEach (e) ->
-    
-          #date parsing
-          from =  e.start_time[8..9]  + " " + month[parseInt(e.start_time[5..6]) - 1] + " " +e.start_time[0..3]
-          to =  e.end_time[8..9]  + " " + month[parseInt(e.end_time[5..6]) - 1] + " " + e.end_time[0..3]
-
-          #creation of the flexbox who contains the event's info
-          event = $('<li class="flex-item">
-                    <div class="img-event">
-                      <div class="wrapperB" style="background-image: url(\'' + e.picture + '\');"></div>
-                    </div>
-                    <div class="content-event">
-                        <p class="title-event"><a class="link link-title" href="/events/' + e.id + '">' + e.title + '</a></p>
-                        <p class="date-event">From ' + from + ' to ' + to + '</p>
-                        <p class="multiline-ellipsis">
-
-                          ' + e.description + '
-                        </p>
-                        <div class="more-event">
-                          <button class="btn" href="#"><a class="link link-btn" href="/events/' + e.id + '">More</a></button>
-                        </div>
-                    </div>
-                </li>')
-
-          #append it to the flex-container
-          $('.flex-container').append(event)
+      append_next(data,true)
       
   })
+  
+#function for add event dynamically
+append_next = (data,clear) ->
+  #remove all child of flex-container with flex-item class
+  if clear 
+    $('.flex-container > .flex-item').remove();
+
+  month = ['January','February','March','April','May','June','July','August','September','October','November','December']
+
+  #iterate on each search result
+  data.forEach (e) ->
+
+    #date parsing
+    from =  e.start_time[8..9]  + " " + month[parseInt(e.start_time[5..6]) - 1] + " " +e.start_time[0..3]
+    to =  e.end_time[8..9]  + " " + month[parseInt(e.end_time[5..6]) - 1] + " " + e.end_time[0..3]
+
+    #creation of the flexbox who contains the event's info
+    event = $('<li class="flex-item">
+          <div class="img-event">
+          <div class="wrapperB" style="background-image: url(\'' + e.picture + '\');"></div>
+          </div>
+          <div class="content-event">
+          <p class="title-event"><a class="link link-title" href="/events/' + e.id + '">' + e.title + '</a></p>
+          <p class="date-event">From ' + from + ' to ' + to + '</p>
+          <p class="multiline-ellipsis">
+
+          ' + e.description + '
+          </p>
+          <div class="more-event">
+          <button class="btn" href="#"><a class="link link-btn" href="/events/' + e.id + '">More</a></button>
+          </div>
+          </div>
+          </li>')
+
+    #append it to the flex-container
+    $('.flex-container').append(event)
 
 # création de l'URL pour requête AJAX
 create_ajax_url = () ->
@@ -66,8 +74,8 @@ create_ajax_url = () ->
   title = $("#input-event-title").val()
   title = "*" if title == ""
   
-  limit = 0
-  offset = 0
+  limit = 5
+  offset = 5 * page
   
   return "/main/load/" + e(categories) + "/" + e(cantons) + "/" + e(date) + "/" + e(title) + "/" + e(limit) + "/" + e(offset)
 
@@ -121,3 +129,21 @@ $ ->
   $('.notify-close').click ->
     $(this).closest('.notify').hide();
 
+    
+#infinite scolling
+
+$(window).scroll ->
+    console.log "scroll"
+    if($(window).scrollTop() == $(document).height() - $(window).height())
+        console.log page++
+        $.ajax({
+        url: create_ajax_url(), 
+        dataType: "json", 
+        success: (data) =>
+            if(data)
+                #alert("SCROLL")
+                
+                append_next(data,false)
+            else
+                alert("No More Event !")
+        })

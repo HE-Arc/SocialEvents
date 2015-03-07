@@ -7,7 +7,7 @@ class MainController < ApplicationController
     cantons = ["Bern"]
     #@events = Event.get_listing_events(title, categories, cantons)
     #TODO first load limit 10
-    @events = Event.get_listing_events(nil, nil, nil, 10, 0, nil)
+    @events = Event.get_listing_events(nil, nil, nil, 5, 0, nil)
     
     @categories = Event.get_categories()
     @cantons = EventLocation.get_cantons()
@@ -29,8 +29,12 @@ class MainController < ApplicationController
     title = title != "*" ? title : nil
     
     # todo
-    limit = nil
-    offset = nil
+    if limit != nil
+      limit = limit.to_i
+    end
+    if offset != nil
+      offset = offset.to_i
+    end
     
     @events = Event.get_listing_events(title, categories_list, cantons_list, limit, offset, date)
     
