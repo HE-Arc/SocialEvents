@@ -11,10 +11,44 @@ load_event = () ->
   $.ajax({
     url: create_ajax_url(), 
     dataType: "json", 
+    #success callback actions
     success: (data) => 
       console.log "result ajax"
       console.log data 
-      #alert(data)
+    
+      #remove all child of flex-container with flex-item class
+      $('.flex-container > .flex-item').remove();
+  
+      month = ['January','February','March','April','May','June','July','August','September','October','November','December']
+    
+      #iterate on each search result
+      data.forEach (e) ->
+    
+          #date parsing
+          from =  e.start_time[8..9]  + " " + month[parseInt(e.start_time[5..6]) - 1] + " " +e.start_time[0..3]
+          to =  e.end_time[8..9]  + " " + month[parseInt(e.end_time[5..6]) - 1] + " " + e.end_time[0..3]
+
+          #creation of the flexbox who contains the event's info
+          event = $('<li class="flex-item">
+                    <div class="img-event">
+                      <div class="wrapperB" style="background-image: url(\'' + e.picture + '\');"></div>
+                    </div>
+                    <div class="content-event">
+                        <p class="title-event"><a class="link link-title" href="/events/' + e.id + '">' + e.title + '</a></p>
+                        <p class="date-event">From ' + from + ' to ' + to + '</p>
+                        <p class="multiline-ellipsis">
+
+                          ' + e.description + '
+                        </p>
+                        <div class="more-event">
+                          <button class="btn" href="#"><a class="link link-btn" href="/events/' + e.id + '">More</a></button>
+                        </div>
+                    </div>
+                </li>')
+
+          #append it to the flex-container
+          $('.flex-container').append(event)
+      
   })
 
 # création de l'URL pour requête AJAX

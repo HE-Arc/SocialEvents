@@ -6,7 +6,8 @@ class MainController < ApplicationController
     categories = ["fun", "Détente"]
     cantons = ["Bern"]
     #@events = Event.get_listing_events(title, categories, cantons)
-    @events = Event.get_listing_events()
+    #TODO first load limit 10
+    @events = Event.get_listing_events(nil, nil, nil, 10, 0, nil)
     
     @categories = Event.get_categories()
     @cantons = EventLocation.get_cantons()
