@@ -10,8 +10,9 @@ class UsersController < ApplicationController
     # authorize! :read, @user
     
     # accessible publiquement, sans vérification user courant connecté
-    @user = User.get_user_with_contribution_counter(params[:id]) #User.find(params[:id])
-    @is_connected = @user == current_user
+    @user = User.get_user_with_contribution_counter(params[:id])
+    @is_my_profile = @user == current_user
+    @events = Event.get_user_events(@user.id)
   end
 
   # GET /users/:id/edit

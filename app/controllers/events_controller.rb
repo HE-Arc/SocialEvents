@@ -10,6 +10,20 @@ class EventsController < ApplicationController
     @events_location = EventLocation.find(@event.event_location_id)
   end
   
+  def destroy
+    # la destruction masque l'événement, il sera supprimé plus tard automatiquement lorsque sa date sera dépassée
+    @event = Event.find(params[:id])
+    
+    if @event.user_id == current_user.id
+      @event.is_published = false
+      @event.save
+      redirect_to :back, notice: "The event has been deleted"
+      
+    else
+      redirect_to :back, alert: "You cannot delete someone's events like that, what are you thinking?"
+    end
+  end
+  
   def import_data
     user = current_user
     

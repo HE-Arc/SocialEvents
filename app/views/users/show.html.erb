@@ -1,9 +1,44 @@
-<h1>Profil de <%= @user.first_name %> <%= @user.last_name %></h1>
+<section class="main">
+  <div class="content">
 
-<% if @is_connected %>
-<p><button id="import">Importation</button></p>
-<p><%= link_to "Importation", import_test_path %></p>
-<% end %>
+    <h1>Profil de <%= @user.first_name %> <%= @user.last_name %></h1>
+
+    <% if @is_my_profile %>
+    <p><button id="import">Importation</button></p>
+    <p><%= link_to "Importation", import_test_path %></p>
+    <% end %>
 
 
-<p>Nombre de contributions : <%= @user.contributions_counter %>
+    <p>Nombre de contributions : <%= @user.contributions_counter %></p>
+    
+    <ul class="flex-container">
+      <% @events.each do |event| %>
+      <li class="flex-item">
+        <div class="img-event">
+          <!-- TODO take url from database -->
+          <!--
+            <div class="inner">
+            <%= image_tag("http://i.imgur.com/Qt7VGfn.jpg", :alt => "event image") %>
+            </div>-->
+          <div class="wrapperB" style="background-image: url('<%= event.picture %>');"></div>
+        </div>
+        <div class="content-event">
+          <p class="title-event"><%= link_to(event.title, event, :class => "link link-title") %></p>
+
+          <p class="date-event">From <%= event.start_time.strftime("%d %B %Y") %> to <%= event.end_time.strftime("%d %B %Y") %></p>
+          <p class="multiline-ellipsis">
+            <%= event.description %>
+          </p>
+          <div class="more-event">
+            <button class="btn" href="#"><%= link_to("More", event, :class => "link link-btn") %></button>
+            <% if @is_my_profile %>
+            <%= button_to "Supprimer", event, :class => "btn", :method => :delete %>
+            <% end %>
+          </div>
+        </div>
+      </li>
+      <% end %>
+    </ul>
+
+  </div>
+</section>
