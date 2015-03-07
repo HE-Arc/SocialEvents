@@ -1,3 +1,12 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+$ ->
+    handler = Gmaps.build('Google')
+    handler.buildMap
+      internal: 
+        id: "map"
+      , ->
+        marker = handler.addMarker({
+          lat: $('#lat').val()
+          lng: $('#lon').val()
+        })
+        handler.map.centerOn(marker)
+

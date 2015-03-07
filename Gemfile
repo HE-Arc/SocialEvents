@@ -55,3 +55,5 @@ gem 'jquery-turbolinks'
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+#google map API integration gem
+gem 'gmaps4rails'

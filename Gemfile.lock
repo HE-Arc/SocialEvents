@@ -58,6 +58,7 @@ GEM
     execjs (2.3.0)
     faraday (0.9.1)
       multipart-post (>= 1.2, < 3)
+    gmaps4rails (2.1.2)
     hashie (3.4.0)
     hike (1.2.3)
     i18n (0.7.0)
@@ -171,6 +172,7 @@ DEPENDENCIES
   delayed_job_active_record
   delayed_job_recurring
   devise
+  gmaps4rails
   jbuilder (~> 2.0)
   jquery-rails
   jquery-turbolinks

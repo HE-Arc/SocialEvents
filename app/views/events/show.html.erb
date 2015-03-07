@@ -19,9 +19,21 @@
 
     </div>
   </div>
-  <div class="map">
 
-  </div>
+    <div class="map">
+      <%= hidden_field_tag 'lat', @events_location.latitude %>
+      <%= hidden_field_tag 'lon', @events_location.longitude %>
+      <div id="map" style='width: 800px; height: 400px;'></div>
+    </div>
+
   
   
 </section>
+
+<script>
+  
+
+
+
+
+</script>
