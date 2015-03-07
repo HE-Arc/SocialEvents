@@ -2,7 +2,7 @@ class Event < ActiveRecord::Base
   belongs_to :user
   belongs_to :event_location
   
-  # Listing des événements selon différents critères de filtrage
+  # Listing des événements publics selon différents critères de filtrage
   #    title        titre ou description de l'événement
   #    categories   catégories possibles
   #    cantons      cantons possibles
@@ -14,7 +14,9 @@ class Event < ActiveRecord::Base
       date = DateTime.now.to_date
     end
     
-    query = self.joins(:event_location).order(:start_time).order(:title).where("? <= events.end_time", date)
+    query = self.joins(:event_location).order(:start_time).order(:title)
+                .where("? <= events.end_time", date)
+                .where('is_published = true')
 
     if not title.nil?
       # ILIKE propre à Postgres
@@ -50,5 +52,13 @@ class Event < ActiveRecord::Base
     date = DateTime.now.to_date
     self.where("? > events.end_time", date).destroy_all
   end
-  
+
+  # Récupération des événements visibles d'un utilisateur
+  #     user_id      id de l'utilisateur spécifique
+  def self.get_user_events(user_id)
+    self.joins(:event_location).order(:start_time).order(:title)
+        .where("? <= events.end_time", DateTime.now.to_date)
+        .where(:is_published => true)
+        .where("user_id = ?", user_id)
+  end
 end
