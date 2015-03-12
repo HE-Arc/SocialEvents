@@ -14,9 +14,9 @@
     flex-flow: row wrap;
     justify-content: flex-start;
 
-    -webkit-padding-start: 10px;
-    padding-start: 10px;
-    -moz-padding-start: 10px;
+    -webkit-padding-start: 5px;
+    padding-start:         5px;
+    -moz-padding-start:    5px;
 }
 
 /*RESET*/

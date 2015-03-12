@@ -68,10 +68,11 @@ footer {
 
 .header-content {
     padding-left: 2em;
+    overflow:auto;
 }
 
 header{
-  height: 10em;
+  height: 8em;
 }
 
 footer {
@@ -492,20 +493,16 @@ label.categorie {
     display: inline-block;
     margin: 10px;
     cursor: pointer;
+  
 }
 
 div.categorie {
-    background: #2c3e50;
+    color: #2c3e50;
     padding: 0.2em;
 }
 
 /* DVisible */
 div.categorie-1 {
-
-    color: white;
-
-
-
     max-height: 0px;
 
     /*TODO all browsers*/
@@ -537,11 +534,6 @@ input[type=checkbox].categorie-1:checked ~ div.categorie-1 {
 }
 
 div.categorie-2 {
-
-    color: white;
-
-
-
     max-height: 0px;
 
     /*TODO all browsers*/
@@ -650,8 +642,13 @@ input[type=checkbox].categorie:checked + label:after {
 	background:#FF2400;
 }
 
+.header-nav{
+  overflow:auto;
+}
+
 .btn-user{
   float:right;
+  padding-top:.5em;
 }
 
 .btn,
@@ -661,6 +658,8 @@ input[type=checkbox].categorie:checked + label:after {
 
 .site-title{
   font-size: 2.5em;
+  overflow:auto;
+  
 }
 
 /**********************************/
