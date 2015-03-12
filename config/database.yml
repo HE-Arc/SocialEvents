@@ -83,6 +83,9 @@ test:
 #
 production:
   <<: *default
-  database: SocialEvents_production
-  username: SocialEvents
-  password: <%= ENV['SOCIALEVENTS_DATABASE_PASSWORD'] %>
+  database: socialevents_production
+  username: socialevents
+  password: socialevents
+  #database: SocialEvents_production
+  #username: SocialEvents
+  #password: <%= ENV['SOCIALEVENTS_DATABASE_PASSWORD'] %>
