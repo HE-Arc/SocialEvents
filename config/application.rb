@@ -6,6 +6,8 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+CONFIG = YAML.load_file(File.expand_path('../app.yml', __FILE__))[Rails.env]
+
 module SocialEvents
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
