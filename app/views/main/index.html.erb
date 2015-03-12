@@ -1,6 +1,8 @@
 
 <div class="image-cover-div">
-  <%= image_tag( @event_cover.picture , :alt => "cover image" ,:class => "img-cover") %>
+  <% if not @event_cover.nil? %>
+    <%= image_tag( @event_cover.picture , :alt => "cover image" ,:class => "img-cover") %>
+  <% end %>
 </div>
 <section class="main">
 <nav class="nav-bar">
