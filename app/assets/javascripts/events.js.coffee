@@ -1,5 +1,6 @@
 $ ->
-    if document.location.href.indexOf('events') > -1 && $('#map') != null
+    # Do not use the id 'map' unless you want to load google map API
+    if $('#map') != null
       handler = Gmaps.build('Google')
       handler.buildMap
         internal: 
