@@ -86,6 +86,7 @@ production:
   database: socialevents_production
   username: socialevents
   password: socialevents
+  host: localhost
   #database: SocialEvents_production
   #username: SocialEvents
   #password: <%= ENV['SOCIALEVENTS_DATABASE_PASSWORD'] %>
