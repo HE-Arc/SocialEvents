@@ -44,7 +44,7 @@ section.main .nav-bar {
     padding: 5px;
     color: #333;
     border: solid #bdc3c7 1px;
-    min-width: 25%;
+    min-width: 20%;
 }
 
 section.main .nav-bar ul {
@@ -520,7 +520,7 @@ div.categorie-1 {
 /* Hide */
 input[type=checkbox].categorie-1:checked ~ div.categorie-1 {
 
-    max-height: 10em;
+    max-height: 100em;
 
     -webkit-transition: all 0.3s linear;
     -moz-transition: all 0.3s linear;
@@ -662,6 +662,11 @@ input[type=checkbox].categorie:checked + label:after {
   
 }
 
+.ui-datepicker {
+  width: 100% !important;
+  padding: 0;
+}
+
 /**********************************/
 /* MEDIA QUERIES                  */
 /**********************************/
@@ -742,8 +747,7 @@ input[type=checkbox].categorie:checked + label:after {
         padding: 5px;
         color: #333;
         border: solid #bdc3c7 1px;
-        min-width: 25%;
-    }
+     }
 
     section.main .nav-bar ul {
         list-style: none;
