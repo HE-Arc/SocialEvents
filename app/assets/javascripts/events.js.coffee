@@ -1,3 +1,4 @@
+
 $ ->
     # Do not use the id 'map' unless you want to load google map API
     if $('#map').length > 0
