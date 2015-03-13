@@ -1,6 +1,6 @@
 $ ->
     # Do not use the id 'map' unless you want to load google map API
-    if $('#map') != null
+    if $('#map').length > 0
       handler = Gmaps.build('Google')
       handler.buildMap
         internal: 
