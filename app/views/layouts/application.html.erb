@@ -39,31 +39,24 @@
       </div>
     <% end %>
     <% if user_signed_in? %>
-               <div class="btn-user">
-                <%= button_to "Sign out", destroy_user_session_path, :class => "btn", :method => :delete %>
-                 <%= button_to "Profil", user_path(current_user), :class => "btn", :method => :get %>
-                 <%= button_to "Home", "/", :class => "btn", :method => :get %>
-              </div>
-        <% end %>
+        <div class="btn-user">
+          <%= button_to "Sign out", destroy_user_session_path, :class => "btn", :method => :delete %>
+          <%= button_to "Profil", user_path(current_user), :class => "btn", :method => :get %>
+          <%= button_to "Home", "/", :class => "btn", :method => :get %>
+        </div>
+    <% end %>
+    <% if not user_signed_in? %>
+        <div class="fb-login-button fb-login-button-large"><%= link_to(image_tag("fb_login.png", :alt => "facebook button", :class => ""),user_omniauth_authorize_path(:facebook)) %></div>
+        <div class="fb-login-button fb-login-button-small"><%= link_to(image_tag("fb_login_small.png", :alt => "facebook button", :class => ""),user_omniauth_authorize_path(:facebook)) %></div>
+    <% end %>
         <div class="site-title">Social Events</div>
-          <% if not user_signed_in? %>
-                <div class="fb-login-button fb-login-button-large"><%= link_to(image_tag("fb_login.png", :alt => "facebook button", :class => ""),
-    user_omniauth_authorize_path(:facebook)) %></div>
-                <div class="fb-login-button fb-login-button-small"><%= link_to(image_tag("fb_login_small.png", :alt => "facebook button", :class => ""),
-      user_omniauth_authorize_path(:facebook)) %></div>
-            <% end %>
-    
-        
+
         <% if user_signed_in? %>
         <div class="welcom">
         Welcome <%= current_user.last_name+' '+current_user.first_name %>
         </div>
         <% end %>
-    
-      
-    
 
-    
   </header>
 
   

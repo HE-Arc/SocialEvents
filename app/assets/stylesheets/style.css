@@ -549,7 +549,7 @@ div.categorie-2 {
 
 /* Hide */
 input[type=checkbox].categorie-2:checked ~ div.categorie-2 {
-    max-height: 10em;
+    max-height: 100em;
 
     -moz-transition: all 0.3s linear;
     -webkit-transition: all 0.3s linear;
