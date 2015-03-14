@@ -1,3 +1,5 @@
+alert("*");
+
 (function() {
   this.Gmaps = {
     build: function(type, options) {

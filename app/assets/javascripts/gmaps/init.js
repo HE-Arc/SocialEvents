@@ -23,4 +23,3 @@ require("/assets/gmaps/google/objects/polygon.js?body=1");
 require("/assets/gmaps/google/objects/polyline.js?body=1");
 require("/assets/gmaps/google/primitives.js?body=1");
 require("/assets/gmaps/google.js?body=1");
-

@@ -1,4 +1,7 @@
-<%= raw javascript_include_view_js %>
+<% content_for :javascript_includes do %>
+  <%= raw javascript_include_view_js %>
+<% end %>
+
 <div class="image-cover-div">
   <%= image_tag(@event.picture, :alt => "cover image" ,:class => "img-cover") %>
 </div>
@@ -26,8 +29,5 @@
       <%= hidden_field_tag 'lon', @events_location.longitude %>
       <div id="map" style='width: 800px; height: 400px;'></div>
     </div>
-
-  
-  
 </section>
 
