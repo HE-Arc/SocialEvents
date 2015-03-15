@@ -10,7 +10,7 @@ users = []
 event_locations = []
 events = []
 
-users <<  { email: "caraccio@facebook.com", first_name: "Michael", last_name: "Carraccio" }
+users <<  { email: "caraccio@facebook.com", first_name: "Michael", last_name: "Caraccio" }
 users <<  { email: "deruaz@facebook.com", first_name: "Vincent", last_name: "Deruaz" }
 users <<  { email: "Rossert@facebook.com", first_name: "Mathieu", last_name: "Rossert" }
 users <<  { email: "LeGredin@facebook.com", first_name: "Kilian", last_name: "LeGredin" }
@@ -71,3 +71,13 @@ events <<  { description:"Cum haec taliaque sollicitas eius aures everberarent e
 User.create(users)
 EventLocation.create(event_locations)
 Event.create(events)
+
+# Chargement des localités dans la bdd
+sql = File.read('db/localites.sql')
+statements = sql.split("\n")
+statements.pop
+
+connection = ActiveRecord::Base.connection()
+statements.each do |statement|
+  connection.execute(statement)
+end
