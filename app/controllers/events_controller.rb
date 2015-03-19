@@ -186,9 +186,18 @@ class EventsController < ApplicationController
       
       event = Event.where(:id_facebook => event_request["id"]).first_or_initialize
       
+      # Vérification si image n'est pas null
       image_cover = ""
       if cover_image[0]
         image_cover = cover_image[0]["source"]
+      end
+      
+      
+      # Si date de fin non spécifier, alors on ajoute 1 jour à la date de début
+      endtime = event_request["end_time"]
+      if not event_request["end_time"]
+        endtime = DateTime.parse(event_request["start_time"])
+        endtime += 1.days
       end
       
       event.update_attributes(
@@ -197,7 +206,7 @@ class EventsController < ApplicationController
         :category => "",
         :description => event_request["description"],
         :start_time => event_request["start_time"],
-        :end_time => event_request["end_time"],
+        :end_time => endtime,
         :user_id => current_user.id,
         :event_location_id => location.id
       )
