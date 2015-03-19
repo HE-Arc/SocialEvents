@@ -115,15 +115,16 @@ class EventsController < ApplicationController
         eventlist_request.each do |f| 
             eventlist.push(f)
         end
-        
+      
+      location = EventLocation.where(:id_facebook => f["id"]).first_or_initialize
+
       # Insertion du lieu dans la base de données
-      location = EventLocation.new(    
-        :id_facebook  =>  f["id"].to_i,
+      location.update_attributes(
         :name  =>  f["name"],
         :city  =>  f["location"]["city"],
         :street  =>  f["location"]["street"],
         :zip  =>  f["location"]["zip"],
-        :canton  =>  "zgeg",
+        :canton  =>  Localite.find_canton(f["location"]["zip"]),
         :country  =>  f["location"]["country"],
         :latitude  =>  f["location"]["latitude"],
         :longitude  =>  f["location"]["longitude"],
@@ -132,11 +133,8 @@ class EventsController < ApplicationController
         :likes  =>  f["likes"],
         :link  =>  f["link"],
         :phone  =>  f["phone"],
-        :website  =>  f["website"])   
-      
-      location.save()
-        
-        
+        :website  =>  f["website"]
+        )   
       end 
     end
     
@@ -160,13 +158,14 @@ class EventsController < ApplicationController
         # Insertion du lieu dans la base de données
         event_location = @graph.get_object(event_request["owner"]["id"])
 
-        location = EventLocation.new(    
-          :id_facebook  =>  event_location["id"].to_i,
+        location = EventLocation.where(:id_facebook => event_location["id"]).first_or_initialize
+
+        location.update_attributes(    
           :name  =>  event_location["name"],
           :city  =>  event_location["location"]["city"],
           :street  =>  event_location["location"]["street"],
           :zip  =>  event_location["location"]["zip"],
-          :canton  =>  "zgeg",
+          :canton  =>  Localite.find_canton(event_location["location"]["zip"]),
           :country  =>  event_location["location"]["country"],
           :latitude  =>  event_location["location"]["latitude"],
           :longitude  =>  event_location["location"]["longitude"],
@@ -175,30 +174,33 @@ class EventsController < ApplicationController
           :likes  =>  event_location["likes"],
           :link  =>  event_location["link"],
           :phone  =>  event_location["phone"],
-          :website  =>  event_location["website"])   
-        
-        location.save()
+          :website  =>  event_location["website"]
+          )   
       end 
       
       cover_image = @graph.get_object(event_request["id"]+"/photos?fields=source")
         puts "--------------------------------------------------------------------"
-        puts cover_image[0]["source"]
-        puts location.id
+        #puts cover_image[0]["source"]
+        #puts location.id
         puts "--------------------------------------------------------------------"
-      # Insertion des événements dans la base de données
-      event = Event.new(
-        :id_facebook => event_request["id"],
+      
+      event = Event.where(:id_facebook => event_request["id"]).first_or_initialize
+      
+      image_cover = ""
+      if cover_image[0]
+        image_cover = cover_image[0]["source"]
+      end
+      
+      event.update_attributes(
         :title => event_request["name"],
-        :picture => cover_image[0]["source"],
+        :picture => image_cover,
         :category => "",
         :description => event_request["description"],
         :start_time => event_request["start_time"],
         :end_time => event_request["end_time"],
         :user_id => current_user.id,
-        :event_location_id => location.id)
-      
-      event.save()
-      
+        :event_location_id => location.id
+      )
     end
   end
 end
