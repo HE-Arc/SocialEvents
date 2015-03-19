@@ -19,7 +19,7 @@ class MainController < ApplicationController
   def load
     categories = params[:categories]
     cantons = params[:cantons]
-    date = params[:date]
+    date = DateTime.strptime(params[:date], "%Y-%m-%d")
     title = params[:title]
     limit = params[:limit]
     offset = params[:offset]
