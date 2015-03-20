@@ -15,7 +15,7 @@ class Event < ActiveRecord::Base
     end
     
     query = self.joins(:event_location).order(:start_time).order(:title)
-                .where("events.start_time <= ? AND events.end_time >= ?", date, date)
+                .where("DATE(events.start_time) <= ? AND DATE(events.end_time) >= ?", date, date)
                 .where('is_published = true')
 
     if not title.nil?
@@ -50,14 +50,14 @@ class Event < ActiveRecord::Base
   # Purge les événements plus vieux que la date du jour
   def self.purge_events
     date = DateTime.now.to_date
-    self.where("? > events.end_time", date).destroy_all
+    self.where("? > DATE(events.end_time)", date).destroy_all
   end
 
   # Récupération des événements visibles d'un utilisateur
   #     user_id      id de l'utilisateur spécifique
   def self.get_user_events(user_id)
     self.joins(:event_location).order(:start_time).order(:title)
-        .where("? <= events.end_time", DateTime.now.to_date)
+        .where("? <= DATE(events.end_time)", DateTime.now.to_date)
         .where(:is_published => true)
         .where("user_id = ?", user_id)
   end
