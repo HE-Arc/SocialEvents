@@ -65,7 +65,7 @@ class EventsController < ApplicationController
     will_import = user && !user.is_fetching
         
     if will_import
-      ImportEventsTask.import(user.id, session["devise.facebook_data"]["credentials"]["token"])      
+      ImportEventsTask.import(user.id, session["devise.facebook_data"]["credentials"]["token"],params[:latitude],params[:longitude])      
     end
     
     render :json => will_import
@@ -102,6 +102,7 @@ class EventsController < ApplicationController
     # ******************************************************************
     
     # Affiche les événements à proximité de l'utilisateur
+    
     eventlocation = @graph.get_object("search?q=bar&type=place&center=46.94,6.85&distance=40000&limit=40")
     @events_locations = eventlocation
     
