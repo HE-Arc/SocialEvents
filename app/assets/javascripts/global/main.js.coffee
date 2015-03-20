@@ -77,7 +77,8 @@ create_ajax_url = () ->
   limit = 5
   offset = 5 * page
   
-  return $(location).attr('href') + "/main/load/" + e(categories) + "/" + e(cantons) + "/" + e(date) + "/" + e(title) + "/" + e(limit) + "/" + e(offset)
+  url = "main/load/" + e(categories) + "/" + e(cantons) + "/" + e(date) + "/" + e(title) + "/" + e(limit) + "/" + e(offset)
+  return base_url + url
 
 # vérification des checkbox cantons et catégories
 # l'option "all" est exclusive avec toute autre option
