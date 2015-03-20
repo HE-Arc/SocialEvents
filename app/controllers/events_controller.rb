@@ -1,6 +1,6 @@
 require "koala"
-require "openssl"
-require "base64"
+#require "openssl"
+#require "base64"
 
 class EventsController < ApplicationController
   
@@ -8,33 +8,18 @@ class EventsController < ApplicationController
   
   def javascript_include_view_js
     include = ''
+    
+    files = ["base.js", "base/base.js", "objects/base_builder.js", "objects/builder.js", "objects/handler.js", "objects/null_clusterer.js",
+            "google/objects/common.js", "google/builders/bound.js", "google/builders/circle.js", "google/builders/clusterer.js",
+            "google/builders/kml.js", "google/builders/map.js", "google/builders/marker.js", "google/builders/polygon.js",
+            "google/builders/polyline.js", "google/objects/bound.js", "google/objects/circle.js", "google/objects/clusterer.js",
+            "google/objects/kml.js", "google/objects/map.js", "google/objects/marker.js", "google/objects/polygon.js",
+            "google/objects/polyline.js", "google/primitives.js", "google.js"]
+    
+    files.each do |f|
+      include += '<script data-turbolinks-track="true" src="/assets/gmaps/' + f + '?body=1" type="text/javascript"></script>'
+    end
    
-    include += '<script data-turbolinks-track="true" src="/assets/gmaps/base.js?body=1" type="text/javascript"></script>'
-    include += '<script data-turbolinks-track="true" src="/assets/gmaps/base/base.js?body=1" type="text/javascript"></script>'
-    include += '<script data-turbolinks-track="true" src="/assets/gmaps/objects/base_builder.js?body=1" type="text/javascript"></script>'
-    include += '<script data-turbolinks-track="true" src="/assets/gmaps/objects/builder.js?body=1" type="text/javascript"></script>'
-    include += '<script data-turbolinks-track="true" src="/assets/gmaps/objects/handler.js?body=1" type="text/javascript"></script>'
-    include += '<script data-turbolinks-track="true" src="/assets/gmaps/objects/null_clusterer.js?body=1" type="text/javascript"></script>'
-    include += '<script data-turbolinks-track="true" src="/assets/gmaps/google/objects/common.js?body=1" type="text/javascript"></script>'
-    include += '<script data-turbolinks-track="true" src="/assets/gmaps/google/builders/bound.js?body=1" type="text/javascript"></script>'
-    include += '<script data-turbolinks-track="true" src="/assets/gmaps/google/builders/circle.js?body=1" type="text/javascript"></script>'
-    include += '<script data-turbolinks-track="true" src="/assets/gmaps/google/builders/clusterer.js?body=1" type="text/javascript"></script>'
-    include += '<script data-turbolinks-track="true" src="/assets/gmaps/google/builders/kml.js?body=1" type="text/javascript"></script>'
-    include += '<script data-turbolinks-track="true" src="/assets/gmaps/google/builders/map.js?body=1" type="text/javascript"></script>'
-    include += '<script data-turbolinks-track="true" src="/assets/gmaps/google/builders/marker.js?body=1" type="text/javascript"></script>'
-    include += '<script data-turbolinks-track="true" src="/assets/gmaps/google/builders/polygon.js?body=1" type="text/javascript"></script>'
-    include += '<script data-turbolinks-track="true" src="/assets/gmaps/google/builders/polyline.js?body=1" type="text/javascript"></script>'
-    include += '<script data-turbolinks-track="true" src="/assets/gmaps/google/objects/bound.js?body=1" type="text/javascript"></script>'
-    include += '<script data-turbolinks-track="true" src="/assets/gmaps/google/objects/circle.js?body=1" type="text/javascript"></script>'
-    include += '<script data-turbolinks-track="true" src="/assets/gmaps/google/objects/clusterer.js?body=1" type="text/javascript"></script>'
-    include += '<script data-turbolinks-track="true" src="/assets/gmaps/google/objects/kml.js?body=1" type="text/javascript"></script>'
-    include += '<script data-turbolinks-track="true" src="/assets/gmaps/google/objects/map.js?body=1" type="text/javascript"></script>'
-    include += '<script data-turbolinks-track="true" src="/assets/gmaps/google/objects/marker.js?body=1" type="text/javascript"></script>'
-    include += '<script data-turbolinks-track="true" src="/assets/gmaps/google/objects/polygon.js?body=1" type="text/javascript"></script>'
-    include += '<script data-turbolinks-track="true" src="/assets/gmaps/google/objects/polyline.js?body=1" type="text/javascript"></script>'
-    include += '<script data-turbolinks-track="true" src="/assets/gmaps/google/primitives.js?body=1" type="text/javascript"></script>'
-    include += '<script data-turbolinks-track="true" src="/assets/gmaps/google.js?body=1" type="text/javascript"></script>'
-
     return include
   end
   
@@ -113,7 +98,7 @@ class EventsController < ApplicationController
     # ******************************************************************
     
     # Affiche les événements à proximité de l'utilisateur
-    eventlocation = @graph.get_object("search?q=bar&type=place&center=46.94,6.85&distance=40000&limit=40")
+    eventlocation = @graph.get_object("search?q=&type=place&center=46.94,6.85&distance=40000&limit=40")
     @events_locations = eventlocation
     
     # **************************************************************
