@@ -38,8 +38,7 @@ class EventsController < ApplicationController
     return include
   end
   
-  def show
-    
+  def show 
     @event = Event.find(params[:id])
     @user = User.find(@event.user_id)
     @events_location = EventLocation.find(@event.event_location_id)
@@ -71,6 +70,15 @@ class EventsController < ApplicationController
     render :json => will_import
   end
   
+  def strposa(haystack, needle, offset=0)
+    count = 0
+    needle.each do |n|
+      count = count + haystack.scan(n).count
+    end
+    puts count
+    return count
+  end
+  
   def import_verify
     user = current_user
     
@@ -83,7 +91,10 @@ class EventsController < ApplicationController
   
   # GRAPH API
   def test
-    
+    category_musique = ["Album", "Artist", "Arts/entertainment/nightlife", "Author", "Bar", "Club", "Concert tour", "Concert venue", "Music", "Music award","electro", "Music chart", "Music video", "Musical genre", "Musical instrument", "Musician/band", "musique", "music","dj", "musiques", "concert", "festival de musique", "MUSIC", "MUSIQUE", "Clubbing", "Dance-hall","funk","rock","jam", "Jam","compositeur","blues"]
+    category_cinema = ["Actor/director", "Comedian", "Movie","Movie general", "Movie genre", "Movie theater", "Movies/music", "cinéma", "cinémas", "projection", "film", "films", "NIFFF", "CINEMA"]
+    category_art = ["Arts/humanities website", "Dancer", "Museum/art gallery", "Society/culture website", "expositions","exposition","musée", "galerie"]
+    category_spectacle = ["Attractions/things to do", "Event planning/event services", "spectacle", "spetacles", "représentation","Théâtre", "sketch", "sketches","sketche"]
     # **************************************************************
     # Authentification process
     # **************************************************************
@@ -180,10 +191,10 @@ class EventsController < ApplicationController
       end 
       
       cover_image = @graph.get_object(event_request["id"]+"/photos?fields=source")
-        puts "--------------------------------------------------------------------"
+        #puts "--------------------------------------------------------------------"
         #puts cover_image[0]["source"]
         #puts location.id
-        puts "--------------------------------------------------------------------"
+        #puts "--------------------------------------------------------------------"
       
       event = Event.where(:id_facebook => event_request["id"]).first_or_initialize
       
@@ -201,10 +212,41 @@ class EventsController < ApplicationController
         endtime += 1.days
       end
       
+      #recherche dans la description
+      count = strposa(event_request["description"], category_musique)
+      temp = strposa(event_request["description"], category_cinema)
+      eventCategory = "Musique"
+      
+      if count >= temp 
+        eventCategory = "Musique"
+      else
+        count = temp
+        eventCategory = "Cinéma"
+      end
+        
+      temp2 = strposa(event_request["description"], category_art)
+      if temp2 > count
+        count = temp2
+        eventCategory = "Musée / Exposition"
+      end
+      
+      temp3 = strposa(event_request["description"], category_spectacle)
+      if temp3 > count
+        count = temp3
+        eventCategory = "Spectacle / Théâtre"
+      end  
+      
+      #puts "-------"
+      #puts event_request["name"]
+      #puts event_request["description"]
+      #puts eventCategory
+      #puts "-------"
+      puts "1 événement ajouté"
+      
       event.update_attributes(
         :title => event_request["name"],
         :picture => image_cover,
-        :category => "",
+        :category => eventCategory,
         :description => event_request["description"],
         :start_time => event_request["start_time"],
         :end_time => endtime,
