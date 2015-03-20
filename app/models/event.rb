@@ -44,7 +44,7 @@ class Event < ActiveRecord::Base
   
   # Listing des catégories d'événements
   def self.get_categories
-    self.distinct.pluck(:category)
+    self.distinct.order(:category).pluck(:category)
   end
   
   # Purge les événements plus vieux que la date du jour
