@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   
   get "/import" => "events#import"
   get "/import/test" => "events#test"
-  get "/import/data/:latitude/:longitude" => "events#import_data"
+  get "/import/data/:latitude/:longitude" => "events#import_data", :latitude => /[^\/]+/, :longitude => /[^\/]+/
   get "/import/verify" => "events#import_verify"
   match '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => :finish_signup
   

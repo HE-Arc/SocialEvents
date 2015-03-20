@@ -32,7 +32,7 @@ $ ->
             console.log("Latitude : " + position.coords.latitude + ", longitude : " + position.coords.longitude)
             fetching.show()
             $.ajax(url: "/import/data/" + position.coords.latitude + "/" + position.coords.longitude)
-            setTimeout(verify_import, 2000)
+            setTimeout(verify_import, 10000)
             import_button.attr("disabled", "")
           , (error) ->
             alert("vieux ZGEG shaaaaaaaaaaaaaaaaaaaaaare !!!!!")
