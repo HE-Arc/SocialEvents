@@ -6,13 +6,13 @@ class ImportEventsTask
   
   class << self
     
-    def import(user_id, token)
+    def import(user_id, token, latitude, longitude)
                   
       user = User.find(user_id)
       user.is_fetching = true
       user.save!
       
-      self.fetch(token)
+      self.fetch(token, latitude, longitude)
 
       user.is_fetching = false
       user.save!
@@ -24,7 +24,7 @@ class ImportEventsTask
 
   private
     
-  def self.fetch(token)
+  def self.fetch(token, latitude, longitude)
     # **************************************************************
     # Authentification process
     # **************************************************************
