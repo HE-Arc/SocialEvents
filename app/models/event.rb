@@ -15,7 +15,7 @@ class Event < ActiveRecord::Base
     end
     
     query = self.joins(:event_location).order(:start_time).order(:title)
-                .where("events.start_time <= ? AND events.end_time >= ?", date, date)
+                .where("DATE(events.start_time) <= ? AND DATE(events.end_time) >= ?", date, date)
                 .where('is_published = true')
 
     if not title.nil?
