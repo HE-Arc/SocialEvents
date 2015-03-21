@@ -70,7 +70,7 @@
         <% @users_top.each do |user| %>
         <div>
             <div class="content-top-contributor">
-                <i class="icon-user"></i><span class="name-top-contributor"><%= user.first_name %> <%= user.last_name %></span>
+                <i class="icon-user"></i><span class="name-top-contributor"><%= link_to user.first_name + " " + user.last_name, user, class: 'link' %></span>
                 <span class="value-top-contributor"><%= user.contributions_counter %></span>
             </div>
         </div>

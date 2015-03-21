@@ -1,5 +1,18 @@
-<h1>Liste des utilisateurs</h1>
+<section class="main">
+  <div class="content">
+    
+    <div class="top-contributor cat-queries-480">
+      <h3 class="title-top-contributor">Liste des utilisateurs</h3>
+      <% @users.each do |user| %>
+      <div>
+        <div class="content-top-contributor">
+          <i class="icon-user"></i><span class="name-top-contributor"><%= link_to user.first_name + " " + user.last_name, user, class: 'link' %></span>
+          <span class="value-top-contributor"><%= user.contributions_counter %></span>
+        </div>
+      </div>
+      <% end %>
+    </div>
 
-<% @users.each do |user| %>
-<p><%= link_to user.first_name + " " + user.last_name, user %> <%= user.contributions_counter %></p>
-<% end %>
+    
+  </div>
+</section>

@@ -15,7 +15,6 @@ Rails.application.routes.draw do
   get "/import/test" => "events#test"
   get "/import/data/:latitude/:longitude" => "events#import_data", :latitude => /[^\/]+/, :longitude => /[^\/]+/
   get "/import/verify" => "events#import_verify"
-  match '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => :finish_signup
   
   get "/main/load/" => "main#load"
   get "/main/load/:categories/:cantons/:date/:title/:limit/:offset" => "main#load"

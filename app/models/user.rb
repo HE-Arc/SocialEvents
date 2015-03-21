@@ -1,15 +1,12 @@
 class User < ActiveRecord::Base
   has_many :events, dependent: :destroy
   
-  TEMP_EMAIL_PREFIX = 'change@me'
-  TEMP_EMAIL_REGEX = /\Achange@me/
-
   # Include default devise modules. Others available are:
   # :registerable, :confirmable, :recoverable, :validatable
   # :lockable, :timeoutable
   devise :database_authenticatable, :trackable, :rememberable, :omniauthable
 
-  validates_format_of :email, :without => TEMP_EMAIL_REGEX, on: :update
+  #validates_format_of :email, :without => TEMP_EMAIL_REGEX, on: :update
 
   def self.find_for_oauth(auth, signed_in_resource = nil)
 
@@ -25,29 +22,22 @@ class User < ActiveRecord::Base
     # Create the user if needed
     if user.nil?
 
-      # Get the existing user by email if the provider gives us a verified email.
-      # If no verified email was provided we assign a temporary email and ask the
-      # user to verify it on the next step via UsersController.finish_signup
-      email_is_verified = auth.info.email && (auth.info.verified || auth.info.verified_email)
-      email = auth.info.email if email_is_verified
-      user = User.where(:email => email).first if email
+      # Get the existing user by email
+      email = auth.info.email ? auth.info.email : "#{auth.uid}@#{auth.provider}.com" 
+      user = User.where(:email => email).first_or_initialize
 
-      # Create the user if it's a new registration
-      if user.nil?
-        user = User.new(
-          id_facebook: auth.uid,
-          email: email ? email : "#{TEMP_EMAIL_PREFIX}-#{auth.uid}-#{auth.provider}.com",
-          first_name: auth.info.first_name,
-          last_name: auth.info.last_name,
-          city: auth.extra.raw_info.location,
-          gender: auth.extra.raw_info.gender,
-          birthday: auth.extra.raw_info.birthday, # Date.strptime(auth.extra.raw_info.birthday, "%m/%d/%Y"),
-          #username: auth.info.nickname || auth.uid,
-          password: Devise.friendly_token[0,20]
-        )
-        #user.skip_confirmation!
-        user.save!
-      end
+      # Update or create the user in database
+      user.update_attributes(
+        id_facebook: auth.uid,
+        email: email,
+        first_name: auth.info.first_name,
+        last_name: auth.info.last_name,
+        city: auth.extra.raw_info.location,
+        gender: auth.extra.raw_info.gender,
+        birthday: auth.extra.raw_info.birthday, # Date.strptime(auth.extra.raw_info.birthday, "%m/%d/%Y"),
+        #username: auth.info.nickname || auth.uid,
+        password: Devise.friendly_token[0,20]
+      )
     end
 
     # Associate the identity with the user if needed
@@ -56,12 +46,7 @@ class User < ActiveRecord::Base
       identity.save!
     end
     user
-  end
-
-  def email_verified?
-    self.email && self.email !~ TEMP_EMAIL_REGEX
-  end
-  
+  end  
   
   # Récupère la liste des utilisateurs, triés par ordre de contribution descendant
   # limit    limite à N utilisateurs la liste
