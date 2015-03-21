@@ -2,9 +2,13 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-# e permet désormais permet d'échapper un paramètre d'URL
-e = encodeURIComponent
+# Encoding for Javascript
+encUrl = (url) -> 
+  return encodeURIComponent(url)
 
+encHtml = (html) ->
+  return $('<div />').text(html).html()
+  
 page = 0
 
 # exécution requête AJAX
@@ -41,14 +45,14 @@ append_next = (data,clear) ->
     #creation of the flexbox who contains the event's info
     event = $('<li class="flex-item">
           <div class="img-event">
-          <div class="wrapperB" style="background-image: url(\'' + e.picture + '\');"></div>
+          <div class="wrapperB" style="background-image: url(\'' + encHtml(e.picture) + '\');"></div>
           </div>
           <div class="content-event">
-          <p class="title-event"><a class="link link-title" href="/events/' + e.id + '">' + e.title + '</a></p>
+          <p class="title-event"><a class="link link-title" href="/events/' + e.id + '">' + encHtml(e.title) + '</a></p>
           <p class="date-event">From ' + from + ' to ' + to + '</p>
           <p class="multiline-ellipsis">
 
-          ' + e.description + '
+          ' + encHtml(e.description) + '
           </p>
           <div class="more-event">
           <button class="btn" href="#"><a class="link link-btn" href="/events/' + e.id + '">More</a></button>
@@ -77,7 +81,7 @@ create_ajax_url = () ->
   limit = 5
   offset = 5 * page
   
-  url = "main/load/" + e(categories) + "/" + e(cantons) + "/" + e(date) + "/" + e(title) + "/" + e(limit) + "/" + e(offset)
+  url = "main/load/" + encUrl(categories) + "/" + encUrl(cantons) + "/" + encUrl(date) + "/" + encUrl(title) + "/" + encUrl(limit) + "/" + encUrl(offset)
   return base_url + url
 
 # vérification des checkbox cantons et catégories
