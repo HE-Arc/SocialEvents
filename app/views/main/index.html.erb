@@ -1,18 +1,30 @@
 
 <div class="image-cover-div">
+  
   <% if not @event_cover.nil? %>
-    <%= image_tag( @event_cover.picture , :alt => "cover image" ,:class => "img-cover") %>
+    <% if not @event_cover.id_facebook.nil? %><!-- TODO DEFAULT IMAGE -->
+      <a href="<%= @event_cover.id_facebook %>">
+        <%= link_to(image_tag( @event_cover.picture , :alt => "cover image" ,:class => "img-cover"), "http://www.facebook.com/" + @event_cover.id_facebook)%>
+      </a>
+    <% end %>
   <% end %>
 </div>
 <section class="main">
 <nav class="nav-bar">
+    <div class="">
+
+        <div id="datepicker"></div>
+      
+    </div>
     <div class="cat-queries-480">
+      
         <!-- Research Filter Title -->
         <input type="checkbox" checked="checked" class="categorie categorie-1" id="toggle-1"/>
 
         <label class="categorie" for="toggle-1">
             Categories
         </label>
+      
 
         <!-- Research Filter -->
         <div class="categorie categorie-1">
@@ -63,7 +75,7 @@
         </div>
     </div>
   
-  <div id="datepicker"></div>
+  
   
     <div class="top-contributor cat-queries-480">
         <h3 class="title-top-contributor">Top Contributors</h3>
@@ -100,26 +112,29 @@
     </div>
     <div class="content">
         <ul class="flex-container">
+            <div class="no-event-found">
+              <p class="msg"></p>
+            </div>
+          
             <% @events.each do |event| %>
             <li class="flex-item">
                 <div class="img-event">
-                    <!-- TODO take url from database -->
-                  <!--
-                    <div class="inner">
-                    <%= image_tag("http://i.imgur.com/Qt7VGfn.jpg", :alt => "event image") %>
-                    </div>-->
                   <div class="wrapperB" style="background-image: url('<%= event.picture %>');"></div>
                 </div>
                 <div class="content-event">
-                    <p class="title-event"><%= link_to(event.title, event, :class => "link link-title") %></p>
+                    <p class="title-event multiline-ellipsis"><%= link_to(event.title, event, :class => "link link-title") %></p>
 
                   <p class="date-event">From <%= event.start_time.strftime("%d %B %Y") %> to <%= event.end_time.strftime("%d %B %Y") %></p>
                     <p class="multiline-ellipsis">
                       <%= event.description %>
                     </p>
+                  <a class="" href="/events/<%= event.id %>">
                     <div class="more-event">
-                      <button class="btn" href="#"><%= link_to("More", event, :class => "link link-btn") %></button>
+                      
+                        <button class="btn" href="#">More</button>
+                      
                     </div>
+                    </a>
                 </div>
             </li>
             <% end %>

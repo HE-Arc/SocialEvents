@@ -32,8 +32,14 @@ append_next = (data,clear) ->
   #remove all child of flex-container with flex-item class
   if clear 
     $('.flex-container > .flex-item').remove();
+    $('.no-event-found > .msg').remove();
+    
 
   month = ['January','February','March','April','May','June','July','August','September','October','November','December']
+
+  
+  if data[0] == undefined
+    $('.no-event-found').append('<p class="msg">No event found !!!</p>')
 
   #iterate on each search result
   data.forEach (e) ->
@@ -54,9 +60,11 @@ append_next = (data,clear) ->
 
           ' + encHtml(e.description) + '
           </p>
+          <a class="link link-btn" href="/events/' + e.id + '">
           <div class="more-event">
-          <button class="btn" href="#"><a class="link link-btn" href="/events/' + e.id + '">More</a></button>
+          <button class="btn" href="#">More</button>
           </div>
+          </a>
           </div>
           </li>')
 

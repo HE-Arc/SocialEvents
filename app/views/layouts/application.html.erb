@@ -44,9 +44,9 @@
     <% end %>
     <% if user_signed_in? %>
         <div class="btn-user">
+          <%= button_to "Home", "/", :class => "btn", :method => :get %>
           <%= button_to "Sign out", destroy_user_session_path, :class => "btn", :method => :delete %>
           <%= button_to "Profil", user_path(current_user), :class => "btn", :method => :get %>
-          <%= button_to "Home", "/", :class => "btn", :method => :get %>
           <%= button_to "Utilisateurs", users_path, :class => "btn", :method => :get %>
         </div>
     <% end %>

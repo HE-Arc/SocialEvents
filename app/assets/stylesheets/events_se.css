@@ -87,6 +87,7 @@
 
 .title-event{
     font-size: 1.5em;
+    -webkit-line-clamp:1;
 }
 
 .date-event{
