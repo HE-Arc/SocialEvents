@@ -31,15 +31,17 @@ load_event = () ->
 append_next = (data,clear) ->
   #remove all child of flex-container with flex-item class
   if clear 
-    $('.flex-container > .flex-item').remove();
-    $('.no-event-found > .msg').remove();
+    $('.flex-container-events > .flex-item').remove()
     
 
   month = ['January','February','March','April','May','June','July','August','September','October','November','December']
 
-  
+  # handle events errors
+  flex_error = $('.flex-container-error > .flex-item')
   if data[0] == undefined
-    $('.no-event-found').append('<p class="msg">No event found !!!</p>')
+    flex_error.show()
+  else
+    flex_error.hide()
 
   #iterate on each search result
   data.forEach (e) ->
@@ -69,7 +71,7 @@ append_next = (data,clear) ->
           </li>')
 
     #append it to the flex-container
-    $('.flex-container').append(event)
+    $('.flex-container-events').append(event)
 
 # création de l'URL pour requête AJAX
 create_ajax_url = () ->
@@ -145,21 +147,18 @@ $ ->
     
 #infinite scolling
 
-$(window).scroll ->
-    console.log "scroll"
-    if($(window).scrollTop() == $(document).height() - $(window).height())
-        console.log page++
-        $.ajax({
-        url: create_ajax_url(), 
-        dataType: "json", 
-        success: (data) =>
-            if(data)
-                #alert("SCROLL")
-                
-                append_next(data,false)
-            else
-                alert("No More Event !")
-        })
+  if $('#map').length <= 0
+    $(window).scroll ->
+        console.log "scroll"
+        if($(window).scrollTop() >= $(document).height() - $(window).height())
+          page++
+          console.log page
+          $.ajax({
+            url: create_ajax_url(), 
+            dataType: "json", 
+            success: (data) =>
+              append_next(data,false)
+          })
 
 
 
