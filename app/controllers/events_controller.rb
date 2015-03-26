@@ -98,7 +98,7 @@ class EventsController < ApplicationController
     # ******************************************************************
     
     # Affiche les événements à proximité de l'utilisateur
-    eventlocation = @graph.get_object("search?q=&type=place&center=46.94,6.85&distance=40000&limit=40")
+    eventlocation = @graph.get_object("search?q=bar&type=place&center=46.94,6.85&distance=40000&limit=40")
     @events_locations = eventlocation
     
     # **************************************************************
