@@ -26,8 +26,10 @@ class ImportEventsTask
     
   def self.strposa(haystack, needle, offset=0)
     count = 0
-    needle.each do |n|
-      count = count + haystack.scan(n).count
+    unless haystack.nil?
+      needle.each do |n|
+        count = count + haystack.scan(n).count
+      end
     end
     return count
   end
@@ -102,100 +104,106 @@ class ImportEventsTask
       #puts fe
       #puts "--------------------------------------------------------------------"
 
-      event_request = @graph.get_object(fe["id"])
-      @events = @events.push(event_request)
+      begin
+        event_request = @graph.get_object(fe["id"])
+        @events = @events.push(event_request)
       
-      location = EventLocation.select(:id).where(id_facebook: event_request["owner"]["id"])
+        location = EventLocation.select(:id).where(id_facebook: event_request["owner"]["id"])
 
-      if not location.nil?
-        # Insertion du lieu dans la base de données
-        event_location = @graph.get_object(event_request["owner"]["id"])
+        if not location.nil?
+          # Insertion du lieu dans la base de données
+          event_location = @graph.get_object(event_request["owner"]["id"])
+          
+          # Note: can generate exception if nil
 
-        location = EventLocation.where(:id_facebook => event_location["id"]).first_or_initialize
+          location = EventLocation.where(:id_facebook => event_location["id"]).first_or_initialize
 
-        location.update_attributes(    
-          :id_facebook => event_location["id"]
-          :name  =>  event_location["name"],
-          :city  =>  event_location["location"]["city"],
-          :street  =>  event_location["location"]["street"],
-          :zip  =>  event_location["location"]["zip"],
-          :canton  =>  Localite.find_canton(event_location["location"]["zip"]),
-          :country  =>  event_location["location"]["country"],
-          :latitude  =>  event_location["location"]["latitude"],
-          :longitude  =>  event_location["location"]["longitude"],
-          :category  =>  event_location["category"],
-          :likes  =>  event_location["likes"],
-          :link  =>  event_location["link"],
-          :phone  =>  event_location["phone"],
-          :website  =>  event_location["website"]
-          )   
-      end 
+          location.update_attributes(    
+            :id_facebook => event_location["id"],
+            :name  =>  event_location["name"],
+            :city  =>  event_location["location"]["city"],
+            :street  =>  event_location["location"]["street"],
+            :zip  =>  event_location["location"]["zip"],
+            :canton  =>  Localite.find_canton(event_location["location"]["zip"]),
+            :country  =>  event_location["location"]["country"],
+            :latitude  =>  event_location["location"]["latitude"],
+            :longitude  =>  event_location["location"]["longitude"],
+            :category  =>  event_location["category"],
+            :likes  =>  event_location["likes"],
+            :link  =>  event_location["link"],
+            :phone  =>  event_location["phone"],
+            :website  =>  event_location["website"]
+            )   
+        end 
       
-      cover_image = @graph.get_object(event_request["id"]+"/photos?fields=source")
-        #puts "--------------------------------------------------------------------"
-        #puts cover_image[0]["source"]
-        #puts location.id
-        #puts "--------------------------------------------------------------------"
+        cover_image = @graph.get_object(event_request["id"]+"/photos?fields=source")
+          #puts "--------------------------------------------------------------------"
+          #puts cover_image[0]["source"]
+          #puts location.id
+          #puts "--------------------------------------------------------------------"
+
+        event = Event.where(:id_facebook => event_request["id"]).first_or_initialize
+
+        # Vérification si image n'est pas null
+        image_cover = ""
+        if cover_image[0]
+          image_cover = cover_image[0]["source"]
+        end
+
+
+        # Si date de fin non spécifier, alors on ajoute 1 jour à la date de début
+        endtime = event_request["end_time"]
+        if not event_request["end_time"]
+          endtime = DateTime.parse(event_request["start_time"])
+          endtime += 1.days
+        end
       
-      event = Event.where(:id_facebook => event_request["id"]).first_or_initialize
-      
-      # Vérification si image n'est pas null
-      image_cover = ""
-      if cover_image[0]
-        image_cover = cover_image[0]["source"]
-      end
-      
-      
-      # Si date de fin non spécifier, alors on ajoute 1 jour à la date de début
-      endtime = event_request["end_time"]
-      if not event_request["end_time"]
-        endtime = DateTime.parse(event_request["start_time"])
-        endtime += 1.days
-      end
-      
-      #recherche dans la description
-      count = strposa(event_request["description"], category_musique)
-      temp = strposa(event_request["description"], category_cinema)
-      eventCategory = "Musique"
-      
-      if count >= temp 
+        #recherche dans la description
+        count = strposa(event_request["description"], category_musique)
+        temp = strposa(event_request["description"], category_cinema)
         eventCategory = "Musique"
-      else
-        count = temp
-        eventCategory = "Cinéma"
+
+        if count >= temp 
+          eventCategory = "Musique"
+        else
+          count = temp
+          eventCategory = "Cinéma"
+        end
+
+        temp2 = strposa(event_request["description"], category_art)
+        if temp2 > count
+          count = temp2
+          eventCategory = "Musée / Exposition"
+        end
+
+        temp3 = strposa(event_request["description"], category_spectacle)
+        if temp3 > count
+          count = temp3
+          eventCategory = "Spectacle / Théâtre"
+        end        
+      
+        #puts "-------"
+        #puts event_request["name"]
+        #puts event_request["description"]
+        #puts eventCategory
+        #puts "-------"
+        puts "1 événement ajouté"
+
+        event.update_attributes(
+          :id_facebook => event_request["id"],
+          :title => event_request["name"],
+          :picture => image_cover,
+          :category => eventCategory,
+          :description => event_request["description"],
+          :start_time => event_request["start_time"],
+          :end_time => endtime,
+          :user_id => user_id,
+          :event_location_id => location.id
+        )
+      rescue
+        # oops
+        puts "oops"
       end
-        
-      temp2 = strposa(event_request["description"], category_art)
-      if temp2 > count
-        count = temp2
-        eventCategory = "Musée / Exposition"
-      end
-      
-      temp3 = strposa(event_request["description"], category_spectacle)
-      if temp3 > count
-        count = temp3
-        eventCategory = "Spectacle / Théâtre"
-      end  
-      
-      #puts "-------"
-      #puts event_request["name"]
-      #puts event_request["description"]
-      #puts eventCategory
-      #puts "-------"
-      puts "1 événement ajouté"
-      
-      event.update_attributes(
-        :id_facebook => event_request["id"],
-        :title => event_request["name"],
-        :picture => image_cover,
-        :category => eventCategory,
-        :description => event_request["description"],
-        :start_time => event_request["start_time"],
-        :end_time => endtime,
-        :user_id => user_id,
-        :event_location_id => location.id
-      )
     end
   end
-
 end
