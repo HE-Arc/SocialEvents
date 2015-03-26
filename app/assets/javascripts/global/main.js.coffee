@@ -132,7 +132,8 @@ $ ->
   $("#datepicker").datepicker({ 
     minDate: new Date(),
     dateFormat: 'yy-mm-dd',
-    onSelect: load_event
+    onSelect: load_event,
+    firstDay: 1
   })
   
   $("#button-event-title").click ->
