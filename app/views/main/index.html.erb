@@ -2,11 +2,9 @@
 <div class="image-cover-div">
   
   <% if not @event_cover.nil? %>
-    <% if not @event_cover.id_facebook.nil? %><!-- TODO DEFAULT IMAGE -->
       <a href="<%= @event_cover.id_facebook %>">
-        <%= link_to(image_tag( @event_cover.picture , :alt => "cover image" ,:class => "img-cover"), "http://www.facebook.com/" + @event_cover.id_facebook)%>
+        <%= link_to(image_tag( @event_cover.picture , :alt => @event_cover.title ,:class => "img-cover"), @event_cover)%>
       </a>
-    <% end %>
   <% end %>
 </div>
 <section class="main">

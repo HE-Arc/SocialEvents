@@ -12,7 +12,6 @@ Rails.application.routes.draw do
   resources :events
   
   get "/import" => "events#import"
-  get "/import/test" => "events#test"
   get "/import/data/:latitude/:longitude" => "events#import_data", :latitude => /[^\/]+/, :longitude => /[^\/]+/
   get "/import/verify" => "events#import_verify"
   
