@@ -5,3 +5,6 @@
 {
   border-radius: 0px;
 }
+.ui-widget-header,.ui-widget-content{
+  border:0px !important;
+}
