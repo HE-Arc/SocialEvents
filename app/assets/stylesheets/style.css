@@ -47,6 +47,16 @@ section.main .nav-bar {
     min-width: 20%;
 }
 
+.list-users{
+  width:99%;
+  background-color: #FFFFFF;
+  padding:5px;
+}
+
+.content{
+  width:100%;
+}
+
 section.main .nav-bar ul {
     list-style: none;
 }
@@ -142,6 +152,29 @@ section.show{
 }
 
 
+
+h3.title-user-list{
+    -webkit-margin-before: 0;
+    -webkit-margin-after: 0.5em;
+}
+
+.content-user-list{
+    margin: 0.7em;
+}
+
+.name-user-list{
+    margin-left: 1em;
+}
+
+.value-user-list{
+    margin-left: 1em;
+    color:#FFFFFF;
+    padding: 0.2em;
+    background-color: #2c3e50;
+    float: right;
+}
+
+/**/
 
 h3.title-top-contributor{
     -webkit-margin-before: 0;
