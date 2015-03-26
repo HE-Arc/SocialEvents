@@ -60,7 +60,7 @@ class EventsController < ApplicationController
     needle.each do |n|
       count = count + haystack.scan(n).count
     end
-    puts count
+    #puts count
     return count
   end
   
