@@ -26,6 +26,7 @@
   <!-- INTEGRATION -->
   
   <header>
+    <div class="header-content-margin">
         <% if alert!=nil %>  
       <div class="notify notify error alert" role="alert">  
         <%= alert %>
@@ -57,12 +58,11 @@
         Welcome <%= current_user.last_name+' '+current_user.first_name %>
         </div>
         <% end %>
-
+    </div>
   </header>
 
+  <%= yield %>
   
-<%= yield %>
-
   <footer>FOOTER</footer>
 </body>
 </html>

@@ -48,6 +48,10 @@ section.main {
     width:100%;
 }
 
+.header-content-margin{
+  margin:5px;
+}
+
 section.main .nav-bar ul {
     list-style: none;
 }
