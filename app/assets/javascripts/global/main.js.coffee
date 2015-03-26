@@ -146,8 +146,7 @@ $ ->
     $(this).closest('.notify').hide();
 
     
-#infinite scolling
-
+  #infinite scolling
   if $('#map').length <= 0
     $(window).scroll ->
         console.log "scroll"
