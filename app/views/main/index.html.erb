@@ -9,22 +9,21 @@
 </div>
 <section class="main">
 <nav class="nav-bar">
-    <div class="">
-
-        <div id="datepicker"></div>
-      
+    <!-- DEBUT DU FILTRE TITRE -->
+    <div class="nav-bar-title">
+      <p>Filtres</p>
     </div>
-    <div class="cat-queries-480">
-      
-        <!-- Research Filter Title -->
+    <!-- FIN DU FILTRE TITRE -->
+  
+    <!-- DEBUT DU FILTRE CONTENT -->
+    <div class="nav-bar-content">
+      <div id="datepicker"></div>
+      <div class="cat-queries-480">
         <input type="checkbox" checked="checked" class="categorie categorie-1" id="toggle-1"/>
-
         <label class="categorie" for="toggle-1">
             Categories
         </label>
-      
-
-        <!-- Research Filter -->
+     
         <div class="categorie categorie-1">
             <div>
                 <label class="se-checkbox">
@@ -42,17 +41,16 @@
                 <span class="category-name"><%= category %></span>
             </div>
           <% end %>
-        </div>
-    </div>
-
-    <div class="cat-queries-480">
+          </div>
+      </div>
+  
+      <div class="cat-queries-480">
         <input type="checkbox" checked="checked" class="categorie categorie-2" id="toggle-2" />
 
         <label class="categorie" for="toggle-2">
             Cantons
         </label>
-
-        <!-- Research Filter -->
+        
         <div class="categorie categorie-2">
             <div>
                 <label class="se-checkbox">
@@ -71,22 +69,30 @@
             </div>
           <% end %>
         </div>
+      </div>
     </div>
+    <!-- FIN DU FILTRE CONTENT-->
   
   
-  
-    <div class="top-contributor cat-queries-480">
-        <h3 class="title-top-contributor">Top Contributors</h3>
-        <% @users_top.each do |user| %>
-        <div>
-            <div class="content-top-contributor">
-                <i class="icon-user"></i><span class="name-top-contributor"><%= link_to user.first_name + " " + user.last_name, user, class: 'link' %></span>
-                <span class="value-top-contributor"><%= user.contributions_counter %></span>
-            </div>
-        </div>
-        <% end %>
+    <!-- DEBUT DU TOP CONTRIBUTOR TITRE -->
+    <div class="nav-bar-title">
+      <p>Top contributors</p>
     </div>
-
+    <!-- FIN DU TOP CONTRIBUTOR TITRE -->
+    <!-- DEBUT DU TOP CONTRIBUTOR CONTENT -->
+    <div class="nav-bar-content">
+      <div class="top-contributor cat-queries-480">
+          <% @users_top.each do |user| %>
+          <div>
+              <div class="content-top-contributor">
+                  <i class="icon-user"></i><span class="name-top-contributor"><%= link_to user.first_name + " " + user.last_name, user, class: 'link' %></span>
+                  <span class="value-top-contributor"><%= user.contributions_counter %></span>
+              </div>
+          </div>
+          <% end %>
+      </div>
+  </div>
+  <!-- FIN DU TOP CONTRIBUTOR CONTENT -->
 </nav>
 
 <!--SEARCH BAR-->
