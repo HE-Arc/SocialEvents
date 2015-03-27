@@ -88,16 +88,52 @@ create_ajax_url = () ->
   cantons = cantons.join(',')
   
   date = if is_searching then "all" else $("#datepicker").val()
-  
+      
   title = $("#input-event-title").val()
   title = "*" if title == ""
   
   limit = 5
   offset = 5 * page
   
+  store_in_cookies(categories, cantons, date, title)
+  
   url = "main/load/" + encUrl(categories) + "/" + encUrl(cantons) + "/" + encUrl(date) + "/" + encUrl(title) + "/" + encUrl(limit) + "/" + encUrl(offset)
   return base_url + url
 
+# store filters and search data in cookies for later reuse
+store_in_cookies = (categories, cantons, date, title) ->
+  $.cookie('categories', categories)
+  $.cookie('cantons', cantons)
+  $.cookie('date', date)
+  $.cookie('title', title)
+  $.cookie('is_searching', if is_searching then "1" else "0")
+  
+# restore the page, with events, filters and search data from cookies
+load_from_cookies = () ->
+  categories = ($.cookie('categories') || "all").split(',')
+  cantons = ($.cookie('cantons') || "all").split(',')
+  date = $.cookie('date') || new Date()    
+  title = $.cookie('title') || ""
+  is_searching = if $.cookie('is_searching') then $.cookie('is_searching') == "1" else true
+    
+  if typeof(date) is 'string'
+    if date == "all"
+      date = new Date()
+    else    
+      date = new Date(date)
+
+  $("#input-event-title").val(title) if title != "*"
+  $("#datepicker").datepicker('setDate', date)
+  
+  $('.chk_category').each ->
+    $(this).prop('checked', $.inArray($(this).val(), categories) != -1)
+    
+  $('.chk_canton').each ->
+    $(this).prop('checked', $.inArray($(this).val(), cantons) != -1)
+    
+  load_event()
+  
+  
 # vérification des checkbox cantons et catégories
 # l'option "all" est exclusive avec toute autre option
 verify_checkboxes = (checkbox) ->
@@ -191,5 +227,5 @@ $ ->
               append_next(data,false)
           })
 
-
+    load_from_cookies()
 
