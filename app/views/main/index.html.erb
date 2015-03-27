@@ -114,26 +114,21 @@
     <div class="content">
         <ul class="flex-container flex-container-events">          
           <% @events.each do |event| %>
-          <li class="flex-item">
-            <div class="img-event">
-              <div class="wrapperB" style="background-image: url('<%= event.picture %>');"></div>
-            </div>
-            <div class="content-event">
-              <p class="title-event multiline-ellipsis"><%= link_to(event.title, event, :class => "link link-title") %></p>
+          <a class="" href="/events/<%= event.id %>">
+            <li class="flex-item">
+              <div class="img-event">
+                <div class="wrapperB" style="background-image: url('<%= event.picture %>');"></div>
+              </div>
+              <div class="content-event">
+                <p class="title-event multiline-ellipsis"><%= link_to(event.title, event, :class => "link link-title") %></p>
 
-              <p class="date-event">From <%= event.start_time.strftime("%d %B %Y") %> to <%= event.end_time.strftime("%d %B %Y") %></p>
-              <p class="multiline-ellipsis">
-                <%= event.description %>
-              </p>
-              <a class="" href="/events/<%= event.id %>">
-                <div class="more-event">
-
-                  <button class="btn" href="#">More</button>
-
-                </div>
-              </a>
-            </div>
-          </li>
+                <p class="date-event">From <%= event.start_time.strftime("%d %B %Y") %> to <%= event.end_time.strftime("%d %B %Y") %></p>
+                <p class="multiline-ellipsis">
+                  <%= event.description %>
+                </p>
+              </div>
+            </li>
+            </a>
           <% end %>
         </ul>
         <ul class="flex-container flex-container-error">          
