@@ -53,10 +53,10 @@ append_next = (data,clear) ->
     #creation of the flexbox who contains the event's info
     event = $('<li class="flex-item">
           <div class="img-event">
-          <div class="wrapperB" style="background-image: url(\'' + encHtml(e.picture) + '\');"></div>
+          <div class="wrapperB" style="background-image: url(\'' + encHtml(base_url + 'assets/' + e.picture) + '\');"></div>
           </div>
           <div class="content-event">
-          <p class="title-event"><a class="link link-title" href="/events/' + e.id + '">' + encHtml(e.title) + '</a></p>
+          <p class="title-event"><a class="link link-title" href="' + base_url + 'events/' + e.id + '">' + encHtml(e.title) + '</a></p>
           <p class="date-event">From ' + from + ' to ' + to + '</p>
           <p class="multiline-ellipsis">
 
