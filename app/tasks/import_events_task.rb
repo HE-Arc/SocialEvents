@@ -185,13 +185,13 @@ class ImportEventsTask
         else
           case eventCategory
           when "Cinéma"
-            image_cover = ActionController::Base.helpers.image_url('placeholder/cinema1.jpg')
+            image_cover = 'placeholder/cinema1.jpg'
           when "Musée / Exposition"
-            image_cover = ActionController::Base.helpers.image_url('placeholder/art1.jpg')
+            image_cover = 'placeholder/art1.jpg'
           when "Spectacle / Théâtre"
-            image_cover = ActionController::Base.helpers.image_url('placeholder/music2.jpg')
+            image_cover = 'placeholder/music2.jpg'
           else
-            image_cover = ActionController::Base.helpers.image_url('placeholder/music1.jpg')
+            image_cover = 'placeholder/music1.jpg'
           end
         end
 
