@@ -11,6 +11,10 @@ encHtml = (html) ->
   
 page = 0
 
+# app is in search mode if it can find all upcoming events
+# when filtering by date, it isn't in search mode anymore
+is_searching = true
+
 # exécution requête AJAX
 load_event = () ->
   console.log(create_ajax_url())
@@ -83,7 +87,7 @@ create_ajax_url = () ->
   $('.chk_canton:checked').each -> cantons.push($(this).val())
   cantons = cantons.join(',')
   
-  date = $("#datepicker").val()
+  date = if is_searching then "all" else $("#datepicker").val()
   
   title = $("#input-event-title").val()
   title = "*" if title == ""
@@ -119,31 +123,58 @@ verify_checkboxes = (checkbox) ->
       $(css_class).slice(1).each -> all_unchecked = false if $(this).is(':checked')
       if all_unchecked
         $(css_class).first().prop('checked', true)
-    
+
+# change the search mode of the app
+change_search_mode = (is_on) ->
+  is_searching = is_on
+  
+  if is_searching
+    chk_all_canton = $('.chk_canton').first()
+    chk_all_category = $('.chk_category').first()
+    chk_all_canton.prop('checked', true)
+    chk_all_category.prop('checked', true)
+    verify_checkboxes(chk_all_canton)
+    verify_checkboxes(chk_all_category)
+    $("#datepicker").datepicker('setDate', new Date())
   
 
 # binding JS <-> UI (document onload)
 $ ->
 
-  $('.chk_category, .chk_canton').change ->
-    verify_checkboxes($(this))
-    load_event()
-      
   $("#datepicker").datepicker({ 
     minDate: new Date(),
     dateFormat: 'yy-mm-dd',
-    onSelect: load_event,
+    onSelect: () -> 
+      change_search_mode(false) 
+      load_event()
+    ,
     firstDay: 1
   })
+
+  $('.chk_category, .chk_canton').change ->
+    verify_checkboxes($(this))
+    #change_search_mode(false)  # search mode doesn't change on filtering by checkbox
+    load_event()
+
   
   $("#button-event-title").click ->
+    change_search_mode(true)
     load_event()
+    return false
+  
+  $("#button-event-refresh").click ->
+    $("#input-event-title").val("")
+    change_search_mode(true)
+    load_event()
+    return false
     
   $("#input-event-title").keypress (e) ->
-    load_event() if e.which == 13
+    if e.which == 13
+      change_search_mode(true)
+      load_event() 
       
   $('.notify-close').click ->
-    $(this).closest('.notify').hide();
+    $(this).closest('.notify').hide()
 
     
   #infinite scolling
