@@ -15,6 +15,7 @@ Rails.application.configure do
   config.action_controller.perform_caching = true
   
   config.action_controller.relative_url_root = '/socialevents'
+  config.relative_url_root = "/socialevents"
 
   # Enable Rack::Cache to put a simple HTTP cache in front of your application
   # Add `rack-cache` to your Gemfile before enabling this.

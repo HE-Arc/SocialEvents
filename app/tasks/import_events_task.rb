@@ -3,7 +3,7 @@ require "openssl"
 require "base64"
 
 class ImportEventsTask
-  
+    
   class << self
     
     def import(user_id, token, latitude, longitude)
@@ -44,7 +44,7 @@ class ImportEventsTask
     # **************************************************************
     
     # Authentification à l'application Facebook
-    @oauth = Koala::Facebook::OAuth.new("653919454735658","035ddda1f5dc692934d9f0abc345e4ef", root_url)
+    @oauth = Koala::Facebook::OAuth.new("653919454735658","035ddda1f5dc692934d9f0abc345e4ef", "/")
     
     # Permission pour le graph search
     @oauth.url_for_oauth_code(:permissions => "publish_actions")
@@ -145,10 +145,13 @@ class ImportEventsTask
         event = Event.where(:id_facebook => event_request["id"]).first_or_initialize
 
         # Si date de fin non spécifier, alors on ajoute 1 jour à la date de début
-        endtime = event_request["end_time"]
+        starttime = DateTime.parse(event_request["start_time"])
+        #endtime = DateTime.parse(event_request["end_time"])
         if not event_request["end_time"]
           endtime = DateTime.parse(event_request["start_time"])
           endtime += 1.days
+        else
+          endtime = DateTime.parse(event_request["end_time"])
         end
       
         #recherche dans la description
@@ -182,13 +185,13 @@ class ImportEventsTask
         else
           case eventCategory
           when "Cinéma"
-            image_cover = image_url('placeholder/cinema1.jpg')
+            image_cover = ActionController::Base.helpers.image_url('placeholder/cinema1.jpg')
           when "Musée / Exposition"
-            image_cover = image_url('placeholder/art1.jpg')
+            image_cover = ActionController::Base.helpers.image_url('placeholder/art1.jpg')
           when "Spectacle / Théâtre"
-            image_cover = image_url('placeholder/music2.jpg')
+            image_cover = ActionController::Base.helpers.image_url('placeholder/music2.jpg')
           else
-            image_cover = image_url('placeholder/music1.jpg')
+            image_cover = ActionController::Base.helpers.image_url('placeholder/music1.jpg')
           end
         end
 
@@ -205,14 +208,13 @@ class ImportEventsTask
           :picture => image_cover,
           :category => eventCategory,
           :description => event_request["description"] ? event_request["description"] : "",
-          :start_time => event_request["start_time"],
+          :start_time => starttime,
           :end_time => endtime,
           :user_id => user_id,
           :event_location_id => location.id
         )
       rescue => e
         # oops
-        raise
         puts "oops"
       end
     end
