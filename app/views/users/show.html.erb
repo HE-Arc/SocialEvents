@@ -22,7 +22,7 @@
             <div class="inner">
             <%= image_tag("http://i.imgur.com/Qt7VGfn.jpg", :alt => "event image") %>
             </div>-->
-          <div class="wrapperB" style="background-image: url('<%= event.picture %>');"></div>
+          <div class="wrapperB" style="background-image: url('<%= image_url(event.picture) %>');"></div>
         </div>
         <div class="content-event">
           <p class="title-event"><%= link_to(event.title, event, :class => "link link-title") %></p>
