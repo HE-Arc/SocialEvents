@@ -117,7 +117,7 @@
           <a class="" href="/events/<%= event.id %>">
             <li class="flex-item">
               <div class="img-event">
-                <div class="wrapperB" style="background-image: url('<%= image_url(event.picture) %>');"></div>
+                <div class="wrapperB" style="background-image: url('<%= event.picture %>');"></div>
               </div>
               <div class="content-event">
                 <p class="title-event multiline-ellipsis"><%= link_to(event.title, event, :class => "link link-title") %></p>

@@ -183,15 +183,16 @@ class ImportEventsTask
         if cover_image[0]
           image_cover = cover_image[0]["source"]
         else
+          root = ActionController::Base.helpers.root_url
           case eventCategory
           when "Cinéma"
-            image_cover = 'placeholder/cinema%d.jpg' % [rand(1..7)]
+            image_cover = root + 'images/cinema%d.jpg' % [rand(1..7)]
           when "Musée / Exposition"
-            image_cover = 'placeholder/art%d.jpg' % [rand(1..5)]
+            image_cover = root + 'images/art%d.jpg' % [rand(1..5)]
           when "Spectacle / Théâtre"
-            image_cover = 'placeholder/music%d.jpg' % [rand(1..10)]
+            image_cover = root + 'images/music%d.jpg' % [rand(1..10)]
           else
-            image_cover = 'placeholder/music%d.jpg' % [rand(1..10)]
+            image_cover = root + 'images/music%d.jpg' % [rand(1..10)]
           end
         end
 
