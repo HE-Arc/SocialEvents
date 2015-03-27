@@ -10,7 +10,8 @@ $ ->
   fetching = $("#fetching")
 
   verify_import = () ->  
-    $.ajax({url: "/import/verify", dataType: "json", success: (data) => 
+    url = base_url + "import/verify"
+    $.ajax({url: url, dataType: "json", success: (data) => 
       console.log "result ajax"
 
       is_fetching = data
