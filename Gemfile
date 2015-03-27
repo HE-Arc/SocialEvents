@@ -54,6 +54,8 @@ gem 'capistrano-rails', group: :development
 gem 'capistrano-rvm', group: :development
 gem 'capistrano-passenger', group: :development
 
+gem 'capistrano3-delayed-job'
+
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
