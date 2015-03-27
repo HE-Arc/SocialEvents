@@ -1,7 +1,3 @@
-require "koala"
-#require "openssl"
-#require "base64"
-
 class EventsController < ApplicationController
   
   helper_method :javascript_include_view_js
@@ -60,8 +56,7 @@ class EventsController < ApplicationController
     is_fetching = user ? user.is_fetching : false
       
     render :json => is_fetching
-  end
-  
+  end 
 end
 
 
