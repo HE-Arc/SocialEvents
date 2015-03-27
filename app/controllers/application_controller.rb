@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   # filter to register information about the current logged user
   def verify_current_user
     user = current_user
-    @user_is_logged = true if user else false
+    @user_is_logged = user != nil
     @user_is_fetching = @user_is_logged && user.is_fetching
   end
   

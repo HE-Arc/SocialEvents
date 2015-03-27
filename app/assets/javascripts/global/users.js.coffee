@@ -30,9 +30,10 @@ $ ->
     if navigator.geolocation
         navigator.geolocation.getCurrentPosition(
           (position) ->
+            url = base_url + "import/data/" + position.coords.latitude + "/" + position.coords.longitude
             console.log("Latitude : " + position.coords.latitude + ", longitude : " + position.coords.longitude)
             fetching.show()
-            $.ajax(url: "/import/data/" + position.coords.latitude + "/" + position.coords.longitude)
+            $.ajax(url: url)
             setTimeout(verify_import, 10000)
             import_button.attr("disabled", "")
           , (error) ->
