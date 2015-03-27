@@ -7,7 +7,7 @@
 $ ->
   
   import_button = $("#import")
-  fetching = $("#fetching")
+  fetching = $(".fetching")
 
   verify_import = () ->  
     url = base_url + "import/verify"

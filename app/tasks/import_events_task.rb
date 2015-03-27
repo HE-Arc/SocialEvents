@@ -57,7 +57,7 @@ class ImportEventsTask
     # ******************************************************************
     
     # Affiche les événements à proximité de l'utilisateur
-    eventlocation = @graph.get_object("search?q=&type=place&center=" + latitude + "," + longitude + "&distance=40000&limit=400")
+    eventlocation = @graph.get_object("search?q=bar&type=place&center=" + latitude + "," + longitude + "&distance=40000&limit=40")
     @events_locations = eventlocation
     
     # **************************************************************

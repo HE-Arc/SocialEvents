@@ -4,7 +4,10 @@
     <h1>Profil de <%= @user.first_name %> <%= @user.last_name %></h1>
 
     <% if @is_my_profile %>
-    <p><button id="import">Importation</button></p>
+    <p>
+      <button id="import">Fetch my events</button> 
+      <span class="fetching" style="display: <%= @user_is_fetching ? 'inline' : 'none' %>">A fetching is already occuring</span>
+    </p>
     <% end %>
 
 
