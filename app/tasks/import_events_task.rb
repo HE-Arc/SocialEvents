@@ -204,7 +204,7 @@ class ImportEventsTask
           :title => event_request["name"],
           :picture => image_cover,
           :category => eventCategory,
-          :description => event_request["description"],
+          :description => event_request["description"] ? event_request["description"] : "",
           :start_time => event_request["start_time"],
           :end_time => endtime,
           :user_id => user_id,
