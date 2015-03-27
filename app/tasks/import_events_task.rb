@@ -44,7 +44,7 @@ class ImportEventsTask
     # **************************************************************
     
     # Authentification à l'application Facebook
-    @oauth = Koala::Facebook::OAuth.new("653919454735658","035ddda1f5dc692934d9f0abc345e4ef","/import/data")
+    @oauth = Koala::Facebook::OAuth.new("653919454735658","035ddda1f5dc692934d9f0abc345e4ef", root_url)
     
     # Permission pour le graph search
     @oauth.url_for_oauth_code(:permissions => "publish_actions")
@@ -210,8 +210,9 @@ class ImportEventsTask
           :user_id => user_id,
           :event_location_id => location.id
         )
-      rescue
+      rescue => e
         # oops
+        raise
         puts "oops"
       end
     end
