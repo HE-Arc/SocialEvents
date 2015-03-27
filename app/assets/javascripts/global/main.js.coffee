@@ -147,7 +147,7 @@ $ ->
 
     
   #infinite scolling
-  if $('#map').length <= 0
+  if $('#event-main-page').length > 0
     $(window).scroll ->
         console.log "scroll"
         if($(window).scrollTop() >= $(document).height() - $(window).height())

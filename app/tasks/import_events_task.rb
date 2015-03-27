@@ -144,13 +144,6 @@ class ImportEventsTask
 
         event = Event.where(:id_facebook => event_request["id"]).first_or_initialize
 
-        # Vérification si image n'est pas null
-        image_cover = ""
-        if cover_image[0]
-          image_cover = cover_image[0]["source"]
-        end
-
-
         # Si date de fin non spécifier, alors on ajoute 1 jour à la date de début
         endtime = event_request["end_time"]
         if not event_request["end_time"]
@@ -182,6 +175,23 @@ class ImportEventsTask
           eventCategory = "Spectacle / Théâtre"
         end        
       
+        # Vérification si image n'est pas null
+        image_cover = ""
+        if cover_image[0]
+          image_cover = cover_image[0]["source"]
+        else
+          case eventCategory
+          when "Cinéma"
+            image_cover = image_url('placeholder/cinema1.jpg')
+          when "Musée / Exposition"
+            image_cover = image_url('placeholder/art1.jpg')
+          when "Spectacle / Théâtre"
+            image_cover = image_url('placeholder/music2.jpg')
+          else
+            image_cover = image_url('placeholder/music1.jpg')
+          end
+        end
+
         #puts "-------"
         #puts event_request["name"]
         #puts event_request["description"]
