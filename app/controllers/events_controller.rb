@@ -45,7 +45,7 @@ class EventsController < ApplicationController
     will_import = user && !user.is_fetching
         
     if will_import
-      ImportEventsTask.import(user.id, session["devise.facebook_data"]["credentials"]["token"],params[:latitude],params[:longitude])      
+      ImportEventsTask.import_without_delay(user.id, session["devise.facebook_data"]["credentials"]["token"],params[:latitude],params[:longitude])      
     end
     
     render :json => will_import
