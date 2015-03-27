@@ -6,13 +6,13 @@ class ImportEventsTask
     
   class << self
     
-    def import(user_id, token, latitude, longitude)
+    def import(user_id, token, latitude, longitude, root)
                   
       user = User.find(user_id)
       user.is_fetching = true
       user.save!
       
-      self.fetch(user_id, token, latitude, longitude)
+      self.fetch(user_id, token, latitude, longitude, root)
 
       user.is_fetching = false
       user.save!
@@ -34,7 +34,7 @@ class ImportEventsTask
     return count
   end
   
-  def self.fetch(user_id, token, latitude, longitude)
+  def self.fetch(user_id, token, latitude, longitude, root)
     category_musique = ["Album", "Artist", "Arts/entertainment/nightlife", "Author", "Bar", "Club", "Concert tour", "Concert venue", "Music", "Music award","electro", "Music chart", "Music video", "Musical genre", "Musical instrument", "Musician/band", "musique", "music","dj", "musiques", "concert", "festival de musique", "MUSIC", "MUSIQUE", "Clubbing", "Dance-hall","funk","rock","jam", "Jam","compositeur","blues"]
     category_cinema = ["Actor/director", "Comedian", "Movie","Movie general", "Movie genre", "Movie theater", "Movies/music", "cinéma", "cinémas", "projection", "film", "films", "NIFFF", "CINEMA"]
     category_art = ["Arts/humanities website", "Dancer", "Museum/art gallery", "Society/culture website", "expositions","exposition","musée", "galerie"]
@@ -57,7 +57,7 @@ class ImportEventsTask
     # ******************************************************************
     
     # Affiche les événements à proximité de l'utilisateur
-    eventlocation = @graph.get_object("search?q=bar&type=place&center=" + latitude + "," + longitude + "&distance=40000&limit=40")
+    eventlocation = @graph.get_object("search?q=bar&type=place&center=" + latitude + "," + longitude + "&distance=40000&limit=80")
     @events_locations = eventlocation
     
     # **************************************************************
@@ -183,7 +183,6 @@ class ImportEventsTask
         if cover_image[0]
           image_cover = cover_image[0]["source"]
         else
-          root = ActionController::Base.helpers.root_url
           case eventCategory
           when "Cinéma"
             image_cover = root + 'images/cinema%d.jpg' % [rand(1..7)]
@@ -214,9 +213,11 @@ class ImportEventsTask
           :user_id => user_id,
           :event_location_id => location.id
         )
-      rescue => e
+      rescue Exception
         # oops
-        puts "oops"
+        puts oops
+        puts $!, $@
+        raise
       end
     end
   end
