@@ -103,6 +103,19 @@ section.main .left .search {
     padding: 0px;
     text-align: center;
     overflow: hidden;
+    position: relative;
+}
+
+.image-cover-div .cover-overlay {
+  position: absolute; 
+  bottom: 20%; 
+  left: 5%; 
+  opacity: 0.8;
+  max-width: 50%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  text-align: left;
 }
 
 .img-cover {
