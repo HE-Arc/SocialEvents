@@ -1980,7 +1980,6 @@ INSERT INTO localites (npa,localite,canton) VALUES ('1218','Le Grand-Saconnex','
 INSERT INTO localites (npa,localite,canton) VALUES ('2525','Le Landeron','Neuchâtel');
 INSERT INTO localites (npa,localite,canton) VALUES ('1345','Le Lieu','Vaud');
 INSERT INTO localites (npa,localite,canton) VALUES ('1219','Vernier','Geneva');
-INSERT INTO localites (npa,localite,canton) VALUES ('2400','','');
 INSERT INTO localites (npa,localite,canton) VALUES ('2400','Le Locle','Neuchâtel');
 INSERT INTO localites (npa,localite,canton) VALUES ('1801','Chardonne','Vaud');
 INSERT INTO localites (npa,localite,canton) VALUES ('1052','Le Mont-sur-Lausanne','Vaud');
