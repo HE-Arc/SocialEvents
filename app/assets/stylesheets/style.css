@@ -240,6 +240,12 @@ input[type="text"]:focus {
 }
 
 
+
+
+.btn-small{
+  float:right;
+}
+
 .search-div{
   width: 100%;
   margin-right:0;
@@ -247,10 +253,6 @@ input[type="text"]:focus {
 
 .search-input{
     width: 96%;
-}
-
-.btn-small{
-  float:right;
 }
 
 .search-div > a{
@@ -802,38 +804,17 @@ input[type=checkbox].categorie:checked + label:after {
         background-color: green;
     }
 }
-
-/* Extra Small Devices, Phones */
-@media only screen and (max-width : 480px) {
-
-
-    .top-contributor,
-    .title-top-contributor,
-    .content-top-contributor,
-    .name-top-contributor,
-    .value-top-contributor{
-        width:0;
-        height: 0;
-        opacity: 0;
-    }
-
-    .site-title{
-        font-size: 1.5em;
-    }
-
-    .img-event,
-    .image-cover-div{
-        display:none;
-    }
-
-    .content-event{
-        width:100%;
-        float: none;
-        max-height: 100%;
-    }
-
-
+@media only screen and (max-width : 960px) {
+    .se-placeholder {
+      position: relative;
+      display: inline-block;
+      width: 82%;
+  }
 }
+
+
+
+
 
 /* Small Devices, Tablets */
 @media only screen and (max-width : 768px) {
@@ -841,6 +822,14 @@ input[type=checkbox].categorie:checked + label:after {
         flex-grow: 1;
         margin-left: 0.2em;
     }
+  
+
+  
+    .se-placeholder {
+      position: relative;
+      display: inline-block;
+      width: 81%;
+  }
 
     .fb-login-button-small{
         display: block;
@@ -901,6 +890,51 @@ input[type=checkbox].categorie:checked + label:after {
     .btn-user{
         float:none;
     }
+}
+
+@media only screen and (max-width : 570px) {
+
+    .se-placeholder {
+      position: relative;
+      display: inline-block;
+      width: 79%;
+  }
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (max-width : 480px) {
+
+
+    .top-contributor,
+    .title-top-contributor,
+    .content-top-contributor,
+    .name-top-contributor,
+    .value-top-contributor{
+        width:0;
+        height: 0;
+        opacity: 0;
+    }
+
+    .site-title{
+        font-size: 1.5em;
+    }
+
+    .img-event,
+    .image-cover-div{
+        display:none;
+    }
+
+    .content-event{
+        width:100%;
+        float: none;
+        max-height: 100%;
+    }
+    .se-placeholder {
+      position: relative;
+      display: inline-block;
+      width: 68%;
+  }
+
 }
 
 /* Large Devices, Wide Screens */
