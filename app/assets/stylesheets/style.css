@@ -730,6 +730,51 @@ input[type=checkbox].categorie:checked + label:after {
     padding: 0;
 }
 
+/*---------------------------*/
+/*  Fetching indicator       */
+/*---------------------------*/
+
+.not-done{
+  background: red;
+}
+
+.underway{
+  background: orange;
+}
+
+.done{
+  background: green;
+}
+
+.fetching-flag{
+  width: 20px;
+  height: 20px;
+  
+  border-radius: 50%;
+  display: flex;
+
+}
+.fetching-flag:before{
+  content:'';
+  width: 0;
+  height: 0;
+  margin:auto;
+  border: 5px solid #DBD2D7;
+  border-radius: 50%;
+  -webkit-animation:fetching-flag-ani1 1s infinite;
+}
+@-webkit-keyframes fetching-flag-ani1{
+  70%{
+    width: 20px;
+    height: 20px;
+  }
+  100%{
+    width: 20px;
+    height: 20px;
+    border-width: 0;
+  }
+}
+
 /*-----------------------------------------------------------------------------*/
 /*  MEDIA QUERIES                                                              */
 /*-----------------------------------------------------------------------------*/
@@ -840,3 +885,4 @@ input[type=checkbox].categorie:checked + label:after {
 @media only screen and (max-width : 1200px) {
 
 }
+
