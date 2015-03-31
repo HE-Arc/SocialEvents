@@ -1,12 +1,7 @@
 class MainController < ApplicationController
   def index
     @users_top = User.get_users_with_contributions_counter(5)
-    
-    title = "and"
-    categories = ["fun", "Détente"]
-    cantons = ["Bern"]
-    #@events = Event.get_listing_events(title, categories, cantons)
-    #TODO first load limit 10
+
     @events = Event.get_listing_events(nil, nil, nil, 5, 0, nil)
     
     @categories = Event.get_categories()
