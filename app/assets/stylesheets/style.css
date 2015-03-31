@@ -829,8 +829,13 @@ input[type=checkbox].categorie:checked + label:after {
     }
 
     .fb-login-button-large,
+    .hide
     {
         display: none;
+    }
+  
+      header {
+      height: auto;
     }
 
     section.main {
@@ -845,8 +850,7 @@ input[type=checkbox].categorie:checked + label:after {
     }
 
     section.main .nav-bar {
-        display: -webkit-flex;
-        display: flex;
+
         -webkit-flex-direction: row;
         flex-direction: row;
         justify-content:space-between;
@@ -873,7 +877,7 @@ input[type=checkbox].categorie:checked + label:after {
     }
 
     #datepicker{
-        display:none;
+        /*display:none;*/
     }
 
     .btn-user{
