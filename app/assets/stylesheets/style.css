@@ -93,6 +93,8 @@ section.main .left .search {
     margin-bottom: 10px;
     /*padding-top: 20px;*/
     /*padding-bottom: 20px;*/
+    margin-right:0;
+  padding-right:0;
 }
 
 .image-cover-div {
@@ -237,14 +239,32 @@ input[type="text"]:focus {
 
 }
 
-.search-input{
-  
+
+.search-div{
+  width: 100%;
+  margin-right:0;
 }
+
+.search-input{
+    width: 96%;
+}
+
+.btn-small{
+  float:right;
+}
+
+.search-div > a{
+  margin-left:10px;
+  margin-right:0;
+}
+
+
 
 /*PLACHOLDER*/
 .se-placeholder {
     position: relative;
     display: inline-block;
+    width: 87%;
 }
 
 .se-placeholder input + span {
@@ -446,9 +466,7 @@ input[type="text"]:focus {
     color: #bdc3c7;
 }
 
-.search-div {
-    width: 80%;
-}
+
 
 .grid-or-list {
     float: right;
