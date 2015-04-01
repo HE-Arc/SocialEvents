@@ -212,12 +212,20 @@ input, select, .btn {
     outline: none !important;
     margin: 0;
     background: #e9ecee;
-
     font-size: 16px;
 }
 
 input:focus, textarea:focus {
     background: #f0f4f7
+}
+
+.menu{
+  color: #fff;
+  height: 36px;
+  line-height: 50px;
+  padding-left:15px;
+  padding-right:15px;
+  text-decoration:none;
 }
 
 .btn {
