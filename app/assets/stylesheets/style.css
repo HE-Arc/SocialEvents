@@ -139,6 +139,10 @@ section.show{
     background-color: #DBD2D7;
 }
 
+/*---------------------------*/
+/*  Events show details      */
+/*---------------------------*/
+
 .show-body{
     padding:1.2em;
     background: #FFFFFF;
@@ -151,8 +155,19 @@ section.show{
     margin:2em;
 }
 
+.show-description pre {
+  word-wrap: break-word;
+}
+
 .show-information {
     padding:0.8em;
+}
+
+.show-information label {
+  display: inline-block;
+  min-width: 20%;
+  font-weight: bold;
+  margin-top: 10px;
 }
 
 h3.title-user-list{
@@ -174,6 +189,10 @@ h3.title-user-list{
     padding: 0.2em;
     background-color: #2c3e50;
     float: right;
+}
+
+.show-title .title-complement {
+  float: right;
 }
 
 /*-----------------------------------------------------------------------------*/
@@ -794,21 +813,6 @@ input[type=checkbox].categorie:checked + label:after {
     height: 20px;
     border-width: 0;
   }
-}
-
-/*---------------------------*/
-/*  Events show details      */
-/*---------------------------*/
-
-.show-information label {
-  display: inline-block;
-  min-width: 20%;
-  font-weight: bold;
-  margin-top: 10px;
-}
-
-.show-title .title-complement {
-  float: right;
 }
 
 /*-----------------------------------------------------------------------------*/

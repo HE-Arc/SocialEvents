@@ -21,6 +21,14 @@
 <body>   
   <!-- INTEGRATION -->
     
+  <% if flash_first_login != nil %>  
+    <div id="flash-first-login" title="First login with Facebook">
+      <p>This is your first login with Facebook on Social Events.</p>
+      <p>By going to <%= link_to("your profile", current_user) %>, you can import events from Facebook near your current location.</p>
+      <p>When importing them on Social Events, you accept to link them to your account and make them public</p>
+    </div>
+  <% end %>
+
   <header>
     <div class="header-content-margin">
     <% if alert!=nil %>  
@@ -29,15 +37,6 @@
         <button type="button" class="notify-close">&times;</button>
       </div>
     <% end %>
-      
-    <% if flash_first_login != nil %>  
-      <div id="flash-first-login" title="First login with Facebook">
-        <p>This is your first login with Facebook on Social Events.</p>
-        <p>By going to <%= link_to("your profile", current_user) %>, you can import events from Facebook near your current location.</p>
-        <p>When importing them on Social Events, you accept to link them to your account and make them public</p>
-      </div>
-    <% end %>
-
       
     <% if notice!=nil %>  
       <div class="notify notify warning notice" role="alert">  

@@ -115,7 +115,7 @@
     <div class="content">
         <ul class="flex-container flex-container-events">          
           <% @events.each do |event| %>
-          <a class="" href="/events/<%= event.id %>">
+          <a class="" href="<%= event_path(event) %>">
             <li class="flex-item">
               <div class="img-event">
                 <div class="wrapperB" style="background-image: url('<%= event.picture %>');"></div>
