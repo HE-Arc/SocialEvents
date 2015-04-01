@@ -177,6 +177,10 @@ change_search_mode = (is_on) ->
 # binding JS <-> UI (document onload)
 $ ->
 
+  $("#flash-first-login").dialog({
+    modal: true
+   })
+  
   $("#datepicker").datepicker({ 
     minDate: new Date(),
     dateFormat: 'yy-mm-dd',

@@ -6,9 +6,9 @@ class User < ActiveRecord::Base
   # :lockable, :timeoutable
   devise :database_authenticatable, :trackable, :rememberable, :omniauthable
 
-  #validates_format_of :email, :without => TEMP_EMAIL_REGEX, on: :update
-
   def self.find_for_oauth(auth, signed_in_resource = nil)
+
+    is_new_user = false
 
     # Get the identity and user if they exist
     identity = Identity.find_for_oauth(auth)
@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
     # Note that this may leave zombie accounts (with no associated identity) which
     # can be cleaned up at a later date.
     user = signed_in_resource ? signed_in_resource : identity.user
-
+    
     # Create the user if needed
     if user.nil?
 
@@ -26,6 +26,8 @@ class User < ActiveRecord::Base
       email = auth.info.email ? auth.info.email : "#{auth.uid}@#{auth.provider}.com" 
       user = User.where(:email => email).first_or_initialize
 
+      is_new_user = user.id ? true : false
+      
       # Update or create the user in database
       user.update_attributes(
         id_facebook: auth.uid,
@@ -45,7 +47,8 @@ class User < ActiveRecord::Base
       identity.user = user
       identity.save!
     end
-    user
+    
+    return user, is_new_user
   end  
   
   # Récupère la liste des utilisateurs, triés par ordre de contribution descendant

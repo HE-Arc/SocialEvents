@@ -6,18 +6,16 @@ Rails.application.routes.draw do
   root 'main#index'
   
   devise_for :users, :controllers => { omniauth_callbacks: 'omniauth_callbacks' }
-  # désactivation possible de /users/sign_in ?
-  
+
   resources :users
   resources :events
-  
+    
   get "/import" => "events#import"
   get "/import/data/:latitude/:longitude" => "events#import_data", :latitude => /[^\/]+/, :longitude => /[^\/]+/
   get "/import/verify" => "events#import_verify"
   
   get "/main/load/" => "main#load"
   get "/main/load/:categories/:cantons/:date/:title/:limit/:offset" => "main#load"
-
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

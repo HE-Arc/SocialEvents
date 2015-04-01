@@ -10,21 +10,32 @@
 <section class="show">
   <div class="show-body">
     <div class="show-title">
+      <div class="title-complement"><%= link_to "Voir sur Facebook", 'https://www.facebook.com/' + @event.id_facebook, :target => '_blank' %></div>
       <p class="title-event"><%= @event.title %></p>
       <p class="date-event">From <%= @event.start_time.strftime("%d %B %Y") %> to <%= @event.end_time.strftime("%d %B %Y") %></p>
     </div>
     <div class="show-content">
       <div class="show-information">
-        <div><%= link_to "Voir sur Facebook", 'https://www.facebook.com/' + @event.id_facebook, :target => '_blank' %></div>
-        <div>Catégorie: <%= @event.category %></div>
-        <div>Organisateur: <%= link_to @event.event_location.name, @event.event_location.link, :target => "_blank" %></div>
-        <div>Localisation: <%= @event.event_location.street %>, <%= @event.event_location.city %>, Canton <%= @event.event_location.canton %></div>
-        <div>Utilisateur: <%= @user.first_name %> <%= @user.last_name %></div>
+        <div>
+          <label>Category:</label> 
+          <%= @event.category %>
+        </div>
+        <div>
+          <label>Organizer:</label> 
+          <%= link_to @event.event_location.name, @event.event_location.link, :target => "_blank" %>
+        </div>
+        <div>
+          <label>Localisation:</label>
+          <%= @event.event_location.street %>, <%= @event.event_location.city %>, Canton <%= @event.event_location.canton %>
+        </div>
+        <div>
+          <label>Published by user:</label>
+          <%= @user.first_name %> <%= @user.last_name %>
+        </div>
       </div>
       <div class="show-description">
-        <%= @event.description %>
+        <pre><%= @event.description %></pre>
       </div>
-
     </div>
   </div>
 
