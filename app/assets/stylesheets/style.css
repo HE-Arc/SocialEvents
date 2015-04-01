@@ -98,6 +98,7 @@ section.main .left .search {
 }
 
 .image-cover-div {
+    min-height: 100px;
     max-height: 280px;
     max-width: 970px;
     margin: auto;
@@ -793,6 +794,21 @@ input[type=checkbox].categorie:checked + label:after {
     height: 20px;
     border-width: 0;
   }
+}
+
+/*---------------------------*/
+/*  Events show details      */
+/*---------------------------*/
+
+.show-information label {
+  display: inline-block;
+  min-width: 20%;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.show-title .title-complement {
+  float: right;
 }
 
 /*-----------------------------------------------------------------------------*/
