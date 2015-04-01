@@ -1,11 +1,9 @@
 <div id="event-main-page"></div>
 <div class="image-cover-div">
-  
   <% if not @event_cover.nil? %>
   <%= image_tag(@event_cover.picture , :alt => @event_cover.title ,:class => "img-cover") %>
-  <% end %>
-
   <%= link_to(@event_cover.title, @event_cover, :class => 'link link-title title-event flex-item cover-overlay') %>
+  <% end %>
 </div>
 <section class="main">
 <nav class="nav-bar">

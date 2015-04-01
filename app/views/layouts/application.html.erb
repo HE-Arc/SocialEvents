@@ -41,9 +41,9 @@
           <!-- BEGIN FETCHING -->
           <span class="fetching" style="display: <%= @user_is_fetching ? 'inline' : 'none' %>">Fetching</span>
           <!-- END FETCHING -->
-          <%= button_to "Profil", user_path(current_user), :class => "btn", :method => :get %>
-          <%= button_to "Utilisateurs", users_path, :class => "btn", :method => :get %>
-          <%= button_to "Sign out", destroy_user_session_path, :class => "btn", :method => :delete %>
+          <%= link_to "Profil", user_path(current_user), :class => "menu", :method => :get %>
+          <!-- <%= link_to "Utilisateurs", users_path, :class => "menu", :method => :get %> -->
+          <%= link_to "Sign out", destroy_user_session_path, :class => "menu", :method => :delete %>
         </div>
     <% end %>
     <% if not user_signed_in? %>
