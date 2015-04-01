@@ -1,140 +1,142 @@
-<div id="event-main-page"></div>
-<div class="image-cover-div">
-  <% if not @event_cover.nil? %>
-  <%= image_tag(@event_cover.picture , :alt => @event_cover.title ,:class => "img-cover") %>
-  <%= link_to(@event_cover.title, @event_cover, :class => 'link link-title title-event flex-item cover-overlay') %>
-  <% end %>
-</div>
-<section class="main">
-<nav class="nav-bar">
-    <!-- DEBUT DU FILTRE TITRE -->
-    <div class="nav-bar-title">
-      <p>Filtres</p>
-    </div>
-    <!-- FIN DU FILTRE TITRE -->
-  
-    <!-- DEBUT DU FILTRE CONTENT -->
-    <div class="nav-bar-content">
-      <div id="datepicker"></div>
-      <div class="cat-queries-480">
-        <input type="checkbox" checked="checked" class="categorie categorie-1" id="toggle-1"/>
-        <label class="categorie" for="toggle-1">
-            Categories
-        </label>
-     
-        <div class="categorie categorie-1">
-            <div>
-                <label class="se-checkbox">
-                    <input type="checkbox" checked="checked" class="chk_category" value="all"/>
-                    <span></span>
-                </label>
-                <span class="category-name">All</span>
-            </div>
-            <% @categories.each do |category| %>
-            <div>
-                <label class="se-checkbox">
-                    <input type="checkbox" class="chk_category" value="<%= category %>"/>
-                    <span></span>
-                </label>
-                <span class="category-name"><%= category %></span>
-            </div>
-          <% end %>
-          </div>
-      </div>
-  
-      <div class="cat-queries-480">
-        <input type="checkbox" checked="checked" class="categorie categorie-2" id="toggle-2" />
-
-        <label class="categorie" for="toggle-2">
-            Cantons
-        </label>
-        
-        <div class="categorie categorie-2">
-            <div>
-                <label class="se-checkbox">
-                    <input type="checkbox" checked="checked" class="chk_canton" value="all"/>
-                    <span></span>
-                </label>
-                <span class="category-name">All</span>
-            </div>
-            <% @cantons.each do |canton| %>
-            <div>
-                <label class="se-checkbox">
-                    <input type="checkbox" class="chk_canton" value="<%= canton %>"/>
-                    <span></span>
-                </label>
-                <span class="category-name"><%= canton %></span>
-            </div>
-          <% end %>
-        </div>
-      </div>
-    </div>
-    <!-- FIN DU FILTRE CONTENT-->
-  
-  
-    <!-- DEBUT DU TOP CONTRIBUTOR TITRE -->
-    <div class="nav-bar-title hide">
-      <p>Top contributors</p>
-    </div>
-    <!-- FIN DU TOP CONTRIBUTOR TITRE -->
-    <!-- DEBUT DU TOP CONTRIBUTOR CONTENT -->
-    <div class="nav-bar-content hide">
-      <div class="top-contributor cat-queries-480">
-          <% @users_top.each do |user| %>
-          <div>
-              <div class="content-top-contributor">
-                  <i class="icon-user"></i><span class="name-top-contributor"><%= link_to user.first_name + " " + user.last_name, user, class: 'link' %></span>
-                  <span class="value-top-contributor"><%= user.contributions_counter %></span>
-              </div>
-          </div>
-          <% end %>
-      </div>
+<div class="main-content">
+  <div id="event-main-page"></div>
+  <div class="image-cover-div">
+    <% if not @event_cover.nil? %>
+    <%= image_tag(@event_cover.picture , :alt => @event_cover.title ,:class => "img-cover") %>
+    <%= link_to(@event_cover.title, @event_cover, :class => 'link link-title title-event flex-item cover-overlay') %>
+    <% end %>
   </div>
-  <!-- FIN DU TOP CONTRIBUTOR CONTENT -->
-</nav>
+  <section class="main">
+  <nav class="nav-bar">
+      <!-- DEBUT DU FILTRE TITRE -->
+      <div class="nav-bar-title">
+        <p>Filtres</p>
+      </div>
+      <!-- FIN DU FILTRE TITRE -->
 
-<!--SEARCH BAR-->
-<section class="left">
-    <div class="search">
-        <div class="search-div">
-            <label class="se-placeholder">
-                <input type="text" placeholder="Search" class="search-input" id="input-event-title" />
-            </label>
-            <a class="btn btn-small" href="#" id="button-event-title"> <i class="icon-search"></i></a>
-            <a class="btn btn-small" href="#" id="button-event-refresh"> <i class="icon-refresh"></i></a>
+      <!-- DEBUT DU FILTRE CONTENT -->
+      <div class="nav-bar-content">
+        <div id="datepicker"></div>
+        <div class="cat-queries-480">
+          <input type="checkbox" checked="checked" class="categorie categorie-1" id="toggle-1"/>
+          <label class="categorie" for="toggle-1">
+              Categories
+          </label>
+
+          <div class="categorie categorie-1">
+              <div>
+                  <label class="se-checkbox">
+                      <input type="checkbox" checked="checked" class="chk_category" value="all"/>
+                      <span></span>
+                  </label>
+                  <span class="category-name">All</span>
+              </div>
+              <% @categories.each do |category| %>
+              <div>
+                  <label class="se-checkbox">
+                      <input type="checkbox" class="chk_category" value="<%= category %>"/>
+                      <span></span>
+                  </label>
+                  <span class="category-name"><%= category %></span>
+              </div>
+            <% end %>
+            </div>
         </div>
-      <!--
-        <div class="grid-or-list">
-            <button class="search-div-btn" href="#"><i class="icon-th"></i> Grid</button>
-            <button class="search-div-btn" href="#"><i class="icon-list"></i> List</button>
+
+        <div class="cat-queries-480">
+          <input type="checkbox" checked="checked" class="categorie categorie-2" id="toggle-2" />
+
+          <label class="categorie" for="toggle-2">
+              Cantons
+          </label>
+
+          <div class="categorie categorie-2">
+              <div>
+                  <label class="se-checkbox">
+                      <input type="checkbox" checked="checked" class="chk_canton" value="all"/>
+                      <span></span>
+                  </label>
+                  <span class="category-name">All</span>
+              </div>
+              <% @cantons.each do |canton| %>
+              <div>
+                  <label class="se-checkbox">
+                      <input type="checkbox" class="chk_canton" value="<%= canton %>"/>
+                      <span></span>
+                  </label>
+                  <span class="category-name"><%= canton %></span>
+              </div>
+            <% end %>
+          </div>
         </div>
-      -->
+      </div>
+      <!-- FIN DU FILTRE CONTENT-->
+
+
+      <!-- DEBUT DU TOP CONTRIBUTOR TITRE -->
+      <div class="nav-bar-title hide">
+        <p>Top contributors</p>
+      </div>
+      <!-- FIN DU TOP CONTRIBUTOR TITRE -->
+      <!-- DEBUT DU TOP CONTRIBUTOR CONTENT -->
+      <div class="nav-bar-content hide">
+        <div class="top-contributor cat-queries-480">
+            <% @users_top.each do |user| %>
+            <div>
+                <div class="content-top-contributor">
+                    <i class="icon-user"></i><span class="name-top-contributor"><%= link_to user.first_name + " " + user.last_name, user, class: 'link' %></span>
+                    <span class="value-top-contributor"><%= user.contributions_counter %></span>
+                </div>
+            </div>
+            <% end %>
+        </div>
     </div>
-    <div class="content">
-        <ul class="flex-container flex-container-events">          
-          <% @events.each do |event| %>
-          <a class="" href="/events/<%= event.id %>">
-            <li class="flex-item">
-              <div class="img-event">
-                <div class="wrapperB" style="background-image: url('<%= event.picture %>');"></div>
-              </div>
-              <div class="content-event">
-                <p class="title-event multiline-ellipsis"><%= link_to(event.title, event, :class => "link link-title") %></p>
+    <!-- FIN DU TOP CONTRIBUTOR CONTENT -->
+  </nav>
 
-                <p class="date-event">From <%= event.start_time.strftime("%d %B %Y") %> to <%= event.end_time.strftime("%d %B %Y") %></p>
-                <p class="multiline-ellipsis">
-                  <%= event.description %>
-                </p>
-              </div>
+  <!--SEARCH BAR-->
+  <section class="left">
+      <div class="search">
+          <div class="search-div">
+              <label class="se-placeholder">
+                  <input type="text" placeholder="Search" class="search-input" id="input-event-title" />
+              </label>
+              <a class="btn btn-small" href="#" id="button-event-title"> <i class="icon-search"></i></a>
+              <a class="btn btn-small" href="#" id="button-event-refresh"> <i class="icon-refresh"></i></a>
+          </div>
+        <!--
+          <div class="grid-or-list">
+              <button class="search-div-btn" href="#"><i class="icon-th"></i> Grid</button>
+              <button class="search-div-btn" href="#"><i class="icon-list"></i> List</button>
+          </div>
+        -->
+      </div>
+      <div class="content">
+          <ul class="flex-container flex-container-events">          
+            <% @events.each do |event| %>
+            <a class="" href="/events/<%= event.id %>">
+              <li class="flex-item">
+                <div class="img-event">
+                  <div class="wrapperB" style="background-image: url('<%= event.picture %>');"></div>
+                </div>
+                <div class="content-event">
+                  <p class="title-event multiline-ellipsis"><%= link_to(event.title, event, :class => "link link-title") %></p>
+
+                  <p class="date-event">From <%= event.start_time.strftime("%d %B %Y") %> to <%= event.end_time.strftime("%d %B %Y") %></p>
+                  <p class="multiline-ellipsis">
+                    <%= event.description %>
+                  </p>
+                </div>
+              </li>
+              </a>
+            <% end %>
+          </ul>
+          <ul class="flex-container flex-container-error">          
+            <li class="flex-item"<%== ' style="display: none;"' if @events.length > 0 %>>
+              There is unfortunately no more events for these search filters
             </li>
-            </a>
-          <% end %>
-        </ul>
-        <ul class="flex-container flex-container-error">          
-          <li class="flex-item"<%== ' style="display: none;"' if @events.length > 0 %>>
-            There is unfortunately no more events for these search filters
-          </li>
-        </ul>
-    </div>
-</section>
-</section>
+          </ul>
+      </div>
+  </section>
+  </section>
+</div>

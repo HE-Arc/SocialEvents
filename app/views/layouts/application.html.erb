@@ -47,25 +47,25 @@
         </div>
     <% end %>
     <% if not user_signed_in? %>
-        <div class="fb-login-button fb-login-button-large"><%= link_to(image_tag("fb_login_small.png", :alt => "facebook button", :class => ""),user_omniauth_authorize_path(:facebook)) %></div>
+        <div class="fb-login-button fb-login-button-large"><%= link_to(image_tag("fb_login.png", :alt => "facebook button", :class => ""),user_omniauth_authorize_path(:facebook)) %></div>
         <div class="fb-login-button fb-login-button-small"><%= link_to(image_tag("fb_login_small.png", :alt => "facebook button", :class => ""),user_omniauth_authorize_path(:facebook)) %></div>
     <% end %>
         <div class="site-title"><%= link_to("Social Events",root_url)%></div>
 
         <% if user_signed_in? %>
-        <div class="welcom">
+        <div class="welcome">
         Welcome <%= current_user.last_name+' '+current_user.first_name %>
         </div>
         <%else %>
-        <div class="welcom">
+        <div class="welcome">
         Des événements autour de vous !
         </div>
         <% end %>
     </div>
   </header>
-
-  <%= yield %>
   
+  <%= yield %>
+
   <footer>FOOTER</footer>
 </body>
 </html>

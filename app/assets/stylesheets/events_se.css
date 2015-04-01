@@ -43,14 +43,13 @@
 }
 
 .img-event{
-    background-color: #585858;
     width: 40%;
     height: 100%;
     overflow: hidden;
     float: left;
     max-height: 12em;
-  background-size: cover;
-  background-position: center center;
+    background-size: cover;
+    background-position: center center;
 }
 
 .wrapperB {
