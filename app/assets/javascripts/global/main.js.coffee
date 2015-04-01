@@ -102,10 +102,10 @@ create_ajax_url = () ->
 
 # store filters and search data in cookies for later reuse
 store_in_cookies = (categories, cantons, date, title) ->
-  $.cookie('categories', categories)
-  $.cookie('cantons', cantons)
-  $.cookie('date', date)
-  $.cookie('title', title)
+  $.cookie('categories', categories, { path: '/' })
+  $.cookie('cantons', cantons, { path: '/' })
+  $.cookie('date', date, { path: '/' })
+  $.cookie('title', title, { path: '/' })
   $.cookie('is_searching', if is_searching then "1" else "0")
   
 # restore the page, with events, filters and search data from cookies
