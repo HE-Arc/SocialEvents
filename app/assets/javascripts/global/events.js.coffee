@@ -12,3 +12,10 @@ $ ->
             lng: $('#lon').val()
           })
           handler.map.centerOn(marker)
+    
+    $("#dialog-cover-opener").click ->
+      $("#dialog-cover").dialog({
+        draggable: false,
+        resizable: false,
+        width: 'auto',
+      })

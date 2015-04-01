@@ -178,8 +178,12 @@ change_search_mode = (is_on) ->
 $ ->
 
   $("#flash-first-login").dialog({
-    modal: true
-   })
+    modal: true,
+    width: 'auto',
+    buttons: {
+      Ok: () ->
+        $(this).dialog("close")
+  }})
   
   $("#datepicker").datepicker({ 
     minDate: new Date(),

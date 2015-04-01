@@ -139,6 +139,10 @@ section.show{
     background-color: #DBD2D7;
 }
 
+.pointer {
+  cursor: pointer;
+}
+
 /*---------------------------*/
 /*  Events show details      */
 /*---------------------------*/
