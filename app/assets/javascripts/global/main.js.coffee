@@ -102,10 +102,10 @@ create_ajax_url = () ->
 
 # store filters and search data in cookies for later reuse
 store_in_cookies = (categories, cantons, date, title) ->
-  $.cookie('categories', categories)
-  $.cookie('cantons', cantons)
-  $.cookie('date', date)
-  $.cookie('title', title)
+  $.cookie('categories', categories, { path: '/' })
+  $.cookie('cantons', cantons, { path: '/' })
+  $.cookie('date', date, { path: '/' })
+  $.cookie('title', title, { path: '/' })
   $.cookie('is_searching', if is_searching then "1" else "0")
   
 # restore the page, with events, filters and search data from cookies
@@ -173,13 +173,29 @@ change_search_mode = (is_on) ->
     verify_checkboxes(chk_all_category)
     $("#datepicker").datepicker('setDate', new Date())
   
+scroll_handler = () ->
+  console.log "scroll"
+  if($(window).scrollTop() >= $(document).height() - $(window).height())
+    page++
+    console.log page
+    $.ajax({
+      url: create_ajax_url(), 
+      dataType: "json", 
+      success: (data) =>
+        append_next(data,false)
+      })
+
 
 # binding JS <-> UI (document onload)
 $ ->
 
   $("#flash-first-login").dialog({
-    modal: true
-   })
+    modal: true,
+    width: 'auto',
+    buttons: {
+      Ok: () ->
+        $(this).dialog("close")
+  }})
   
   $("#datepicker").datepicker({ 
     minDate: new Date(),
@@ -216,20 +232,11 @@ $ ->
   $('.notify-close').click ->
     $(this).closest('.notify').hide()
 
-    
+  $(window).off('scroll', scroll_handler)
+  
   #infinite scolling
   if $('#event-main-page').length > 0
-    $(window).scroll ->
-        console.log "scroll"
-        if($(window).scrollTop() >= $(document).height() - $(window).height())
-          page++
-          console.log page
-          $.ajax({
-            url: create_ajax_url(), 
-            dataType: "json", 
-            success: (data) =>
-              append_next(data,false)
-          })
+    $(window).scroll(scroll_handler)
 
     load_from_cookies()
 

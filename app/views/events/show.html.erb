@@ -4,9 +4,14 @@
   <%= raw javascript_include_view_js %>
 <% end %>
 
-<div class="image-cover-div">
-  <%= image_tag(@event.picture, :alt => "cover image" ,:class => "img-cover") %>
+<div id="dialog-cover" title="<%= @event.title %>" style="display: none;">
+  <%= image_tag(@event.picture, :alt => @event.title) %>
 </div>
+
+<div id="dialog-cover-opener" class="image-cover-div pointer" title="<%= @event.title %>">
+  <%= image_tag(@event.picture, :alt => @event.title ,:class => "img-cover") %>
+</div>
+
 <section class="show">
   <div class="show-body">
     <div class="show-title">
@@ -21,16 +26,16 @@
           <%= @event.category %>
         </div>
         <div>
-          <label>Organizer:</label> 
-          <%= link_to @event.event_location.name, @event.event_location.link, :target => "_blank" %>
-        </div>
-        <div>
           <label>Localisation:</label>
           <%= @event.event_location.street %>, <%= @event.event_location.city %>, Canton <%= @event.event_location.canton %>
         </div>
         <div>
+          <label>Organizer:</label> 
+          <%= link_to @event.event_location.name, @event.event_location.link, :target => "_blank" %>
+        </div>
+        <div>
           <label>Published by user:</label>
-          <%= @user.first_name %> <%= @user.last_name %>
+          <%= link_to @user.first_name + " " + @user.last_name, @user %>
         </div>
       </div>
       <div class="show-description">
