@@ -3,16 +3,16 @@ require "openssl"
 require "base64"
 
 class ImportEventsTask
-  
+    
   class << self
     
-    def import(user_id, token, latitude, longitude)
+    def import(user_id, token, latitude, longitude, root)
                   
       user = User.find(user_id)
       user.is_fetching = true
       user.save!
       
-      self.fetch(user_id, token, latitude, longitude)
+      self.fetch(user_id, token, latitude, longitude, root)
 
       user.is_fetching = false
       user.save!
@@ -34,7 +34,7 @@ class ImportEventsTask
     return count
   end
   
-  def self.fetch(user_id, token, latitude, longitude)
+  def self.fetch(user_id, token, latitude, longitude, root)
     category_musique = ["Album", "Artist", "Arts/entertainment/nightlife", "Author", "Bar", "Club", "Concert tour", "Concert venue", "Music", "Music award","electro", "Music chart", "Music video", "Musical genre", "Musical instrument", "Musician/band", "musique", "music","dj", "musiques", "concert", "festival de musique", "MUSIC", "MUSIQUE", "Clubbing", "Dance-hall","funk","rock","jam", "Jam","compositeur","blues"]
     category_cinema = ["Actor/director", "Comedian", "Movie","Movie general", "Movie genre", "Movie theater", "Movies/music", "cinéma", "cinémas", "projection", "film", "films", "NIFFF", "CINEMA"]
     category_art = ["Arts/humanities website", "Dancer", "Museum/art gallery", "Society/culture website", "expositions","exposition","musée", "galerie"]
@@ -44,7 +44,7 @@ class ImportEventsTask
     # **************************************************************
     
     # Authentification à l'application Facebook
-    @oauth = Koala::Facebook::OAuth.new("653919454735658","035ddda1f5dc692934d9f0abc345e4ef","/import/data")
+    @oauth = Koala::Facebook::OAuth.new("653919454735658","035ddda1f5dc692934d9f0abc345e4ef", "/")
     
     # Permission pour le graph search
     @oauth.url_for_oauth_code(:permissions => "publish_actions")
@@ -57,7 +57,7 @@ class ImportEventsTask
     # ******************************************************************
     
     # Affiche les événements à proximité de l'utilisateur
-    eventlocation = @graph.get_object("search?q=&type=place&center=" + latitude + "," + longitude + "&distance=40000&limit=400")
+    eventlocation = @graph.get_object("search?q=bar&type=place&center=" + latitude + "," + longitude + "&distance=40000&limit=80")
     @events_locations = eventlocation
     
     # **************************************************************
@@ -144,18 +144,14 @@ class ImportEventsTask
 
         event = Event.where(:id_facebook => event_request["id"]).first_or_initialize
 
-        # Vérification si image n'est pas null
-        image_cover = ""
-        if cover_image[0]
-          image_cover = cover_image[0]["source"]
-        end
-
-
         # Si date de fin non spécifier, alors on ajoute 1 jour à la date de début
-        endtime = event_request["end_time"]
+        starttime = DateTime.parse(event_request["start_time"])
+        #endtime = DateTime.parse(event_request["end_time"])
         if not event_request["end_time"]
           endtime = DateTime.parse(event_request["start_time"])
           endtime += 1.days
+        else
+          endtime = DateTime.parse(event_request["end_time"])
         end
       
         #recherche dans la description
@@ -182,6 +178,23 @@ class ImportEventsTask
           eventCategory = "Spectacle / Théâtre"
         end        
       
+        # Vérification si image n'est pas null
+        image_cover = ""
+        if cover_image[0]
+          image_cover = cover_image[0]["source"]
+        else
+          case eventCategory
+          when "Cinéma"
+            image_cover = root + 'images/cinema%d.jpg' % [rand(1..7)]
+          when "Musée / Exposition"
+            image_cover = root + 'images/art%d.jpg' % [rand(1..5)]
+          when "Spectacle / Théâtre"
+            image_cover = root + 'images/music%d.jpg' % [rand(1..10)]
+          else
+            image_cover = root + 'images/music%d.jpg' % [rand(1..10)]
+          end
+        end
+
         #puts "-------"
         #puts event_request["name"]
         #puts event_request["description"]
@@ -194,15 +207,17 @@ class ImportEventsTask
           :title => event_request["name"],
           :picture => image_cover,
           :category => eventCategory,
-          :description => event_request["description"],
-          :start_time => event_request["start_time"],
+          :description => event_request["description"] ? event_request["description"] : "",
+          :start_time => starttime,
           :end_time => endtime,
           :user_id => user_id,
           :event_location_id => location.id
         )
-      rescue
+      rescue Exception
         # oops
-        puts "oops"
+        puts oops
+        puts $!, $@
+        raise
       end
     end
   end

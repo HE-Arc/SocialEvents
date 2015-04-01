@@ -13,7 +13,7 @@ class EventsController < ApplicationController
             "google/objects/polyline.js", "google/primitives.js", "google.js"]
     
     files.each do |f|
-      include += '<script data-turbolinks-track="true" src="/assets/gmaps/' + f + '?body=1" type="text/javascript"></script>'
+      include += '<script data-turbolinks-track="true" src="' + root_url + 'assets/gmaps/' + f + '?body=1" type="text/javascript"></script>'
     end
    
     return include
@@ -45,7 +45,7 @@ class EventsController < ApplicationController
     will_import = user && !user.is_fetching
         
     if will_import
-      ImportEventsTask.import(user.id, session["devise.facebook_data"]["credentials"]["token"],params[:latitude],params[:longitude])      
+      ImportEventsTask.import(user.id, session["devise.facebook_data"]["credentials"]["token"],params[:latitude],params[:longitude], root_url)      
     end
     
     render :json => will_import

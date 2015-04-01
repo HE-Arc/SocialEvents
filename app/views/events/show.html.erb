@@ -15,8 +15,10 @@
     </div>
     <div class="show-content">
       <div class="show-information">
+        <div><%= link_to "Voir sur Facebook", 'https://www.facebook.com/' + @event.id_facebook, :target => '_blank' %></div>
         <div>Catégorie: <%= @event.category %></div>
-        <div>Localisation: <%= @event.event_location.city + " " + @event.event_location.canton %></div>
+        <div>Organisateur: <%= link_to @event.event_location.name, @event.event_location.link, :target => "_blank" %></div>
+        <div>Localisation: <%= @event.event_location.street %>, <%= @event.event_location.city %>, Canton <%= @event.event_location.canton %></div>
         <div>Utilisateur: <%= @user.first_name %> <%= @user.last_name %></div>
       </div>
       <div class="show-description">

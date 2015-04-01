@@ -8,16 +8,18 @@ class Event < ActiveRecord::Base
   #    cantons      cantons possibles
   #    limit        nombre d'événements
   #    offset       indice de début de récupération
-  #    date         date à partir de laquelle on récupère les événements
+  #    date         date à partir de laquelle on récupère les événements, si non spécifiée retourne tous les futurs événements
   def self.get_listing_events(title=nil, categories=nil, cantons=nil, limit=nil, offset=nil, date=nil)
-    if date.nil?
-      date = DateTime.now.to_date
-    end
     
     query = self.joins(:event_location).order(:start_time).order(:title)
-                .where("DATE(events.start_time) <= ? AND DATE(events.end_time) >= ?", date, date)
                 .where('is_published = true')
 
+    if not date.nil?
+      query = query.where("DATE(events.start_time) <= ? AND DATE(events.end_time) >= ?", date, date)
+    else
+      query = query.where("DATE(events.end_time) >= ?", DateTime.now.to_date)
+    end
+    
     if not title.nil?
       # ILIKE propre à Postgres
       query = query.where('events.title ILIKE ? OR events.description ILIKE ?', "%#{title}%", "%#{title}%")

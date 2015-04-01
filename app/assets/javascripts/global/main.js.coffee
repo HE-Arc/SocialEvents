@@ -11,6 +11,10 @@ encHtml = (html) ->
   
 page = 0
 
+# app is in search mode if it can find all upcoming events
+# when filtering by date, it isn't in search mode anymore
+is_searching = true
+
 # exécution requête AJAX
 load_event = () ->
   console.log(create_ajax_url())
@@ -56,7 +60,7 @@ append_next = (data,clear) ->
           <div class="wrapperB" style="background-image: url(\'' + encHtml(e.picture) + '\');"></div>
           </div>
           <div class="content-event">
-          <p class="title-event"><a class="link link-title" href="/events/' + e.id + '">' + encHtml(e.title) + '</a></p>
+          <p class="title-event"><a class="link link-title" href="' + base_url + 'events/' + e.id + '">' + encHtml(e.title) + '</a></p>
           <p class="date-event">From ' + from + ' to ' + to + '</p>
           <p class="multiline-ellipsis">
 
@@ -83,17 +87,53 @@ create_ajax_url = () ->
   $('.chk_canton:checked').each -> cantons.push($(this).val())
   cantons = cantons.join(',')
   
-  date = $("#datepicker").val()
-  
+  date = if is_searching then "all" else $("#datepicker").val()
+      
   title = $("#input-event-title").val()
   title = "*" if title == ""
   
   limit = 5
   offset = 5 * page
   
+  store_in_cookies(categories, cantons, date, title)
+  
   url = "main/load/" + encUrl(categories) + "/" + encUrl(cantons) + "/" + encUrl(date) + "/" + encUrl(title) + "/" + encUrl(limit) + "/" + encUrl(offset)
   return base_url + url
 
+# store filters and search data in cookies for later reuse
+store_in_cookies = (categories, cantons, date, title) ->
+  $.cookie('categories', categories)
+  $.cookie('cantons', cantons)
+  $.cookie('date', date)
+  $.cookie('title', title)
+  $.cookie('is_searching', if is_searching then "1" else "0")
+  
+# restore the page, with events, filters and search data from cookies
+load_from_cookies = () ->
+  categories = ($.cookie('categories') || "all").split(',')
+  cantons = ($.cookie('cantons') || "all").split(',')
+  date = $.cookie('date') || new Date()    
+  title = $.cookie('title') || ""
+  is_searching = if $.cookie('is_searching') then $.cookie('is_searching') == "1" else true
+    
+  if typeof(date) is 'string'
+    if date == "all"
+      date = new Date()
+    else    
+      date = new Date(date)
+
+  $("#input-event-title").val(title) if title != "*"
+  $("#datepicker").datepicker('setDate', date)
+  
+  $('.chk_category').each ->
+    $(this).prop('checked', $.inArray($(this).val(), categories) != -1)
+    
+  $('.chk_canton').each ->
+    $(this).prop('checked', $.inArray($(this).val(), cantons) != -1)
+    
+  load_event()
+  
+  
 # vérification des checkbox cantons et catégories
 # l'option "all" est exclusive avec toute autre option
 verify_checkboxes = (checkbox) ->
@@ -119,35 +159,62 @@ verify_checkboxes = (checkbox) ->
       $(css_class).slice(1).each -> all_unchecked = false if $(this).is(':checked')
       if all_unchecked
         $(css_class).first().prop('checked', true)
-    
+
+# change the search mode of the app
+change_search_mode = (is_on) ->
+  is_searching = is_on
+  
+  if is_searching
+    chk_all_canton = $('.chk_canton').first()
+    chk_all_category = $('.chk_category').first()
+    chk_all_canton.prop('checked', true)
+    chk_all_category.prop('checked', true)
+    verify_checkboxes(chk_all_canton)
+    verify_checkboxes(chk_all_category)
+    $("#datepicker").datepicker('setDate', new Date())
   
 
 # binding JS <-> UI (document onload)
 $ ->
 
-  $('.chk_category, .chk_canton').change ->
-    verify_checkboxes($(this))
-    load_event()
-      
   $("#datepicker").datepicker({ 
     minDate: new Date(),
     dateFormat: 'yy-mm-dd',
-    onSelect: load_event,
+    onSelect: () -> 
+      change_search_mode(false) 
+      load_event()
+    ,
     firstDay: 1
   })
+
+  $('.chk_category, .chk_canton').change ->
+    verify_checkboxes($(this))
+    #change_search_mode(false)  # search mode doesn't change on filtering by checkbox
+    load_event()
+
   
   $("#button-event-title").click ->
+    change_search_mode(true)
     load_event()
+    return false
+  
+  $("#button-event-refresh").click ->
+    $("#input-event-title").val("")
+    change_search_mode(true)
+    load_event()
+    return false
     
   $("#input-event-title").keypress (e) ->
-    load_event() if e.which == 13
+    if e.which == 13
+      change_search_mode(true)
+      load_event() 
       
   $('.notify-close').click ->
-    $(this).closest('.notify').hide();
+    $(this).closest('.notify').hide()
 
     
   #infinite scolling
-  if $('#map').length <= 0
+  if $('#event-main-page').length > 0
     $(window).scroll ->
         console.log "scroll"
         if($(window).scrollTop() >= $(document).height() - $(window).height())
@@ -160,5 +227,5 @@ $ ->
               append_next(data,false)
           })
 
-
+    load_from_cookies()
 

@@ -1,7 +1,11 @@
 class MainController < ApplicationController
   def index
     @users_top = User.get_users_with_contributions_counter(5)
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> abc33134e5a693f9ef6c33f9a57fbc356efb344a
     @events = Event.get_listing_events(nil, nil, nil, 5, 0, nil)
     
     @categories = Event.get_categories()
@@ -14,11 +18,12 @@ class MainController < ApplicationController
   def load
     categories = params[:categories]
     cantons = params[:cantons]
-    date = DateTime.strptime(params[:date], "%Y-%m-%d")
+    date = params[:date]
     title = params[:title]
     limit = params[:limit]
     offset = params[:offset]
     
+    date = date != "all" ? DateTime.strptime(date, "%Y-%m-%d") : nil
     cantons_list = cantons != "all" ? cantons.split(',') : nil
     categories_list = categories != "all" ? categories.split(',') : nil
     title = title != "*" ? title : nil
