@@ -8,7 +8,8 @@
 
 body, html {
     margin:0;
-  padding-top:1.1em;
+    padding-top:1.1em;
+    padding-bottom:30px;
 }
 
 * {
@@ -80,10 +81,22 @@ footer {
 
 header{
     height: 5em;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    -webkit-border-top-left-radius: 4px;
+    -webkit-border-top-right-radius: 4px;
+    -moz-border-radius-topleft: 4px;
+    -moz-border-radius-topright: 4px;
 }
 
 footer {
     height: 150px;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    -webkit-border-bottom-left-radius: 4px;
+    -webkit-border-bottom-right-radius: 4px;
+    -moz-border-radius-bottomleft: 4px;
+    -moz-border-radius-bottomright: 4px;
 }
 
 section.main .left .search {
@@ -98,7 +111,6 @@ section.main .left .search {
 }
 
 .image-cover-div {
-    min-height: 100px;
     max-height: 280px;
     max-width: 970px;
     margin: auto;
@@ -802,21 +814,6 @@ input[type=checkbox].categorie:checked + label:after {
     height: 20px;
     border-width: 0;
   }
-}
-
-/*---------------------------*/
-/*  Events show details      */
-/*---------------------------*/
-
-.show-information label {
-  display: inline-block;
-  min-width: 20%;
-  font-weight: bold;
-  margin-top: 10px;
-}
-
-.show-title .title-complement {
-  float: right;
 }
 
 /*-----------------------------------------------------------------------------*/

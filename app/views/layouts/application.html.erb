@@ -20,32 +20,22 @@
 </head>
 <body>   
   <!-- INTEGRATION -->
-    
+  
   <header>
     <div class="header-content-margin">
-    <% if alert!=nil %>  
+        <% if alert!=nil %>  
       <div class="notify notify error alert" role="alert">  
         <%= alert %>
         <button type="button" class="notify-close">&times;</button>
       </div>
     <% end %>
-      
-    <% if flash_first_login != nil %>  
-      <div id="flash-first-login" title="First login with Facebook">
-        <p>This is your first login with Facebook on Social Events.</p>
-        <p>By going to <%= link_to("your profile", current_user) %>, you can import events from Facebook near your current location.</p>
-        <p>When importing them on Social Events, you accept to link them to your account and make them public</p>
-      </div>
-    <% end %>
-
-      
+  
     <% if notice!=nil %>  
       <div class="notify notify warning notice" role="alert">  
         <%= notice %>
         <button type="button" class="notify-close">&times;</button>
       </div>
     <% end %>
-    
     <% if user_signed_in? %>
         <div class="btn-user">
           <!-- BEGIN FETCHING -->
@@ -57,7 +47,7 @@
         </div>
     <% end %>
     <% if not user_signed_in? %>
-        <div class="fb-login-button fb-login-button-large"><%= link_to(image_tag("fb_login.png", :alt => "facebook button", :class => ""),user_omniauth_authorize_path(:facebook)) %></div>
+        <div class="fb-login-button fb-login-button-large"><%= link_to(image_tag("fb_login_small.png", :alt => "facebook button", :class => ""),user_omniauth_authorize_path(:facebook)) %></div>
         <div class="fb-login-button fb-login-button-small"><%= link_to(image_tag("fb_login_small.png", :alt => "facebook button", :class => ""),user_omniauth_authorize_path(:facebook)) %></div>
     <% end %>
         <div class="site-title"><%= link_to("Social Events",root_url)%></div>
@@ -65,6 +55,10 @@
         <% if user_signed_in? %>
         <div class="welcom">
         Welcome <%= current_user.last_name+' '+current_user.first_name %>
+        </div>
+        <%else %>
+        <div class="welcom">
+        Des événements autour de vous !
         </div>
         <% end %>
     </div>
