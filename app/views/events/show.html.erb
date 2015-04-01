@@ -26,16 +26,16 @@
           <%= @event.category %>
         </div>
         <div>
-          <label>Organizer:</label> 
-          <%= link_to @event.event_location.name, @event.event_location.link, :target => "_blank" %>
-        </div>
-        <div>
           <label>Localisation:</label>
           <%= @event.event_location.street %>, <%= @event.event_location.city %>, Canton <%= @event.event_location.canton %>
         </div>
         <div>
+          <label>Organizer:</label> 
+          <%= link_to @event.event_location.name, @event.event_location.link, :target => "_blank" %>
+        </div>
+        <div>
           <label>Published by user:</label>
-          <%= @user.first_name %> <%= @user.last_name %>
+          <%= link_to @user.first_name + " " + @user.last_name, @user %>
         </div>
       </div>
       <div class="show-description">

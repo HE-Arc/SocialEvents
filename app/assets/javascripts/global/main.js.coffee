@@ -173,6 +173,18 @@ change_search_mode = (is_on) ->
     verify_checkboxes(chk_all_category)
     $("#datepicker").datepicker('setDate', new Date())
   
+scroll_handler = () ->
+  console.log "scroll"
+  if($(window).scrollTop() >= $(document).height() - $(window).height())
+    page++
+    console.log page
+    $.ajax({
+      url: create_ajax_url(), 
+      dataType: "json", 
+      success: (data) =>
+        append_next(data,false)
+      })
+
 
 # binding JS <-> UI (document onload)
 $ ->
@@ -220,20 +232,11 @@ $ ->
   $('.notify-close').click ->
     $(this).closest('.notify').hide()
 
-    
+  $(window).off('scroll', scroll_handler)
+  
   #infinite scolling
   if $('#event-main-page').length > 0
-    $(window).scroll ->
-        console.log "scroll"
-        if($(window).scrollTop() >= $(document).height() - $(window).height())
-          page++
-          console.log page
-          $.ajax({
-            url: create_ajax_url(), 
-            dataType: "json", 
-            success: (data) =>
-              append_next(data,false)
-          })
+    $(window).scroll(scroll_handler)
 
     load_from_cookies()
 
