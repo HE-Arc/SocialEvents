@@ -773,11 +773,23 @@ input[type=checkbox].categorie:checked + label:after {
 }
 
 .warning{
-    background:#FF9500;
+    background:#27ae60;
+    width: 50%;
+    padding-left: 5px;
+    margin-left: 12px;
+    border-radius: 3px;
 }
 
 .error{
-    background:#FF2400;
+    background:#c0392b;
+    width: 50%;
+    padding-left: 5px;
+    margin-left: 12px;
+    border-radius: 3px;
+}
+.warning .notify-close{
+  margin-top:-2px;
+  margin-bottom:2px;
 }
 
 .header-nav{

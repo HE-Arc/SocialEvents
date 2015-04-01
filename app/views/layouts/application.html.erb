@@ -23,19 +23,6 @@
   
   <header>
     <div class="header-content-margin">
-        <% if alert!=nil %>  
-      <div class="notify notify error alert" role="alert">  
-        <%= alert %>
-        <button type="button" class="notify-close">&times;</button>
-      </div>
-    <% end %>
-  
-    <% if notice!=nil %>  
-      <div class="notify notify warning notice" role="alert">  
-        <%= notice %>
-        <button type="button" class="notify-close">&times;</button>
-      </div>
-    <% end %>
     <% if user_signed_in? %>
         <div class="btn-user">
           <!-- BEGIN FETCHING -->
@@ -51,16 +38,27 @@
         <div class="fb-login-button fb-login-button-small"><%= link_to(image_tag("fb_login_small.png", :alt => "facebook button", :class => ""),user_omniauth_authorize_path(:facebook)) %></div>
     <% end %>
         <div class="site-title"><%= link_to("Social Events",root_url)%></div>
+        
+      <% if alert!=nil %>  
+        <div class="notify notify error alert" role="alert">  
+          <%= alert %>
+          <button type="button" class="notify-close">&times;</button>
+        </div> 
+      <% elsif  notice!=nil %>  
+        <div class="notify notify warning notice" role="alert">  
+          <%= notice %>
+          <button type="button" class="notify-close">&times;</button>
+        </div>
+      <% elsif  user_signed_in? %>
+          <div class="welcome">
+          Welcome <%= current_user.last_name+' '+current_user.first_name %>
+          </div>
+       <%else %>
+          <div class="welcome">
+          Des événements autour de vous !
+          </div>
+      <% end %>
 
-        <% if user_signed_in? %>
-        <div class="welcome">
-        Welcome <%= current_user.last_name+' '+current_user.first_name %>
-        </div>
-        <%else %>
-        <div class="welcome">
-        Des événements autour de vous !
-        </div>
-        <% end %>
     </div>
   </header>
   
