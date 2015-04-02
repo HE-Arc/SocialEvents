@@ -755,6 +755,10 @@ input[type=checkbox].categorie:checked + label:after {
     float: right;
 }
 
+.profile-picture-float {
+  float: left;
+  margin: 5px;
+}
 .profile-picture-mini {
   padding: 0px 10px;
 }
@@ -777,6 +781,11 @@ input[type=checkbox].categorie:checked + label:after {
 
 .fb-login-button-small{
     
+}
+
+table.first-login-table td {
+  vertical-align: top;
+  padding-right: 10px;
 }
 
 /*-----------------------------------------------------------------------------*/
@@ -827,7 +836,7 @@ input[type=checkbox].categorie:checked + label:after {
     margin-left: 12px;
     border-radius: 3px;
 }
-.warning .notify-close{
+.warning {
   margin-top:-2px;
   margin-bottom:2px;
 }
