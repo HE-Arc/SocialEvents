@@ -1,74 +1,48 @@
-<section class="main">
-  <div class="content">
-    
-    <h1> Your informations </h1>
-    <table class="profile-table" style="border:1px solid black; width:100%;">
-      <tr>
-        <td rowspan="2" class="profile-td" style="width:35%;">
-           <%= image_tag(@user.profile_picture(220, 220), :alt => "Profile picture") %>
-        </td>
-         <td class="profile-td" style="width:70%; vertical-align:top;">
-           <h1><%= @user.first_name %> <%= @user.last_name %></h1>
-           <h2>Shared events: <%= @user.contributions_counter %></h2>
-           
-        </td>
-       </tr>
-      
-       <tr>
-          <td style="width:70%; vertical-align:bottom;">
-            <button style="width:100%; height:40px;" id="import">Share more events !</button> 
-          </td>
-      </tr> 
-    </table>
-    
-
-    <% if @is_my_profile %>
-    <p>
-      
-      <span class="fetching" style="display: <%= @user_is_fetching ? 'inline' : 'none' %>">A fetching is already occuring</span>
-      <% if @user_is_fetching %>
-        <div class="fetching-flag underway"></div>
-      <% else %>
-        <% if @user.contributions_counter > 0 %>
-          <div class="fetching-flag done"></div>
-        <% else %>
-          <div class="fetching-flag not-done"></div>
-        <% end %>
-      <% end %>
-    </p>
-    <% end %>
-  
-    <h1> Your contributions </h1>
-    <p>Nombre de contributions : <%= @user.contributions_counter %></p>
-
-    <ul class="flex-container">
-      <% @events.each do |event| %>
-      <li class="flex-item">
-        <div class="img-event">
-          <!-- TODO take url from database -->
-          <!--
-            <div class="inner">
-            <%= image_tag("http://i.imgur.com/Qt7VGfn.jpg", :alt => event.title) %>
-            </div>-->
-          <div class="wrapperB" style="background-image: url('<%= event.picture %>');"></div>
+<section class="show">
+  <div class="show-body">
+    <div class="profile-main-content">
+        <h1 class="profile-main-title">Your informations</h1>
+        <div class="profile-main-leftcolumn">
+          <%= image_tag(@user.profile_picture(200, 200), :alt => "Profile picture", :class => "profile-image") %>
         </div>
-        <div class="content-event">
-          <p class="title-event"><%= link_to(event.title, event, :class => "link link-title") %></p>
+        <div class="profile-main-rightcolumn">
+            <p class="profile-main-title-inner"><%= @user.first_name %> <%= @user.last_name %></p>
+            <p>Shared events <%= @user.contributions_counter %></p>
+          
+            <p>Contribute to our website by sharing your events<p>
+          
+            <button style="width:100%; height:40px;" id="import">Share more events</button>
+          
+            <p class="terms-and-conditions">Public information is any information you share with a public audience, as well as information in your Public Profile, or content you share on our website. Public information is available to anyone on or off our Services and can be seen or accessed through. By clicking on "Share more events" you automatically accepts these terms and conditions.</p>
+      </div>
+    </div>
 
-          <p class="date-event">From <%= event.start_time.strftime("%d %B %Y") %> to <%= event.end_time.strftime("%d %B %Y") %></p>
-          <p class="multiline-ellipsis">
-            <%= event.description %>
-          </p>
-          <div class="more-event">
-            <button class="btn" href="#"><%= link_to("More", event, :class => "link link-btn") %></button>
+    <div class="profile-main-content">
+        <h1 class="profile-main-title">Your contributions</h1>
+        <%= button_to "Supprimer", "/events", :class => "btn", :method => :delete %>
+        <ul class="flex-container flex-container-events">
+        <% @events.each do |event| %>
+          
+          <li class="flex-item">
+            <a href="<%= event_path(event) %>" class="link">
+              <div class="img-event">
+                  <div class="wrapperB" style="background-image: url('<%= event.picture %>');"></div>
+              </div>
+            
+              <div class="content-event">
+                  <p class="title-event"><%= event.title %></p>
+                  <p class="date-event">From <%= event.start_time.strftime("%d %B %Y") %> to <%= event.end_time.strftime("%d %B %Y") %></p>
+                  <p class="multiline-ellipsis">
+                      <%= event.description %>
+                  </p>
+              </div>
+            </a>
             <% if @is_my_profile %>
             <%= button_to "Supprimer", event, :class => "btn", :method => :delete %>
             <% end %>
-          </div>
-        </div>
-      </li>
+          </li>
       <% end %>
     </ul>
-
-  </div>
+      </div>
+    </div>
 </section>

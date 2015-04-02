@@ -231,7 +231,7 @@ $ ->
       load_event() 
   
   # close notifications automatically
-  $('.notify').delay(3000).fadeOut('slow', () -> 
+  $('.notify').delay(3000).fadeOut('slow', () ->       
     $('.welcome').fadeIn("slow")
   )
 
