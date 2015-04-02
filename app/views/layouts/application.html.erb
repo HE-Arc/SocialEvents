@@ -29,7 +29,7 @@
         <td><%= image_tag(current_user.profile_picture(125, 125), :alt => "Profile picture") %></td>
         <td>This is your first login with Facebook on Social Events.<br /><br />
           By going to <%= link_to("your profile", current_user) %>, you can import events from Facebook near your current location.<br /><br />
-          When importing them on Social Events, you accept to link them to your account and make them public</td>
+          When importing them on Social Events, you accept to link them to your account and make them public.</td>
       </tr>
     </table>    
   </div>
@@ -40,7 +40,7 @@
     <% if user_signed_in? %>
         <div class="btn-user">
           <!-- BEGIN FETCHING -->
-          <span class="fetching" style="display: <%= @user_is_fetching ? 'inline' : 'none' %>">Fetching</span>
+          <span class="fetching" class="menu" style="display: <%= @user_is_fetching ? 'inline' : 'none' %>">Fetching</span>
           <!-- END FETCHING -->
           <%= link_to "Profil", user_path(current_user), :class => "menu", :method => :get %>
           <%= link_to "Sign out", destroy_user_session_path, :class => "menu", :method => :delete %>
@@ -49,7 +49,7 @@
         </div>
     <% end %>
     <% if not user_signed_in? %>
-        <div class="fb-login-button fb-login-button-small"><%= link_to(image_tag("fb_login_small.png", :alt => "facebook button", :class => ""),user_omniauth_authorize_path(:facebook)) %></div>
+        <div class="fb-login-button fb-login-button-small"><%= link_to(image_tag("fb_login_small.png", :alt => "Facebook login", :class => ""),user_omniauth_authorize_path(:facebook)) %></div>
     <% end %>
         <div class="site-title"><%= link_to("Social Events",root_url)%></div>
         

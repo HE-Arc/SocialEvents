@@ -1,4 +1,6 @@
 class MainController < ApplicationController
+  
+  # Show all data for main page
   def index
     @users_top = User.get_users_with_contributions_counter(5)
     #@events = Event.get_listing_events(nil, nil, nil, 5, 0, nil)  # No data fetch here, all is done by ajax call
@@ -10,6 +12,13 @@ class MainController < ApplicationController
     @event_cover = Event.offset(offset).first
   end
   
+  # Fetch and returns a list of events with JSON
+  # Retrieve events with this filters:
+  #    categories    categories of the events, separated by commas
+  #    cantons       cantons, separated by commas
+  #    date          filtering date
+  #    title         title search pattern
+  #    limit, offset  querying a limit of N events, starting from offset ~> pagination
   def load
     categories = params[:categories]
     cantons = params[:cantons]
@@ -23,7 +32,6 @@ class MainController < ApplicationController
     categories_list = categories != "all" ? categories.split(',') : nil
     title = title != "*" ? title : nil
     
-    # todo
     if limit != nil
       limit = limit.to_i
     end

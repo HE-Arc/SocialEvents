@@ -31,7 +31,8 @@
         </div>
         <div>
           <label>Localisation:</label>
-          <%= @event.event_location.street %>, <%= @event.event_location.city %>, Canton <%= @event.event_location.canton %>
+          <%= @event.event_location.street if @event.event_location.street != ""%>, 
+          <%= @event.event_location.city %>, Canton <%= @event.event_location.canton %>
         </div>
         <div>
           <label>Organizer:</label> 

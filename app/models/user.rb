@@ -6,10 +6,12 @@ class User < ActiveRecord::Base
   # :lockable, :timeoutable
   devise :database_authenticatable, :trackable, :rememberable, :omniauthable
 
+  # return FB profile picture as URL
   def profile_picture(width, height)
     "https://graph.facebook.com/#{self.id_facebook}/picture?width=#{width}&height=#{height}"
   end
   
+  # Find user for FB Auth
   def self.find_for_oauth(auth, signed_in_resource = nil)
 
     is_new_user = false
@@ -74,8 +76,6 @@ class User < ActiveRecord::Base
   # limit      nombre maximum N d'utilisateurs à récupérer
   # retour     1 ou N utilisateur suivant les paramètres
   def self.query_contributions_counter_user(user_id=nil, limit=nil)
-    # A faire avec ActiveRecord!
-    #self.joins(:events).select('users.*, COUNT(events.id) AS contributions_counter').group('users.id').order('contributions_counter DESC').order(:first_name).order(:last_name)
 
     query = self.select('users.*, COUNT(events.id) AS contributions_counter')
         .joins('LEFT JOIN events ON events.user_id = users.id AND events.is_published = True')

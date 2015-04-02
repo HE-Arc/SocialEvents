@@ -6,6 +6,11 @@ class ImportEventsTask
     
   class << self
     
+    # Entry point for asynchronous fetching
+    # user_id    user_id which is fetching
+    # token      facebook token
+    # latitude, longitude  current user coordinates
+    # root      url to root of the website
     def import(user_id, token, latitude, longitude, root)
                   
       user = User.find(user_id)
@@ -34,6 +39,7 @@ class ImportEventsTask
     return count
   end
   
+  # Doing the asynchronous fetching to FB through Graph API
   def self.fetch(user_id, token, latitude, longitude, root)
     category_musique = ["Album", "Artist", "Arts/entertainment/nightlife", "Author", "Bar", "Club", "Concert tour", "Concert venue", "Music", "Music award","electro", "Music chart", "Music video", "Musical genre", "Musical instrument", "Musician/band", "musique", "music","dj", "musiques", "concert", "festival de musique", "MUSIC", "MUSIQUE", "Clubbing", "Dance-hall","funk","rock","jam", "Jam","compositeur","blues"]
     category_cinema = ["Actor/director", "Comedian", "Movie","Movie general", "Movie genre", "Movie theater", "Movies/music", "cinéma", "cinémas", "projection", "film", "films", "NIFFF", "CINEMA"]
