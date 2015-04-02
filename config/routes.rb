@@ -9,7 +9,9 @@ Rails.application.routes.draw do
 
   resources :users
   resources :events
-    
+  
+  delete "/events" => "events#destroy_all"
+  
   get "/import" => "events#import"
   get "/import/data/:latitude/:longitude" => "events#import_data", :latitude => /[^\/]+/, :longitude => /[^\/]+/
   get "/import/verify" => "events#import_verify"

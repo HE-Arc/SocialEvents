@@ -42,6 +42,16 @@ class EventsController < ApplicationController
     end
   end
   
+  # "Delete" all events from user ~> hide them in fact
+  def destroy_all
+    unless current_user.nil?
+      current_user.events.destroy_all
+      redirect_to :back, notice: "All events have been deleted."
+    else
+      redirect_to :back, alert: "Deleting an event is restricted to logged-in users."
+    end
+  end
+  
   # Launch an import task for retrieve asynchronously events from Facebook Graph API
   def import_data
     user = current_user
