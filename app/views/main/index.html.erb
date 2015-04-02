@@ -1,7 +1,7 @@
   <div id="event-main-page"></div>
   <div class="image-cover-div">
     <% if not @event_cover.nil? %>
-    <%= image_tag(@event_cover.picture , :alt => @event_cover.title ,:class => "img-cover") %>
+    <%= link_to(image_tag(@event_cover.picture , :alt => @event_cover.title ,:class => "img-cover"), @event_cover) %>
     <%= link_to(@event_cover.title, @event_cover, :class => 'link link-title title-event flex-item cover-overlay') %>
     <% end %>
   </div>
@@ -127,7 +127,7 @@
                   </p>
                 </div>
               </li>
-              </a>
+            </a>
             <% end %>
           </ul>
           <ul class="flex-container flex-container-error">          
