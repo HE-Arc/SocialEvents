@@ -23,9 +23,15 @@
   
   <% if flash_first_login != nil %>  
   <div id="flash-first-login" title="First login with Facebook">
-    <p>This is your first login with Facebook on Social Events.</p>
-    <p>By going to <%= link_to("your profile", current_user) %>, you can import events from Facebook near your current location.</p>
-    <p>When importing them on Social Events, you accept to link them to your account and make them public</p>
+    <h3>Welcome <%= current_user.last_name + ' ' + current_user.first_name %></h3>
+    <table class="first-login-table">
+      <tr>
+        <td><%= image_tag(current_user.profile_picture(125, 125), :alt => "Profile picture") %></td>
+        <td>This is your first login with Facebook on Social Events.<br /><br />
+          By going to <%= link_to("your profile", current_user) %>, you can import events from Facebook near your current location.<br /><br />
+          When importing them on Social Events, you accept to link them to your account and make them public</td>
+      </tr>
+    </table>    
   </div>
   <% end %>
 
