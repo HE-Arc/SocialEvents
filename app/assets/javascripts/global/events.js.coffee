@@ -1,3 +1,6 @@
+# Handles logic for event details 
+# Show GMaps API
+# Add dialog box to show fullscreen event cover
 
 $ ->
     # Do not use the id 'map' unless you want to load google map API

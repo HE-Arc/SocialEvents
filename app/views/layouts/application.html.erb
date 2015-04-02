@@ -21,66 +21,66 @@
 <body>   
   <!-- INTEGRATION -->
   
-  <% if flash_first_login != nil %>  
-  <div id="flash-first-login" title="First login with Facebook">
-    <h3>Welcome <%= current_user.last_name + ' ' + current_user.first_name %></h3>
-    <table class="first-login-table">
-      <tr>
-        <td><%= image_tag(current_user.profile_picture(125, 125), :alt => "Profile picture") %></td>
-        <td>This is your first login with Facebook on Social Events.<br /><br />
-          By going to <%= link_to("your profile", current_user) %>, you can import events from Facebook near your current location.<br /><br />
-          When importing them on Social Events, you accept to link them to your account and make them public</td>
-      </tr>
-    </table>    
-  </div>
-  <% end %>
-
-  <header>
-    <div class="header-content-margin">
-    <% if user_signed_in? %>
-        <div class="btn-user">
-          <!-- BEGIN FETCHING -->
-          <span class="fetching" style="display: <%= @user_is_fetching ? 'inline' : 'none' %>">Fetching</span>
-          <!-- END FETCHING -->
-          <%= link_to "Profil", user_path(current_user), :class => "menu", :method => :get %>
-          <!-- <%= link_to "Utilisateurs", users_path, :class => "menu", :method => :get %> -->
-          <%= link_to "Sign out", destroy_user_session_path, :class => "menu", :method => :delete %>
-          
-          <%= link_to(image_tag(current_user.profile_picture(50, 50), :alt => "Profile picture", :class => "profile-picture-mini"), current_user) %>
-        </div>
-    <% end %>
-    <% if not user_signed_in? %>
-        <div class="fb-login-button fb-login-button-small"><%= link_to(image_tag("fb_login_small.png", :alt => "facebook button", :class => ""),user_omniauth_authorize_path(:facebook)) %></div>
-    <% end %>
-        <div class="site-title"><%= link_to("Social Events",root_url)%></div>
-        
-      <% if alert!=nil %>  
-        <div class="notify error alert" role="alert">  
-          <%= alert %>
-        </div> 
-      <% elsif  notice!=nil && flash_first_login == nil %>  
-        <div class="notify warning notice" role="alert">  
-          <%= notice %>
-        </div>
-      <% end %>
-      
-      <div class="welcome"<%== ' style="display: none;"' if notice != nil || alert != nil %>>
-        <% if user_signed_in? %>
-          Welcome <%= current_user.last_name+' '+current_user.first_name %>
-        <% else %>
-          Des événements autour de vous !
-        <% end %>
-      </div>
+  <div id="div-wrapper">
+    
+    <% if flash_first_login != nil %>  
+    <div id="flash-first-login" title="First login with Facebook">
+      <h3>Welcome <%= current_user.last_name + ' ' + current_user.first_name %></h3>
+      <table class="first-login-table">
+        <tr>
+          <td><%= image_tag(current_user.profile_picture(125, 125), :alt => "Profile picture") %></td>
+          <td>This is your first login with Facebook on Social Events.<br /><br />
+            By going to <%= link_to("your profile", current_user) %>, you can import events from Facebook near your current location.<br /><br />
+            When importing them on Social Events, you accept to link them to your account and make them public.</td>
+        </tr>
+      </table>    
     </div>
-  </header>
-  
-  <%= yield %>
+    <% end %>
 
-  <footer>
-    <pre>
-      SocialEvents is a website sum up events from Facebook
-      © Copyright 2015 Social Events. Hosting provided by HE-ARC
-    </pre>
-  </footer>
+    <header>
+      <div class="header-content-margin">
+      <% if user_signed_in? %>
+          <div class="btn-user">
+            <!-- BEGIN FETCHING -->
+            <span class="fetching" class="menu" style="display: <%= @user_is_fetching ? 'inline' : 'none' %>">Fetching</span>
+            <!-- END FETCHING -->
+            <%= link_to "Profile", user_path(current_user), :class => "menu", :method => :get %>
+            <%= link_to "Sign out", destroy_user_session_path, :class => "menu", :method => :delete %>
+
+            <%= link_to(image_tag(current_user.profile_picture(50, 50), :alt => "Profile picture", :class => "profile-picture-mini"), current_user) %>
+          </div>
+      <% end %>
+      <% if not user_signed_in? %>
+          <div class="fb-login-button fb-login-button-small"><%= link_to(image_tag("fb_login_small.png", :alt => "Facebook login", :class => ""),user_omniauth_authorize_path(:facebook)) %></div>
+      <% end %>
+          <div class="site-title"><%= link_to("Social Events",root_url)%></div>
+
+        <% if alert!=nil %>  
+          <span class="notify error alert" role="alert">  
+            <%= alert %>
+          </span>
+        <% elsif  notice!=nil && flash_first_login == nil %>  
+          <span class="notify warning notice" role="alert">  
+            <%= notice %>
+          </span>
+        <% end %>
+
+        <span class="welcome"<%== ' style="display: none;"' if notice != nil || alert != nil %>>
+          <% if user_signed_in? %>
+            Welcome <%= current_user.first_name + ' ' + current_user.last_name %>
+          <% else %>
+            Find and import your Facebook's events
+          <% end %>
+        </span>
+      </div>
+    </header>
+
+    <%= yield %>
+
+    <footer>
+      <p>&copy; Copyright 2015 Social Events. Developed by Caraccio Michael, Déruaz Vincent and Rosser Mathieu</p>
+    </footer>
+    
+  </div>
 </body>
 </html>

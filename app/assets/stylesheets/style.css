@@ -6,7 +6,9 @@
 /*-----------------------------------------------------------------------------*/
 
 .map, #map{
-    margin-top: 10px;
+  margin-top: 10px;
+  width: 100%; 
+  height: 400px;
 }
 
 
@@ -40,6 +42,12 @@ body, html {
 
 .link-title{
     color: #111111;
+}
+
+.link-detail {
+  color: #31495A;
+  font-weight: bold;
+  text-decoration: none;
 }
 
 section.main {
@@ -113,7 +121,7 @@ header{
 }
 
 footer {
-    height: 150px;
+    height: 5em;
     border-bottom-left-radius: 4px;
     border-bottom-right-radius: 4px;
     -webkit-border-bottom-left-radius: 4px;
@@ -126,6 +134,10 @@ footer {
     box-shadow: 
         5px 5px 10px -4px rgba(0,0,0,0.35),
         -5px 5px 10px -4px rgba(0,0,0,0.35);
+}
+
+footer p {
+  padding: 0px 10px;
 }
 
 section.main .left .search {
@@ -185,7 +197,8 @@ header,
 footer,
 section.main,
 section.show,
-.image-cover {
+.image-cover,
+#div-wrapper {
     margin: auto;
     max-width: 960px;
 }
@@ -242,7 +255,7 @@ h3.title-user-list{
   margin-top: 10px;
 }
 
-.show-description pre {
+pre {
   word-wrap: break-word;
 }
 
@@ -889,16 +902,14 @@ table.first-login-table td {
 
 .warning{
     background:#27ae60;
-    width: 50%;
-    padding-left: 5px;
+    padding: 2px;
     margin-left: 12px;
     border-radius: 3px;
 }
 
 .error{
     background:#c0392b;
-    width: 50%;
-    padding-left: 5px;
+    padding: 2px;
     margin-left: 12px;
     border-radius: 3px;
 }

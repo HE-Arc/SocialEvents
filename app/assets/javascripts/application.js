@@ -15,7 +15,4 @@
 //= require jquery_ujs
 //= require turbolinks
 
-
-// require_directory .
-
 //= require_tree ./global

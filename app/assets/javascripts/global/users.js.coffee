@@ -1,18 +1,17 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
-
-
+# Users Javascript Control - Manages fetching states
+# Handles GPS location querying to user
+# Allows to launch importing on Rails App with AJAX
+# Handles the AJAX query in loop to verify if the fetching is still occuring on Rails
 
 $ ->
   
   import_button = $("#import")
   fetching = $(".fetching")
 
+  # verify if the import is still active with AJAX call
   verify_import = () ->  
     url = base_url + "import/verify"
     $.ajax({url: url, dataType: "json", success: (data) => 
-      console.log "result ajax"
 
       is_fetching = data
 
@@ -23,9 +22,8 @@ $ ->
         fetching.hide()
     })
 
-  import_button.click ->
-    console.log("click")
-    
+  # Launch an import task from FB with AJAX, only if the user gives us his current location
+  import_button.click ->    
     
     if navigator.geolocation
         navigator.geolocation.getCurrentPosition(
@@ -37,10 +35,10 @@ $ ->
             setTimeout(verify_import, 10000)
             import_button.attr("disabled", "")
           , (error) ->
-            alert("vieux ZGEG shaaaaaaaaaaaaaaaaaaaaaare !!!!!")
+            alert("You decided not to use your current location, therefore you cannot import events on Social Events. Maybe you should reconsider your decision?")
         )
     else 
-        alert("Geolocation is not supported by this browser.")
+        alert("Geolocation is not supported by your browser. You can't import events on Social Events. Try using Google Chrome or Firefox.")
     
     
     

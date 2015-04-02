@@ -1,6 +1,7 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+# Handles the main logic of the application with listing events, providing and handling async calls for listing
+# Listing can be extended with infinite scrolling
+# The listing view is in 2 modes : search or filter ~> search lists all events, filter do some filtering to the current events
+# All filter/search parameters are stored in cookies with jQuery.cookies
 
 # Encoding for Javascript
 encUrl = (url) -> 
@@ -9,26 +10,22 @@ encUrl = (url) ->
 encHtml = (html) ->
   return $('<div />').text(html).html()
   
+# For infinite scrolling
 page = 0
 
 # app is in search mode if it can find all upcoming events
 # when filtering by date, it isn't in search mode anymore
 is_searching = true
 
-# exécution requête AJAX
+# execute AJAX query for loading all events with current parameters 
 load_event = () ->
-  console.log(create_ajax_url())
   page = 0
   $.ajax({
     url: create_ajax_url(), 
     dataType: "json", 
     #success callback actions
-    success: (data) => 
-      console.log "result ajax"
-      console.log data 
-    
-      append_next(data,true)
-      
+    success: (data) =>     
+      append_next(data,true)  # add events to view
   })
   
 #function for add event dynamically
@@ -37,13 +34,12 @@ append_next = (data,clear) ->
   if clear 
     $('.flex-container-events > .flex-item').remove()
     
-
   month = ['January','February','March','April','May','June','July','August','September','October','November','December']
 
   # handle events errors
   flex_error = $('.flex-container-error > .flex-item')
   if data[0] == undefined
-    flex_error.show()
+    flex_error.fadeIn("slow")
   else
     flex_error.hide()
 
@@ -75,7 +71,7 @@ append_next = (data,clear) ->
     #append it to the flex-container
     $('.flex-container-events').append(event)
 
-# création de l'URL pour requête AJAX
+# create the AJAX URL for the current filters / search mode
 create_ajax_url = () ->
   categories = []
   $('.chk_category:checked').each -> categories.push($(this).val())
@@ -93,8 +89,10 @@ create_ajax_url = () ->
   limit = 5
   offset = 5 * page
   
+  # save filters/parameters
   store_in_cookies(categories, cantons, date, title)
   
+  # return URL with server and parameters
   url = "main/load/" + encUrl(categories) + "/" + encUrl(cantons) + "/" + encUrl(date) + "/" + encUrl(title) + "/" + encUrl(limit) + "/" + encUrl(offset)
   return base_url + url
 
@@ -106,7 +104,7 @@ store_in_cookies = (categories, cantons, date, title) ->
   $.cookie('title', title, { path: '/' })
   $.cookie('is_searching', if is_searching then "1" else "0")
   
-# restore the page, with events, filters and search data from cookies
+# restore the page, with events, filters and search data from cookies ~> do an AJAX call to load the data
 load_from_cookies = () ->
   categories = ($.cookie('categories') || "all").split(',')
   cantons = ($.cookie('cantons') || "all").split(',')
@@ -128,10 +126,11 @@ load_from_cookies = () ->
     
   $('.chk_canton').each ->
     $(this).prop('checked', $.inArray($(this).val(), cantons) != -1)
-    
+
+  # load events with restored parameters
   load_event()
   
-  
+
 # vérification des checkbox cantons et catégories
 # l'option "all" est exclusive avec toute autre option
 verify_checkboxes = (checkbox) ->
@@ -158,7 +157,7 @@ verify_checkboxes = (checkbox) ->
       if all_unchecked
         $(css_class).first().prop('checked', true)
 
-# change the search mode of the app
+# change the search mode of the app, reseting filter on new reset
 change_search_mode = (is_on) ->
   is_searching = is_on
   
@@ -170,12 +169,11 @@ change_search_mode = (is_on) ->
     verify_checkboxes(chk_all_canton)
     verify_checkboxes(chk_all_category)
     $("#datepicker").datepicker('setDate', new Date())
-  
+
+# Handle scrolling with mouse : infinite-scrolling with loading of events with AJAX
 scroll_handler = () ->
-  console.log "scroll"
   if($(window).scrollTop() >= $(document).height() - $(window).height())
     page++
-    console.log page
     $.ajax({
       url: create_ajax_url(), 
       dataType: "json", 
@@ -187,6 +185,7 @@ scroll_handler = () ->
 # binding JS <-> UI (document onload)
 $ ->
 
+  # flash info on first login
   $("#flash-first-login").dialog({
     modal: true,
     width: 'auto',
@@ -195,6 +194,7 @@ $ ->
         $(this).dialog("close")
   }})
   
+  # date picker for date filter
   $("#datepicker").datepicker({ 
     minDate: new Date(),
     dateFormat: 'yy-mm-dd',
@@ -205,37 +205,43 @@ $ ->
     firstDay: 1
   })
 
+  # checkboxes filter
   $('.chk_category, .chk_canton').change ->
     verify_checkboxes($(this))
     #change_search_mode(false)  # search mode doesn't change on filtering by checkbox
     load_event()
 
-  
+  # search button
   $("#button-event-title").click ->
     change_search_mode(true)
     load_event()
     return false
   
+  # restore all parameters
   $("#button-event-refresh").click ->
     $("#input-event-title").val("")
     change_search_mode(true)
     load_event()
     return false
-    
+  
+  # search input
   $("#input-event-title").keypress (e) ->
     if e.which == 13
       change_search_mode(true)
       load_event() 
-      
-  $(window).off('scroll', scroll_handler)
   
+  # close notifications automatically
   $('.notify').delay(3000).fadeOut('slow', () -> 
     $('.welcome').fadeIn("slow")
   )
-  
-  #infinite scolling
-  if $('#event-main-page').length > 0
-    $(window).scroll(scroll_handler)
 
+  # remove scroll
+  $(window).off('scroll', scroll_handler)
+
+  # Main page only
+  if $('#event-main-page').length > 0
+    # add infinite scolling
+    $(window).scroll(scroll_handler)
+    # restore filters, parameters and events list
     load_from_cookies()
 
