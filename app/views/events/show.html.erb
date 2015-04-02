@@ -20,7 +20,7 @@
 <section class="show">
   <div class="show-body">
     <div class="show-title">
-      <div class="title-complement"><%= link_to "Voir sur Facebook", 'https://www.facebook.com/' + @event.id_facebook, :target => '_blank', :class => 'link' %></div>
+      <div class="title-complement"><%= link_to "Voir sur Facebook", 'https://www.facebook.com/' + @event.id_facebook, :target => '_blank', :class => 'link-detail' %></div>
       <p class="title-event">From <%= @event.start_time.strftime("%d %B %Y") %> to <%= @event.end_time.strftime("%d %B %Y") %></p>
     </div>
     <div class="show-content">
@@ -36,11 +36,11 @@
         </div>
         <div>
           <label>Organizer:</label> 
-          <%= link_to @event.event_location.name, @event.event_location.link, :target => "_blank", :class => 'link' %>
+          <%= link_to @event.event_location.name, @event.event_location.link, :target => "_blank", :class => 'link-detail' %>
         </div>
         <div>
           <label>Published by user:</label>
-          <%= link_to @user.first_name + " " + @user.last_name, @user, :class => 'link' %>
+          <%= link_to @user.first_name + " " + @user.last_name, @user, :class => 'link-detail' %>
         </div>
         
         <% if @event.description != "" %>
@@ -57,7 +57,7 @@
     <div class="map">
       <%= hidden_field_tag 'lat', @events_location.latitude %>
       <%= hidden_field_tag 'lon', @events_location.longitude %>
-      <div id="map" style='width: 100%; height: 400px;'></div>
+      <div id="map"></div>
     </div>
   </div>
     
