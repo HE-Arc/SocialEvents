@@ -1,17 +1,17 @@
-  <div id="event-main-page"></div>
+<div id="event-main-page"></div>
 
-  <% if not @event_cover.nil? %>
-  <a href="<%= event_path(@event_cover) %>">
-    <div class="image-cover-div">
-      <%= image_tag(@event_cover.picture , :alt => @event_cover.title ,:class => "img-cover") %>
-      <span class="link link-title title-event cover-overlay">
-        <%= @event_cover.title %>
-      </span>
-    </div>
-  </a>
-  <% end %>
+<% if not @event_cover.nil? %>
+<a href="<%= event_path(@event_cover) %>">
+  <div class="image-cover-div">
+    <%= image_tag(@event_cover.picture , :alt => @event_cover.title ,:class => "img-cover") %>
+    <span class="link link-title title-event cover-overlay">
+      <%= @event_cover.title %>
+    </span>
+  </div>
+</a>
+<% end %>
 
-  <section class="main">
+<section class="main">
   <nav class="nav-bar">
       <!-- DEBUT DU FILTRE TITRE -->
       <div class="nav-bar-title">
@@ -120,4 +120,4 @@
           </ul>
       </div>
   </section>
-  </section>
+</section>

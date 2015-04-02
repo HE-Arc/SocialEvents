@@ -44,7 +44,7 @@
             <!-- BEGIN FETCHING -->
             <span class="fetching" class="menu" style="display: <%= @user_is_fetching ? 'inline' : 'none' %>">Fetching</span>
             <!-- END FETCHING -->
-            <%= link_to "Profil", user_path(current_user), :class => "menu", :method => :get %>
+            <%= link_to "Profile", user_path(current_user), :class => "menu", :method => :get %>
             <%= link_to "Sign out", destroy_user_session_path, :class => "menu", :method => :delete %>
 
             <%= link_to(image_tag(current_user.profile_picture(50, 50), :alt => "Profile picture", :class => "profile-picture-mini"), current_user) %>
@@ -67,7 +67,7 @@
 
         <span class="welcome"<%== ' style="display: none;"' if notice != nil || alert != nil %>>
           <% if user_signed_in? %>
-            Welcome <%= current_user.last_name+' '+current_user.first_name %>
+            Welcome <%= current_user.first_name + ' ' + current_user.last_name %>
           <% else %>
             Find and import your Facebook's events
           <% end %>
