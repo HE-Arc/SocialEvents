@@ -24,7 +24,6 @@ body, html {
     margin:0;
     padding-top:1.1em;
     padding-bottom:30px;
-    background-image: url("./bg.jpg");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center; 
