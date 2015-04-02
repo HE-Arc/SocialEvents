@@ -6,6 +6,10 @@ class User < ActiveRecord::Base
   # :lockable, :timeoutable
   devise :database_authenticatable, :trackable, :rememberable, :omniauthable
 
+  def profile_picture(width, height)
+    "https://graph.facebook.com/#{self.id_facebook}/picture?width=#{width}&height=#{height}"
+  end
+  
   def self.find_for_oauth(auth, signed_in_resource = nil)
 
     is_new_user = false

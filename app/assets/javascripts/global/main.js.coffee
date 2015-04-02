@@ -56,7 +56,7 @@ append_next = (data,clear) ->
 
     #creation of the flexbox who contains the event's info
     event = $('<li class="flex-item">
-          <a href="' + base_url + 'events/' + e.id + '">
+          <a href="' + base_url + 'events/' + e.id + '" class="link">
           <div class="img-event">
           <div class="wrapperB" style="background-image: url(\'' + encHtml(e.picture) + '\');"></div>
           </div>

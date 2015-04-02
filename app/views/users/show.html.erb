@@ -19,7 +19,8 @@
     </p>
     <% end %>
 
-
+    <%= image_tag(@user.profile_picture(250, 250), :alt => "Profile picture") %>
+  
     <p>Nombre de contributions : <%= @user.contributions_counter %></p>
     
     <ul class="flex-container">
@@ -29,7 +30,7 @@
           <!-- TODO take url from database -->
           <!--
             <div class="inner">
-            <%= image_tag("http://i.imgur.com/Qt7VGfn.jpg", :alt => "event image") %>
+            <%= image_tag("http://i.imgur.com/Qt7VGfn.jpg", :alt => event.title) %>
             </div>-->
           <div class="wrapperB" style="background-image: url('<%= event.picture %>');"></div>
         </div>

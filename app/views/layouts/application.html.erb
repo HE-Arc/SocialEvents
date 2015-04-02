@@ -39,10 +39,11 @@
           <%= link_to "Profil", user_path(current_user), :class => "menu", :method => :get %>
           <!-- <%= link_to "Utilisateurs", users_path, :class => "menu", :method => :get %> -->
           <%= link_to "Sign out", destroy_user_session_path, :class => "menu", :method => :delete %>
+          
+          <%= link_to(image_tag(current_user.profile_picture(50, 50), :alt => "Profile picture", :class => "profile-picture-mini"), current_user) %>
         </div>
     <% end %>
     <% if not user_signed_in? %>
-        <div class="fb-login-button fb-login-button-large"><%= link_to(image_tag("fb_login.png", :alt => "facebook button", :class => ""),user_omniauth_authorize_path(:facebook)) %></div>
         <div class="fb-login-button fb-login-button-small"><%= link_to(image_tag("fb_login_small.png", :alt => "facebook button", :class => ""),user_omniauth_authorize_path(:facebook)) %></div>
     <% end %>
         <div class="site-title"><%= link_to("Social Events",root_url)%></div>

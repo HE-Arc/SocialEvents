@@ -8,16 +8,26 @@
   <%= image_tag(@event.picture, :alt => @event.title) %>
 </div>
 
+<!--
 <div id="dialog-cover-opener" class="image-cover-div pointer" title="<%= @event.title %>">
   <%= image_tag(@event.picture, :alt => @event.title ,:class => "img-cover") %>
 </div>
+-->
+
+<a id="dialog-cover-opener" href="#">
+  <div class="image-cover-div">
+    <%= image_tag(@event.picture, :alt => @event.title ,:class => "img-cover") %>
+    <span class="link link-title title-event cover-overlay">
+      <%= @event.title %>
+    </span>
+  </div>
+</a>
 
 <section class="show">
   <div class="show-body">
     <div class="show-title">
       <div class="title-complement"><%= link_to "Voir sur Facebook", 'https://www.facebook.com/' + @event.id_facebook, :target => '_blank' %></div>
-      <p class="title-event"><%= @event.title %></p>
-      <p class="date-event">From <%= @event.start_time.strftime("%d %B %Y") %> to <%= @event.end_time.strftime("%d %B %Y") %></p>
+      <p class="title-event">From <%= @event.start_time.strftime("%d %B %Y") %> to <%= @event.end_time.strftime("%d %B %Y") %></p>
     </div>
     <div class="show-content">
       <div class="show-information">
@@ -37,16 +47,20 @@
           <label>Published by user:</label>
           <%= link_to @user.first_name + " " + @user.last_name, @user %>
         </div>
-      </div>
-      <div class="show-description">
-        <pre><%= @event.description %></pre>
+        <div>
+          <label>Description:</label>
+          <div class="show-description">
+            <pre><%= @event.description %></pre>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-
+    
     <div class="map">
       <%= hidden_field_tag 'lat', @events_location.latitude %>
       <%= hidden_field_tag 'lon', @events_location.longitude %>
       <div id="map" style='width: 100%; height: 400px;'></div>
     </div>
+  </div>
+    
 </section>
