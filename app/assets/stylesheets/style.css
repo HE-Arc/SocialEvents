@@ -59,9 +59,6 @@ section.main {
 
     padding: 5px;
     background-color: #f1f1f1;
-    box-shadow: 
-        5px 0 10px -4px rgba(0,0,0,0.35),
-        -5px 0 10px -4px rgba(0,0,0,0.35);
 }
 
 .list-users{
@@ -112,12 +109,6 @@ header{
     -webkit-border-top-right-radius: 4px;
     -moz-border-radius-topleft: 4px;
     -moz-border-radius-topright: 4px;
-    -webkit-box-shadow: 0px -4px 10px 0px rgba(0,0,0,0.35);
-    -moz-box-shadow: 0px -4px 10px 0px rgba(0,0,0,0.35);
-    box-shadow: 0px -4px 10px 0px rgba(0,0,0,0.35);
-    box-shadow: 
-        5px 5px 10px -4px rgba(0,0,0,0.35),
-        -5px 5px 10px -4px rgba(0,0,0,0.35);
 }
 
 footer {
@@ -128,12 +119,6 @@ footer {
     -webkit-border-bottom-right-radius: 4px;
     -moz-border-radius-bottomleft: 4px;
     -moz-border-radius-bottomright: 4px;
-    -webkit-box-shadow: 0px 4px 10px 0px rgba(0,0,0,0.35);
-    -moz-box-shadow: 0px 4px 10px 0px rgba(0,0,0,0.35);
-    box-shadow: 0px 4px 10px 0px rgba(0,0,0,0.35);
-    box-shadow: 
-        5px 5px 10px -4px rgba(0,0,0,0.35),
-        -5px 5px 10px -4px rgba(0,0,0,0.35);
 }
 
 footer p {
@@ -160,9 +145,6 @@ section.main .left .search {
     text-align: center;
     overflow: hidden;
     position: relative;
-    box-shadow: 
-        5px 0 10px -4px rgba(0,0,0,0.35),
-        -5px 0 10px -4px rgba(0,0,0,0.35);
 }
 
 .image-cover-div .cover-overlay {
@@ -193,14 +175,20 @@ section.main .left .search {
   margin-top: -25%;
 }
 
-header,
+/*header,
 footer,
 section.main,
 section.show,
-.image-cover,
+.image-cover,*/
 #div-wrapper {
     margin: auto;
     max-width: 960px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    -webkit-box-shadow: 0px 0px 8px 2px rgba(0,0,0,0.3);
+    -moz-box-shadow: 0px 0px 8px 2px rgba(0,0,0,0.3);
+    box-shadow: 0px 0px 8px 2px rgba(0,0,0,0.3);
 }
 
 section.show{
@@ -281,10 +269,6 @@ input, select, .btn {
     margin: 0;
     background: #ffffff;
     font-size: 16px;
-}
-
-input:focus, textarea:focus {
-    background: #f0f4f7
 }
 
 .menu{
@@ -760,9 +744,13 @@ input[type=checkbox].categorie:checked + label:after {
 /*  FACEBOOK CONNECT                                                           */
 /*-----------------------------------------------------------------------------*/
 
+table.first-login-table td{
+  vertical-align:top;
+  padding-right:10px;
+}
+
 .header-content {
     padding-right: 2em;
-
 }
 
 .fb-login-button, .profile-picture-mini {
@@ -902,15 +890,11 @@ table.first-login-table td {
 
 .warning{
     background:#27ae60;
-    padding: 2px;
-    margin-left: 12px;
     border-radius: 3px;
 }
 
 .error{
     background:#c0392b;
-    padding: 2px;
-    margin-left: 12px;
     border-radius: 3px;
 }
 .warning {
@@ -961,23 +945,17 @@ table.first-login-table td {
     background: red;
 }
 
-.underway{
-    background: orange;
-}
-
-.done{
-    background: green;
-}
-
 .fetching-flag{
-    width: 20px;
-    height: 20px;
-
+    width: 14px;
+    height: 14px;
     border-radius: 50%;
-    display: flex;
-
+    padding:0px;
+    display:inline-block;
+    margin-right: 10px;
+    /*display: flex;*/
 }
-.fetching-flag:before{
+
+/*.fetching-flag:before{
     content:'';
     width: 0;
     height: 0;
@@ -985,7 +963,17 @@ table.first-login-table td {
     border: 5px solid #f1f1f1;
     border-radius: 50%;
     -webkit-animation:fetching-flag-ani1 1s infinite;
+}*/
+
+.underway{
+    background-color: #e67e22;
 }
+
+.done{
+    background-color: #2ecc71;
+    display:none;
+}
+
 @-webkit-keyframes fetching-flag-ani1{
     70%{
         width: 20px;
