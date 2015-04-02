@@ -827,16 +827,14 @@ table.first-login-table td {
 
 .warning{
     background:#27ae60;
-    width: 50%;
-    padding-left: 5px;
+    padding: 2px;
     margin-left: 12px;
     border-radius: 3px;
 }
 
 .error{
     background:#c0392b;
-    width: 50%;
-    padding-left: 5px;
+    padding: 2px;
     margin-left: 12px;
     border-radius: 3px;
 }

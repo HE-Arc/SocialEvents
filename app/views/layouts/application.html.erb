@@ -54,16 +54,16 @@
         <div class="site-title"><%= link_to("Social Events",root_url)%></div>
         
       <% if alert!=nil %>  
-        <div class="notify error alert" role="alert">  
+        <span class="notify error alert" role="alert">  
           <%= alert %>
-        </div> 
+        </span>
       <% elsif  notice!=nil && flash_first_login == nil %>  
-        <div class="notify warning notice" role="alert">  
+        <span class="notify warning notice" role="alert">  
           <%= notice %>
-        </div>
+        </span>
       <% end %>
       
-      <div class="welcome"<%== ' style="display: none;"' if notice != nil || alert != nil %>>
+      <span class="welcome"<%== ' style="display: none;"' if notice != nil || alert != nil %>>
         <% if user_signed_in? %>
           Welcome <%= current_user.last_name+' '+current_user.first_name %>
         <% else %>
