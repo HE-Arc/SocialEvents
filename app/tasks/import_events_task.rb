@@ -191,13 +191,13 @@ class ImportEventsTask
         else
           case eventCategory
           when "Cinéma"
-            image_cover = root + 'images/cinema%d.jpg' % [rand(1..7)]
+            image_cover = root + 'images/cinema%d.jpg' % [rand(1..6)]
           when "Musée / Exposition"
-            image_cover = root + 'images/art%d.jpg' % [rand(1..5)]
+            image_cover = root + 'images/art%d.jpg' % [rand(1..4)]
           when "Spectacle / Théâtre"
-            image_cover = root + 'images/music%d.jpg' % [rand(1..10)]
+            image_cover = root + 'images/music%d.jpg' % [rand(1..9)]
           else
-            image_cover = root + 'images/music%d.jpg' % [rand(1..10)]
+            image_cover = root + 'images/music%d.jpg' % [rand(1..9)]
           end
         end
 
