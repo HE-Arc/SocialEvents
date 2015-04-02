@@ -140,6 +140,7 @@ section.main .left .search {
 }
 
 .image-cover-div {
+    min-height: 100px;
     max-height: 280px;
     max-width: 970px;
     margin: auto;
@@ -217,8 +218,28 @@ h3.title-user-list{
     float: right;
 }
 
+/*---------------------------*/
+/*  Events show details      */
+/*---------------------------*/
 
+.show-information label {
+  display: inline-block;
+  min-width: 20%;
+  font-weight: bold;
+  margin-top: 10px;
+}
 
+.show-description pre {
+  word-wrap: break-word;
+}
+
+.show-title .title-complement {
+  float: right;
+}
+
+.pointer {
+  cursor: pointer;
+}
 
 /*-----------------------------------------------------------------------------*/
 /*  INTERFACES ELEMENTS                                                        */
