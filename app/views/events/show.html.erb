@@ -8,12 +8,6 @@
   <%= image_tag(@event.picture, :alt => @event.title) %>
 </div>
 
-<!--
-<div id="dialog-cover-opener" class="image-cover-div pointer" title="<%= @event.title %>">
-  <%= image_tag(@event.picture, :alt => @event.title ,:class => "img-cover") %>
-</div>
--->
-
 <a id="dialog-cover-opener" href="#">
   <div class="image-cover-div">
     <%= image_tag(@event.picture, :alt => @event.title ,:class => "img-cover") %>
@@ -47,12 +41,15 @@
           <label>Published by user:</label>
           <%= link_to @user.first_name + " " + @user.last_name, @user %>
         </div>
+        
+        <% if @event.description != "" %>
         <div>
           <label>Description:</label>
           <div class="show-description">
             <pre><%= @event.description %></pre>
           </div>
         </div>
+        <% end %>
       </div>
     </div>
     
