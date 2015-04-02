@@ -188,7 +188,8 @@ header,
 footer,
 section.main,
 section.show,
-.image-cover {
+.image-cover,
+#div-wrapper {
     margin: auto;
     max-width: 960px;
 }
