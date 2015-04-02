@@ -43,7 +43,7 @@ append_next = (data,clear) ->
   # handle events errors
   flex_error = $('.flex-container-error > .flex-item')
   if data[0] == undefined
-    flex_error.show()
+    flex_error.fadeIn("slow")
   else
     flex_error.hide()
 

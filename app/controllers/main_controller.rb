@@ -1,7 +1,7 @@
 class MainController < ApplicationController
   def index
     @users_top = User.get_users_with_contributions_counter(5)
-    @events = Event.get_listing_events(nil, nil, nil, 5, 0, nil)
+    #@events = Event.get_listing_events(nil, nil, nil, 5, 0, nil)  # No data fetch here, all is done by ajax call
     
     @categories = Event.get_categories()
     @cantons = EventLocation.get_cantons()

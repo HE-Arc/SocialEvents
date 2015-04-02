@@ -15,7 +15,7 @@
   <nav class="nav-bar">
       <!-- DEBUT DU FILTRE TITRE -->
       <div class="nav-bar-title">
-        <p>Filtres</p>
+        <p>Filters</p>
       </div>
       <!-- FIN DU FILTRE TITRE -->
 
@@ -109,18 +109,12 @@
               <a class="btn btn-small" href="#" id="button-event-refresh"> <i class="icon-refresh"></i></a>
               <a class="btn btn-small" href="#" id="button-event-title"> <i class="icon-search"></i></a>
           </div>
-        <!--
-          <div class="grid-or-list">
-              <button class="search-div-btn" href="#"><i class="icon-th"></i> Grid</button>
-              <button class="search-div-btn" href="#"><i class="icon-list"></i> List</button>
-          </div>
-        -->
       </div>
       <div class="content">
           <ul class="flex-container flex-container-events">      
           </ul>
           <ul class="flex-container flex-container-error">          
-            <li class="flex-item"<%== ' style="display: none;"' if @events.length > 0 %>>
+            <li class="flex-item">
               There is unfortunately no more events for these search filters
             </li>
           </ul>
