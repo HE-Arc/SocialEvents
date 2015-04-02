@@ -43,7 +43,6 @@
           <span class="fetching" style="display: <%= @user_is_fetching ? 'inline' : 'none' %>">Fetching</span>
           <!-- END FETCHING -->
           <%= link_to "Profil", user_path(current_user), :class => "menu", :method => :get %>
-          <!-- <%= link_to "Utilisateurs", users_path, :class => "menu", :method => :get %> -->
           <%= link_to "Sign out", destroy_user_session_path, :class => "menu", :method => :delete %>
           
           <%= link_to(image_tag(current_user.profile_picture(50, 50), :alt => "Profile picture", :class => "profile-picture-mini"), current_user) %>

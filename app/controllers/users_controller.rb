@@ -1,10 +1,6 @@
 class UsersController < ApplicationController
 
   before_action :require_connected
-
-  def index
-    @users = User.get_users_with_contributions_counter()
-  end
   
   # GET /users/:id.:format
   def show
