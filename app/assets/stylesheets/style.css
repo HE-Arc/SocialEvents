@@ -836,7 +836,7 @@ table.first-login-table td {
     margin-left: 12px;
     border-radius: 3px;
 }
-.warning .notify-close{
+.warning {
   margin-top:-2px;
   margin-bottom:2px;
 }

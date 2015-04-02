@@ -55,25 +55,22 @@
         <div class="site-title"><%= link_to("Social Events",root_url)%></div>
         
       <% if alert!=nil %>  
-        <div class="notify notify error alert" role="alert">  
+        <div class="notify error alert" role="alert">  
           <%= alert %>
-          <button type="button" class="notify-close">&times;</button>
         </div> 
-      <% elsif  notice!=nil %>  
-        <div class="notify notify warning notice" role="alert">  
+      <% elsif  notice!=nil && flash_first_login == nil %>  
+        <div class="notify warning notice" role="alert">  
           <%= notice %>
-          <button type="button" class="notify-close">&times;</button>
         </div>
-      <% elsif  user_signed_in? %>
-          <div class="welcome">
-          Welcome <%= current_user.last_name+' '+current_user.first_name %>
-          </div>
-       <%else %>
-          <div class="welcome">
-          Des événements autour de vous !
-          </div>
       <% end %>
-
+      
+      <div class="welcome"<%== ' style="display: none;"' if notice != nil || alert != nil %>>
+        <% if user_signed_in? %>
+          Welcome <%= current_user.last_name+' '+current_user.first_name %>
+        <% else %>
+          Des événements autour de vous !
+        <% end %>
+      </div>
     </div>
   </header>
   

@@ -227,10 +227,11 @@ $ ->
       change_search_mode(true)
       load_event() 
       
-  $('.notify-close').click ->
-    $(this).closest('.notify').hide()
-
   $(window).off('scroll', scroll_handler)
+  
+  $('.notify').delay(3000).fadeOut('slow', () -> 
+    $('.welcome').fadeIn("slow")
+  )
   
   #infinite scolling
   if $('#event-main-page').length > 0
