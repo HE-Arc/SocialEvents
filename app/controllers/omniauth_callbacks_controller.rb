@@ -8,7 +8,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
           sign_in_and_redirect @user, event: :authentication
           session["devise.#{provider}_data"] = env["omniauth.auth"]
           set_flash_message(:notice, :success, kind: "#{provider}".capitalize) if is_navigational_format?
-          set_flash_message(:flash_first_login, "First login") # if is_new_user
+          set_flash_message(:flash_first_login, "First login") if is_new_user
 
         else
           redirect_to root_url, alert: "An error occured when trying to connect with #{provider}, please try again."

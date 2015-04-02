@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
       email = auth.info.email ? auth.info.email : "#{auth.uid}@#{auth.provider}.com" 
       user = User.where(:email => email).first_or_initialize
 
-      is_new_user = user.id ? true : false
+      is_new_user = user.id.nil?
       
       # Update or create the user in database
       user.update_attributes(
