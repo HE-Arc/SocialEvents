@@ -68,7 +68,7 @@
         <% if user_signed_in? %>
           Welcome <%= current_user.last_name+' '+current_user.first_name %>
         <% else %>
-          Des événements autour de vous !
+          Find and import your Facebook's events
         <% end %>
       </div>
     </div>
@@ -77,10 +77,7 @@
   <%= yield %>
 
   <footer>
-    <pre>
-      SocialEvents is a website sum up events from Facebook
-      © Copyright 2015 Social Events. Hosting provided by HE-ARC
-    </pre>
+    <p>&copy; Copyright 2015 Social Events. Developed by Caraccio Michael, Déruaz Vincent and Rosser Mathieu</p>
   </footer>
 </body>
 </html>
