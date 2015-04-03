@@ -63,4 +63,21 @@ class Event < ActiveRecord::Base
         .where(:is_published => true)
         .where("user_id = ?", user_id)
   end
+  
+  def self.get_user_events_profil(user_id, limit=nil, offset=nil)
+    query = self.joins(:event_location).order(:start_time).order(:title)
+        .where("? <= DATE(events.end_time)", DateTime.now.to_date)
+        .where(:is_published => true)
+        .where("user_id = ?", user_id)
+    
+    if not limit.nil?
+      query = query.limit(limit)
+    end
+    
+    if not offset.nil?
+      query = query.offset(offset)
+    end
+        
+    query
+  end
 end

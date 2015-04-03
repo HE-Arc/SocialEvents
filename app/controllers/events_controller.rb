@@ -55,12 +55,13 @@ class EventsController < ApplicationController
   # Launch an import task for retrieve asynchronously events from Facebook Graph API
   def import_data
     user = current_user
+    key_word = params[:key_word]
     
     will_import = user && !user.is_fetching
     
     # start import
     if will_import
-      ImportEventsTask.import(user.id, session["devise.facebook_data"]["credentials"]["token"],params[:latitude],params[:longitude], root_url)      
+      ImportEventsTask.import(user.id, session["devise.facebook_data"]["credentials"]["token"],params[:latitude],params[:longitude], root_url, key_word)      
     end
     
     render :json => will_import

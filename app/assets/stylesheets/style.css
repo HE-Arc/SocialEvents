@@ -806,7 +806,7 @@ table.first-login-table td{
 }
 
 .profile-main-rightcolumn button{
-     position: absolute;
+     /*position: absolute;*/
      bottom: 50px;
      right: 0;
      font-size:20px;
@@ -983,6 +983,16 @@ table.first-login-table td {
         height: 20px;
         border-width: 0;
     }
+}
+/*-----------------------------------------------------------------------------*/
+/*  DROPDOWN                                                             */
+/*-----------------------------------------------------------------------------*/
+.drop-down{
+  border:solid 1px;
+  width:29%;
+  height:40px;
+  border-color: #a6a6a6;
+  font-size: 20px;
 }
 
 /*-----------------------------------------------------------------------------*/

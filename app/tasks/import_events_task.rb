@@ -11,13 +11,13 @@ class ImportEventsTask
     # token      facebook token
     # latitude, longitude  current user coordinates
     # root      url to root of the website
-    def import(user_id, token, latitude, longitude, root)
+    def import(user_id, token, latitude, longitude, root, key_word)
                   
       user = User.find(user_id)
       user.is_fetching = true
       user.save!
       
-      self.fetch(user_id, token, latitude, longitude, root)
+      self.fetch(user_id, token, latitude, longitude, root, key_word)
 
       user.is_fetching = false
       user.save!
@@ -40,7 +40,7 @@ class ImportEventsTask
   end
   
   # Doing the asynchronous fetching to FB through Graph API
-  def self.fetch(user_id, token, latitude, longitude, root)
+  def self.fetch(user_id, token, latitude, longitude, root, key_word)
     category_musique = ["Album", "Artist", "Arts/entertainment/nightlife", "Author", "Bar", "Club", "Concert tour", "Concert venue", "Music", "Music award","electro", "Music chart", "Music video", "Musical genre", "Musical instrument", "Musician/band", "musique", "music","dj", "musiques", "concert", "festival de musique", "MUSIC", "MUSIQUE", "Clubbing", "Dance-hall","funk","rock","jam", "Jam","compositeur","blues"]
     category_cinema = ["Actor/director", "Comedian", "Movie","Movie general", "Movie genre", "Movie theater", "Movies/music", "cinéma", "cinémas", "projection", "film", "films", "NIFFF", "CINEMA"]
     category_art = ["Arts/humanities website", "Dancer", "Museum/art gallery", "Society/culture website", "expositions","exposition","musée", "galerie"]
@@ -63,7 +63,7 @@ class ImportEventsTask
     # ******************************************************************
     
     # Affiche les événements à proximité de l'utilisateur
-    eventlocation = @graph.get_object("search?q=bar&type=place&center=" + latitude + "," + longitude + "&distance=40000&limit=80")
+    eventlocation = @graph.get_object("search?q="+key_word+"&type=place&center=" + latitude + "," + longitude + "&distance=40000&limit=80")
     @events_locations = eventlocation
     
     # **************************************************************

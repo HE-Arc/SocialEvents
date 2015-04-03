@@ -13,6 +13,7 @@ encHtml = (html) ->
 # For infinite scrolling
 page = 0
 
+
 # app is in search mode if it can find all upcoming events
 # when filtering by date, it isn't in search mode anymore
 is_searching = true
@@ -22,6 +23,16 @@ load_event = () ->
   page = 0
   $.ajax({
     url: create_ajax_url(), 
+    dataType: "json", 
+    #success callback actions
+    success: (data) =>     
+      append_next(data,true)  # add events to view
+  })
+  
+load_event_profil = () ->
+  page = 0
+  $.ajax({
+    url: create_ajax_url_profil(), 
     dataType: "json", 
     #success callback actions
     success: (data) =>     
@@ -65,6 +76,31 @@ append_next = (data,clear) ->
           </p>
           </div>
           </a>
+          </li>
+          ')
+    
+    if $('#event-profil-page').length > 0
+      event = $('<li class="flex-item">
+          <a href="' + base_url + 'events/' + e.id + '" class="link">
+          <div class="img-event">
+          <div class="wrapperB" style="background-image: url(\'' + encHtml(e.picture) + '\');"></div>
+          </div>
+          <div class="content-event">
+          <p class="title-event">' + encHtml(e.title) + '</p>
+          <p class="date-event">From ' + from + ' to ' + to + '</p>
+          <p class="multiline-ellipsis">
+
+          ' + encHtml(e.description) + '
+          </p>
+          </div>
+          </a>
+          <form action="' + base_url + 'events/' + e.id + '" class="button_to" method="post">
+          <div>
+          <input name="_method" type="hidden" value="delete" />
+          <input class="btn" type="submit" value="Supprimer" />
+          <input name="authenticity_token" type="hidden" value="b8/VGRJ8ld+mtCC0GfUBb83OqqmgX00s4rJUGT3n5E0=" />
+          </div>
+          </form>
           </li>
           ')
 
@@ -180,6 +216,16 @@ scroll_handler = () ->
       success: (data) =>
         append_next(data,false)
       })
+    
+scroll_handler_profil = () ->
+  if($(window).scrollTop() >= $(document).height() - $(window).height())
+    page++
+    $.ajax({
+      url: create_ajax_url_profil(), 
+      dataType: "json", 
+      success: (data) =>
+        append_next(data,false)
+      })    
 
 
 # binding JS <-> UI (document onload)
@@ -237,6 +283,11 @@ $ ->
 
   # remove scroll
   $(window).off('scroll', scroll_handler)
+  
+  #profil page
+  if $('#event-profil-page').length > 0
+    $(window).scroll(scroll_handler_profil)
+    load_event_profil()
 
   # Main page only
   if $('#event-main-page').length > 0
@@ -245,3 +296,11 @@ $ ->
     # restore filters, parameters and events list
     load_from_cookies()
 
+create_ajax_url_profil = () ->
+  limit = 5
+  offset = 5 * page
+  
+  # return URL with server and parameters
+  url = "profil/load/" + $('#user_id').val() + "/"  + encUrl(limit) + "/" + encUrl(offset)
+  console.log(base_url + url)
+  return base_url + url

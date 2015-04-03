@@ -1,18 +1,32 @@
+<div id="event-profil-page"/>
+
 <section class="show">
   <div class="show-body">
     <div class="profile-main-content">
         <h1 class="profile-main-title">Your informations</h1>
         <div class="profile-main-leftcolumn">
+          <%= hidden_field_tag 'user_id', @user.id, { :id => "user_id" } %>
           <%= image_tag(@user.profile_picture(200, 200), :alt => "Profile picture", :class => "profile-image") %>
         </div>
         <div class="profile-main-rightcolumn">
             <p class="profile-main-title-inner"><%= @user.first_name %> <%= @user.last_name %></p>
             <p>Shared events <%= @user.contributions_counter %></p>
           
-            <p>Contribute to our website by sharing your events<p>
-          
-            <button style="width:100%; height:40px;" id="import">Share more events</button>
-          
+            <p>Contribute to our website by sharing your events</p>
+
+              
+              <select name="Icecream Flavours" class="drop-down" id="drop-down">
+                  <option value="bar">Bar</option>
+                  <option value="party">Party</option>
+                  <option value="concert">Concert</option>
+                  <option value="nightclub">Nightclub</option>
+                  <option value="show">Show</option>
+                  <option value="music">Music</option>
+                  <option value="beer">Beer</option>
+              </select>
+            <button style="width:69%; height:40px;" id="import">Share more events</button>
+            
+            
             <p class="terms-and-conditions">Public information is any information you share with a public audience, as well as information in your Public Profile, or content you share on our website. Public information is available to anyone on or off our Services and can be seen or accessed through. By clicking on "Share more events" you automatically accepts these terms and conditions.</p>
       </div>
     </div>
@@ -21,7 +35,7 @@
         <h1 class="profile-main-title">Your contributions</h1>
         <%= button_to "Supprimer", "/events", :class => "btn", :method => :delete %>
         <ul class="flex-container flex-container-events">
-        <% @events.each do |event| %>
+        <!--<% @events.each do |event| %>
           
           <li class="flex-item">
             <a href="<%= event_path(event) %>" class="link">
@@ -41,7 +55,7 @@
             <%= button_to "Supprimer", event, :class => "btn", :method => :delete %>
             <% end %>
           </li>
-      <% end %>
+      <% end %>-->
     </ul>
       </div>
     </div>
