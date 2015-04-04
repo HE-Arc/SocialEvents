@@ -659,6 +659,14 @@ h3.title-top-contributor{
     margin-left: 1em;
 }
 
+.name-top-contributor a {
+  display: inline-block;
+  max-width: 150px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
 .value-top-contributor{
     margin-left: 1em;
     color:#FFFFFF;

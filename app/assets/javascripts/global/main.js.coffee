@@ -21,7 +21,6 @@ is_searching = true
 # execute AJAX query for loading all events with current parameters 
 load_event = () ->
   page = 0
-  console.log "main"
   $.ajax({
     url: create_ajax_url(), 
     dataType: "json", 
@@ -32,7 +31,6 @@ load_event = () ->
   
 # AJAX query for profile events list
 load_event_profil = () ->
-  console.log "profile"
   page = 0
   $.ajax({
     url: create_ajax_url_profil(), 
@@ -148,7 +146,6 @@ create_ajax_url_profil = () ->
   
   # return URL with server and parameters
   url = "profil/load/" + $('#user_id').val() + "/"  + encUrl(limit) + "/" + encUrl(offset)
-  console.log(base_url + url)
   return base_url + url
 
 # store filters and search data in cookies for later reuse
@@ -297,9 +294,11 @@ $ ->
       load_event() 
   
   # close notifications automatically
-  $('.notify').delay(3000).fadeOut('slow', () ->       
-    $('.welcome').fadeIn("slow")
-  )
+  $('.notify').each () ->
+    if $(this).html().trim() != ""
+      $(this).delay(3000).fadeOut('slow', () ->  
+        $('.welcome').fadeIn("slow")
+      )
 
   # remove scroll
   $(window).off('scroll', scroll_handler)

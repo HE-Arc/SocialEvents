@@ -39,7 +39,6 @@ $ ->
         navigator.geolocation.getCurrentPosition(
           (position) ->
             url = base_url + "import/data/" + position.coords.latitude + "/" + position.coords.longitude + "/" + $("#drop-down").val()
-            console.log("Latitude : " + position.coords.latitude + ", longitude : " + position.coords.longitude + ", key word : " + $("#drop-down").val())
             fetching.show()
             import_button.html("A fetching is already occuring")
             $.ajax(url: url)
