@@ -26,7 +26,7 @@ class EventsController < ApplicationController
   # Delete all events from current user
   def destroy_all
     unless current_user.nil?
-      current_user.events.destroy_all
+      current_user.events.delete_all
       redirect_to :back, notice: "All events have been deleted."
     else
       redirect_to :back, alert: "Deleting an event is restricted to logged-in users."
