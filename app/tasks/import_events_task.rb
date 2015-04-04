@@ -51,7 +51,7 @@ class ImportEventsTask
     # **************************************************************
     
     # Authentification à l'application Facebook
-    @oauth = Koala::Facebook::OAuth.new("653919454735658","035ddda1f5dc692934d9f0abc345e4ef", "/")
+    @oauth = Koala::Facebook::OAuth.new("653875894740014","f9ebc691eea51e52d648f1e5c4b36f35", "/")
     
     # Permission pour le graph search
     @oauth.url_for_oauth_code(:permissions => "publish_actions")
