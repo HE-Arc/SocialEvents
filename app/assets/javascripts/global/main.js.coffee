@@ -126,7 +126,7 @@ create_ajax_url = () ->
   
   date = if is_searching then "all" else $("#datepicker").val()
       
-  title = $("#input-event-title").val()
+  title = $("#input-event-title").val().replace('/', '')
   title = "*" if title == ""
   
   limit = 5
