@@ -3,7 +3,7 @@ class EventLocation < ActiveRecord::Base
   
   # Listing des cantons existants
   def self.get_cantons
-    self.distinct.order(:canton).pluck(:canton)
+    self.distinct.where("canton != 'Undefined'").order(:canton).pluck(:canton)
   end
   
 end
