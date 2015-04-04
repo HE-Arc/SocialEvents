@@ -36,7 +36,7 @@
 
     <div class="profile-main-content">
       <span class="title-complement">
-        <%= button_to "Delete all", events_path, :class => "btn delete-confirm", :method => :delete if @is_my_profile and @events.count > 0 %>
+        <%= button_to "Delete all", events_delete_path, :class => "btn delete-confirm", :method => :delete if @is_my_profile and @events.count > 0 %>
       </span>
       <h1 class="profile-main-title"><%= @is_my_profile ? 'Your contributions' : 'User contributions' %></h1>
         

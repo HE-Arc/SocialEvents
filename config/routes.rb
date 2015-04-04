@@ -10,17 +10,17 @@ Rails.application.routes.draw do
   resources :users
   resources :events
   
-  delete "/events" => "events#destroy_all"
+  delete "events" => "events#destroy_all", as: :events_delete
   
-  get "/import" => "events#import"
-  get "/import/data/:latitude/:longitude/:key_word" => "events#import_data", :latitude => /[^\/]+/, :longitude => /[^\/]+/
-  get "/import/verify" => "events#import_verify"
+  get "import" => "events#import"
+  get "import/data/:latitude/:longitude/:key_word" => "events#import_data", :latitude => /[^\/]+/, :longitude => /[^\/]+/
+  get "import/verify" => "events#import_verify"
   
-  get "/main/load/" => "main#load"
-  get "/main/load/:categories/:cantons/:date/:title/:limit/:offset" => "main#load"
+  get "main/load/" => "main#load"
+  get "main/load/:categories/:cantons/:date/:title/:limit/:offset" => "main#load"
   
-  get "/profil/load/:user_id/" => "users#load"
-  get "/profil/load/:user_id/:limit/:offset" => "users#load"
+  get "profil/load/:user_id/" => "users#load"
+  get "profil/load/:user_id/:limit/:offset" => "users#load"
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
