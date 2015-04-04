@@ -827,9 +827,9 @@ table.first-login-table td{
      font-size:20px;
 }
 .profile-main-rightcolumn .terms-and-conditions{
-     position: absolute;
+     /*position: absolute;
      bottom: 0;
-     right: 0;
+     right: 0;*/
      font-size:10px;
 }
 
