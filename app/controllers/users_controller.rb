@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_action :require_connected
+  #before_action :require_connected
   
   # Show user profile if current user is logged in
   # GET /users/:id.:format

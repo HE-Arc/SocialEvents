@@ -3,7 +3,7 @@
 <section class="show">
   <div class="show-body">
     <div class="profile-main-content">
-        <h1 class="profile-main-title">Your informations</h1>
+      <h1 class="profile-main-title"><%= @is_my_profile ? 'Your informations' : 'User informations' %></h1>
         <div class="profile-main-leftcolumn">
           <%= hidden_field_tag 'user_id', @user.id, { :id => "user_id" } %>
           <%= image_tag(@user.profile_picture(200, 200), :alt => "Profile picture", :class => "profile-image") %>
@@ -27,19 +27,18 @@
                   <option value="cinema">Cinema</option>
                   <option value="event">Event</option>
               </select>
-            <button style="width:69%; height:40px;" id="import">Share more events</button>
-          <% end %>
-            
+            <button style="width:69%; height:40px;" id="import">Share more events</button>            
             
             <p class="terms-and-conditions">Public information is any information you share with a public audience, as well as information in your Public Profile, or content you share on our website. Public information is available to anyone on or off our Services and can be seen or accessed through. By clicking on "Share more events" you automatically accepts these terms and conditions.</p>
+          <% end %>
       </div>
     </div>
 
     <div class="profile-main-content">
       <span class="title-complement">
-        <%= button_to "Delete all", "/events", :class => "btn delete-confirm", :method => :delete if @events.count > 0 %>
+        <%= button_to "Delete all", "/events", :class => "btn delete-confirm", :method => :delete if @is_my_profile and @events.count > 0 %>
       </span>
-      <h1 class="profile-main-title">Your contributions</h1>
+      <h1 class="profile-main-title"><%= @is_my_profile ? 'Your contributions' : 'User contributions' %></h1>
         
       <ul class="flex-container flex-container-events">
       </ul>
