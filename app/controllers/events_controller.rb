@@ -27,14 +27,15 @@ class EventsController < ApplicationController
     @events_location = EventLocation.find(@event.event_location_id)
   end
   
-  # "Delete" specified event
+  # Delete specified event of current user
   def destroy
-    # the destroy hide the event (is_published ~> false), it will be deleted later when it is finished (end date < today)
     @event = Event.find(params[:id])
     
     if @event.user_id == current_user.id
-      @event.is_published = false
-      @event.save
+      #do not only hide the event, effectively delete it from DB!
+      #@event.is_published = false
+      #@event.save
+      @event.destroy
       redirect_to :back, notice: "The event has been deleted."
       
     else
@@ -42,7 +43,7 @@ class EventsController < ApplicationController
     end
   end
   
-  # "Delete" all events from user ~> hide them in fact
+  # Delete all events from current user
   def destroy_all
     unless current_user.nil?
       current_user.events.destroy_all
