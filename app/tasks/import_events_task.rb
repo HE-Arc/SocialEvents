@@ -1,6 +1,7 @@
 require "koala"
 require "openssl"
 require "base64"
+require "erb"
 
 class ImportEventsTask
     
@@ -63,7 +64,7 @@ class ImportEventsTask
     # ******************************************************************
     
     # Affiche les événements à proximité de l'utilisateur
-    eventlocation = @graph.get_object("search?q="+key_word+"&type=place&center=" + latitude + "," + longitude + "&distance=40000&limit=80")
+    eventlocation = @graph.get_object("search?q="+ ERB::Util.url_encode(key_word)+"&type=place&center=" + ERB::Util.url_encode(latitude) + "," + ERB::Util.url_encode(longitude) + "&distance=40000&limit=80")
     @events_locations = eventlocation
     
     # **************************************************************
