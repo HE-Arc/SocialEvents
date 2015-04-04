@@ -51,7 +51,7 @@ class ImportEventsTask
     # **************************************************************
     
     # Authentification à l'application Facebook
-    @oauth = Koala::Facebook::OAuth.new("653875894740014","f9ebc691eea51e52d648f1e5c4b36f35", "/")
+    @oauth = Koala::Facebook::OAuth.new(CONFIG[:facebook_app_id],CONFIG[:facebook_app_secret], "/")
     
     # Permission pour le graph search
     @oauth.url_for_oauth_code(:permissions => "publish_actions")
@@ -166,25 +166,25 @@ class ImportEventsTask
         #recherche dans la description
         count = strposa(event_request["description"], category_musique)
         temp = strposa(event_request["description"], category_cinema)
-        eventCategory = "Musique"
+        eventCategory = "Music"
 
         if count >= temp 
-          eventCategory = "Musique"
+          eventCategory = "Music"
         else
           count = temp
-          eventCategory = "Cinéma"
+          eventCategory = "Cinema"
         end
 
         temp2 = strposa(event_request["description"], category_art)
         if temp2 > count
           count = temp2
-          eventCategory = "Musée / Exposition"
+          eventCategory = "Museum+Exposition"
         end
 
         temp3 = strposa(event_request["description"], category_spectacle)
         if temp3 > count
           count = temp3
-          eventCategory = "Spectacle / Théâtre"
+          eventCategory = "Spectacle+Theater"
         end        
       
         # Vérification si image n'est pas null
@@ -193,11 +193,11 @@ class ImportEventsTask
           image_cover = cover_image[0]["source"]
         else
           case eventCategory
-          when "Cinéma"
+          when "Cinema"
             image_cover = root + 'images/cinema%d.jpg' % [rand(1..6)]
-          when "Musée / Exposition"
+          when "Museum+Exposition"
             image_cover = root + 'images/art%d.jpg' % [rand(1..4)]
-          when "Spectacle / Théâtre"
+          when "Spectacle+Theater"
             image_cover = root + 'images/music%d.jpg' % [rand(1..9)]
           else
             image_cover = root + 'images/music%d.jpg' % [rand(1..9)]
