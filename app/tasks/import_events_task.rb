@@ -221,9 +221,10 @@ class ImportEventsTask
         )
       rescue Exception
         # oops
-        puts oops
+        puts "Import fetching exception"
         puts $!, $@
-        raise
+        Delayed::Worker.logger.debug("Import fetching exception")
+        Delayed::Worker.logger.debug($! + " - " + $@)
       end
     end
   end
