@@ -68,6 +68,7 @@ section.main {
 
 .content{
     width:100%;
+    clear: both;
 }
 
 
@@ -203,7 +204,12 @@ section.show{
 }
 
 .show-description{
-    margin:1em;
+  margin:1em;
+}
+
+.show-description pre {
+  word-wrap: break-word; 
+  white-space: pre-wrap;
 }
 
 .show-information {
@@ -312,7 +318,8 @@ input[type=text] {
 
 .btn-small {
     text-decoration: none;
-    min-width: initial;
+    min-width: auto;  /* IE */
+    min-width: initial;  /* FF, chrome */
 }
 
 /*INPUT TEXT*/

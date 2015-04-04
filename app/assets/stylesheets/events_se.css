@@ -17,6 +17,7 @@
     -webkit-padding-start: 5px;
     padding-start:         5px;
     -moz-padding-start:    5px;
+    padding-left: 5px;  /* IE */
 }
 
 /*RESET*/
@@ -104,6 +105,7 @@
     width: 90%;
     overflow: hidden;
     height: 100%;
+    max-height: 100px;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
