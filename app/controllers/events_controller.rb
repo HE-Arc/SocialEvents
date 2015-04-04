@@ -26,7 +26,8 @@ class EventsController < ApplicationController
   # Delete all events from current user
   def destroy_all
     unless current_user.nil?
-      current_user.events.delete_all
+      #current_user.events.delete_all  # why this line doesn't work on production, seriously?
+      Event.delete_all(user_id: current_user.id)
       redirect_to :back, notice: "All events have been deleted."
     else
       redirect_to :back, alert: "Deleting an event is restricted to logged-in users."
