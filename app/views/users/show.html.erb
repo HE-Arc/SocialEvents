@@ -6,7 +6,7 @@
       <h1 class="profile-main-title"><%= @is_my_profile ? 'Your informations' : 'User informations' %></h1>
         <div class="profile-main-leftcolumn">
           <%= hidden_field_tag 'user_id', @user.id, { :id => "user_id" } %>
-          <%= image_tag(@user.profile_picture(200, 200), :alt => "Profile picture", :class => "profile-image") %>
+          <%= image_tag(@user.profile_picture(200, 200), :alt => "Profile picture", :class => "profile-image", :width => "200") %>
         </div>
         <div class="profile-main-rightcolumn">
             <p class="profile-main-title-inner"><%= @user.first_name %> <%= @user.last_name %></p>
