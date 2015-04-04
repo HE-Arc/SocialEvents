@@ -122,24 +122,26 @@ class ImportEventsTask
           
           # Note: can generate exception if nil
 
-          location = EventLocation.where(:id_facebook => event_location["id"]).first_or_initialize
+          unless event_location["location"].nil?
+            location = EventLocation.where(:id_facebook => event_location["id"]).first_or_initialize
 
-          location.update_attributes(    
-            :id_facebook => event_location["id"],
-            :name  =>  event_location["name"],
-            :city  =>  event_location["location"]["city"],
-            :street  =>  event_location["location"]["street"],
-            :zip  =>  event_location["location"]["zip"],
-            :canton  =>  Localite.find_canton(event_location["location"]["zip"]),
-            :country  =>  event_location["location"]["country"],
-            :latitude  =>  event_location["location"]["latitude"],
-            :longitude  =>  event_location["location"]["longitude"],
-            :category  =>  event_location["category"],
-            :likes  =>  event_location["likes"],
-            :link  =>  event_location["link"],
-            :phone  =>  event_location["phone"],
-            :website  =>  event_location["website"]
-            )   
+            location.update_attributes(    
+              :id_facebook => event_location["id"],
+              :name  =>  event_location["name"],
+              :city  =>  event_location["location"]["city"],
+              :street  =>  event_location["location"]["street"],
+              :zip  =>  event_location["location"]["zip"],
+              :canton  =>  Localite.find_canton(event_location["location"]["zip"]),
+              :country  =>  event_location["location"]["country"],
+              :latitude  =>  event_location["location"]["latitude"],
+              :longitude  =>  event_location["location"]["longitude"],
+              :category  =>  event_location["category"],
+              :likes  =>  event_location["likes"],
+              :link  =>  event_location["link"],
+              :phone  =>  event_location["phone"],
+              :website  =>  event_location["website"]
+              )   
+          end
         end 
       
         cover_image = @graph.get_object(event_request["id"]+"/photos?fields=source")
@@ -224,7 +226,8 @@ class ImportEventsTask
         puts "Import fetching exception"
         puts $!, $@
         Delayed::Worker.logger.debug("Import fetching exception")
-        Delayed::Worker.logger.debug($! + " - " + $@)
+        Delayed::Worker.logger.debug($!)
+        Delayed::Worker.logger.debug($@)
       end
     end
   end
