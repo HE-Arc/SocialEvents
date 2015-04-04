@@ -101,7 +101,7 @@ append_next = (data,clear) ->
           <form action="' + base_url + 'events/' + e.id + '" class="button_to" method="post">
           <div>
           <input name="_method" type="hidden" value="delete" />
-          <input class="btn delete-confirm" type="submit" value="Supprimer" />
+          <input class="btn delete-confirm" type="submit" value="Delete" />
           <input name="authenticity_token" type="hidden" value="' + csrf_token + '" />
           </div>
           </form>' else '') + '

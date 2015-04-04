@@ -14,7 +14,7 @@
           
             <p>Contribute to our website by sharing your events</p>
 
-              
+          <% if @is_my_profile %>
               <select name="Icecream Flavours" class="drop-down" id="drop-down">
                   <option value="bar">Bar</option>
                   <option value="party">Party</option>
@@ -23,8 +23,12 @@
                   <option value="show">Show</option>
                   <option value="music">Music</option>
                   <option value="beer">Beer</option>
+                  <option value="art">Art</option>
+                  <option value="cinema">Cinema</option>
+                  <option value="event">Event</option>
               </select>
             <button style="width:69%; height:40px;" id="import">Share more events</button>
+          <% end %>
             
             
             <p class="terms-and-conditions">Public information is any information you share with a public audience, as well as information in your Public Profile, or content you share on our website. Public information is available to anyone on or off our Services and can be seen or accessed through. By clicking on "Share more events" you automatically accepts these terms and conditions.</p>
