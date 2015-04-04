@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   def show
     @user = User.get_user_with_contribution_counter(params[:id])
     @is_my_profile = @user == current_user
-    @events = Event.get_user_events(@user.id)
+    @events = Event.get_user_events_profil(@user.id, 5, 0)
   end
   
   def load

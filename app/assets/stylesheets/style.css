@@ -171,7 +171,7 @@ section.main .left .search {
 }
 
 .image-cover-div img {
-  margin-top: -25%;
+  margin-top: -10%;
 }
 
 /*header,
@@ -246,7 +246,7 @@ pre {
   word-wrap: break-word;
 }
 
-.show-title .title-complement {
+.title-complement {
   float: right;
 }
 

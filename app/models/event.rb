@@ -57,13 +57,7 @@ class Event < ActiveRecord::Base
 
   # Récupération des événements visibles d'un utilisateur
   #     user_id      id de l'utilisateur spécifique
-  def self.get_user_events(user_id)
-    self.joins(:event_location).order(:start_time).order(:title)
-        .where("? <= DATE(events.end_time)", DateTime.now.to_date)
-        .where(:is_published => true)
-        .where("user_id = ?", user_id)
-  end
-  
+  #   limit, offse   limite et décalage pour pagination  
   def self.get_user_events_profil(user_id, limit=nil, offset=nil)
     query = self.joins(:event_location).order(:start_time).order(:title)
         .where("? <= DATE(events.end_time)", DateTime.now.to_date)

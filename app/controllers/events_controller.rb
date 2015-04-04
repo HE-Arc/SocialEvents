@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
   
   helper_method :javascript_include_view_js
-  
+    
   # Generate JS tags for GMaps API
   def javascript_include_view_js
     include = ''

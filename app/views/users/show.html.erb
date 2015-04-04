@@ -32,31 +32,18 @@
     </div>
 
     <div class="profile-main-content">
-        <h1 class="profile-main-title">Your contributions</h1>
-        <%= button_to "Supprimer", "/events", :class => "btn", :method => :delete %>
-        <ul class="flex-container flex-container-events">
-        <!--<% @events.each do |event| %>
-          
-          <li class="flex-item">
-            <a href="<%= event_path(event) %>" class="link">
-              <div class="img-event">
-                  <div class="wrapperB" style="background-image: url('<%= event.picture %>');"></div>
-              </div>
-            
-              <div class="content-event">
-                  <p class="title-event"><%= event.title %></p>
-                  <p class="date-event">From <%= event.start_time.strftime("%d %B %Y") %> to <%= event.end_time.strftime("%d %B %Y") %></p>
-                  <p class="multiline-ellipsis">
-                      <%= event.description %>
-                  </p>
-              </div>
-            </a>
-            <% if @is_my_profile %>
-            <%= button_to "Supprimer", event, :class => "btn", :method => :delete %>
-            <% end %>
-          </li>
-      <% end %>-->
-    </ul>
-      </div>
+      <span class="title-complement">
+        <%= button_to "Delete all", "/events", :class => "btn delete-confirm", :method => :delete if @events.count > 0 %>
+      </span>
+      <h1 class="profile-main-title">Your contributions</h1>
+        
+      <ul class="flex-container flex-container-events">
+      </ul>
+      <ul class="flex-container flex-container-error">          
+        <li class="flex-item">
+          There is unfortunately no more events
+        </li>
+      </ul>
     </div>
+  </div>
 </section>

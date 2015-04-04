@@ -21,6 +21,7 @@ is_searching = true
 # execute AJAX query for loading all events with current parameters 
 load_event = () ->
   page = 0
+  console.log "main"
   $.ajax({
     url: create_ajax_url(), 
     dataType: "json", 
@@ -29,7 +30,9 @@ load_event = () ->
       append_next(data,true)  # add events to view
   })
   
+# AJAX query for profile events list
 load_event_profil = () ->
+  console.log "profile"
   page = 0
   $.ajax({
     url: create_ajax_url_profil(), 
@@ -79,6 +82,7 @@ append_next = (data,clear) ->
           </li>
           ')
     
+    # events for profile with delete button for current user with csrf token from Rails
     if $('#event-profil-page').length > 0
       event = $('<li class="flex-item">
           <a href="' + base_url + 'events/' + e.id + '" class="link">
@@ -93,19 +97,24 @@ append_next = (data,clear) ->
           ' + encHtml(e.description) + '
           </p>
           </div>
-          </a>
+          </a>' + ( if $('#user_id').val() == user_id then '
           <form action="' + base_url + 'events/' + e.id + '" class="button_to" method="post">
           <div>
           <input name="_method" type="hidden" value="delete" />
-          <input class="btn" type="submit" value="Supprimer" />
-          <input name="authenticity_token" type="hidden" value="b8/VGRJ8ld+mtCC0GfUBb83OqqmgX00s4rJUGT3n5E0=" />
+          <input class="btn delete-confirm" type="submit" value="Supprimer" />
+          <input name="authenticity_token" type="hidden" value="' + csrf_token + '" />
           </div>
-          </form>
+          </form>' else '') + '
           </li>
           ')
 
     #append it to the flex-container
     $('.flex-container-events').append(event)
+    
+    # confirmation deletion
+    $('.delete-confirm').off('click')
+    $('.delete-confirm').click ->
+      return confirm("This deletion cannot be undone. Do you wish to continue?") == true
 
 # create the AJAX URL for the current filters / search mode
 create_ajax_url = () ->
@@ -130,6 +139,16 @@ create_ajax_url = () ->
   
   # return URL with server and parameters
   url = "main/load/" + encUrl(categories) + "/" + encUrl(cantons) + "/" + encUrl(date) + "/" + encUrl(title) + "/" + encUrl(limit) + "/" + encUrl(offset)
+  return base_url + url
+
+# AJAX URL profile
+create_ajax_url_profil = () ->
+  limit = 5
+  offset = 5 * page
+  
+  # return URL with server and parameters
+  url = "profil/load/" + $('#user_id').val() + "/"  + encUrl(limit) + "/" + encUrl(offset)
+  console.log(base_url + url)
   return base_url + url
 
 # store filters and search data in cookies for later reuse
@@ -216,7 +235,8 @@ scroll_handler = () ->
       success: (data) =>
         append_next(data,false)
       })
-    
+
+# Scrolling for profile page
 scroll_handler_profil = () ->
   if($(window).scrollTop() >= $(document).height() - $(window).height())
     page++
@@ -283,6 +303,7 @@ $ ->
 
   # remove scroll
   $(window).off('scroll', scroll_handler)
+  $(window).off('scroll', scroll_handler_profil)
   
   #profil page
   if $('#event-profil-page').length > 0
@@ -295,12 +316,3 @@ $ ->
     $(window).scroll(scroll_handler)
     # restore filters, parameters and events list
     load_from_cookies()
-
-create_ajax_url_profil = () ->
-  limit = 5
-  offset = 5 * page
-  
-  # return URL with server and parameters
-  url = "profil/load/" + $('#user_id').val() + "/"  + encUrl(limit) + "/" + encUrl(offset)
-  console.log(base_url + url)
-  return base_url + url
