@@ -77,7 +77,7 @@ Event.create(events)
 end
 
 # Chargement des localités dans la bdd
-sql = File.read('db/localites.sql')
+sql = File.read(Rails.root.join('db/localites.sql'))
 statements = sql.split("\n")
 statements.pop
 
