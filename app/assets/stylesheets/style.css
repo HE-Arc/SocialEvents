@@ -235,7 +235,7 @@ h3.title-user-list{
 /*  Events show details      */
 /*---------------------------*/
 
-.show-information label {
+.show-body label {
   display: inline-block;
   min-width: 20%;
   font-weight: bold;
