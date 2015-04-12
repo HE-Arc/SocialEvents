@@ -33,7 +33,9 @@ Voir http://srvz-isic04.he-arc.ch/socialevents
 
 L'application a été conçue avec Rails 4.1 et Ruby 2.1/2.2.
 
-SocialEvents nécessite la création d'une application Facebook, avec [Facebook Developers](https://developers.facebook.com/). Avec l'application, vous récupérez un ID d'application et un secret. Ces derniers doivent être ajoutés dans le fichier de configuration `config/app.yml` à créer au format suivant :
+SocialEvents nécessite la création d'une application Facebook, avec [Facebook Developers](https://developers.facebook.com/). Avec l'application, vous récupérez un ID d'application et un secret (onglet *Dashboard*). Dans l'onglet *Settings/Basic*, il faut spécifier l'URL du site de l'application. Puis, dans l'onglet *Settings/Advanced*, il faut activer et spécifier l'URL OAuth de callback: `http://XXXX/users/auth/facebook/callback`. Dans l'onglet *Status & Review*, on peut voir les permissions accessibles. Par défaut, les choix *email*, *public_profile* et *user_friends* sont suffisants pour SocialEvents.
+
+L'ID et le secret d'application Facebook doivent être ajoutés dans le fichier de configuration Rails `config/app.yml` à créer au format suivant: 
 
 ```
 # file config/app.yml
